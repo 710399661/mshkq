@@ -1,0 +1,196 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: discuzq-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-discuz_q}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-secret}
+      MYSQL_USER: ${DB_USERNAME:-discuz_q}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
+      TZ: Asia/Shanghai
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - discuzq
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: discuzq-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - discuzq
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    container_name: discuzq-api
+    restart: unless-stopped
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      APP_DEBUG: ${APP_DEBUG:-false}
+      APP_KEY: ${APP_KEY:-}
+      APP_URL: ${APP_URL:-http://localhost}
+      APP_TIMEZONE: Asia/Shanghai
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: ${DB_DATABASE:-discuz_q}
+      DB_USERNAME: ${DB_USERNAME:-discuz_q}
+      DB_PASSWORD: ${DB_PASSWORD:-secret}
+      CACHE_STORE: redis
+      REDIS_CLIENT: phpredis
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      QUEUE_CONNECTION: redis
+      SESSION_DRIVER: redis
+      RUN_SEEDER: ${RUN_SEEDER:-false}
+    volumes:
+      - api_storage:/var/www/html/storage
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - discuzq
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        NEXT_PUBLIC_APP_NAME: ${NEXT_PUBLIC_APP_NAME:-Discuz! Q}
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost}
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost/api/v1}
+        NEXT_PUBLIC_SITE_DESCRIPTION: ${NEXT_PUBLIC_SITE_DESCRIPTION:-新一代社区论坛系统}
+        NEXT_PUBLIC_SITE_KEYWORDS: ${NEXT_PUBLIC_SITE_KEYWORDS:-Discuz,社区,论坛,问答}
+    container_name: discuzq-web
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      API_BASE_URL: http://api/api/v1
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost/api/v1}
+    depends_on:
+      - api
+    networks:
+      - discuzq
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  admin:
+    build:
+      context: .
+      dockerfile: apps/admin/Dockerfile
+      args:
+        NEXT_PUBLIC_APP_NAME: ${NEXT_PUBLIC_ADMIN_APP_NAME:-Discuz! Q 管理后台}
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_ADMIN_URL:-http://localhost/admin}
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost/api/v1}
+    container_name: discuzq-admin
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      API_BASE_URL: http://api/api/v1
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost/api/v1}
+    depends_on:
+      - api
+    networks:
+      - discuzq
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  nginx:
+    image: nginx:alpine
+    container_name: discuzq-nginx
+    restart: unless-stopped
+    ports:
+      - "${NGINX_PORT:-80}:80"
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - api
+      - web
+      - admin
+    networks:
+      - discuzq
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  queue:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    container_name: discuzq-queue
+    restart: unless-stopped
+    command: php artisan queue:work --tries=3
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      APP_DEBUG: ${APP_DEBUG:-false}
+      APP_KEY: ${APP_KEY:-}
+      APP_URL: ${APP_URL:-http://localhost}
+      APP_TIMEZONE: Asia/Shanghai
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: ${DB_DATABASE:-discuz_q}
+      DB_USERNAME: ${DB_USERNAME:-discuz_q}
+      DB_PASSWORD: ${DB_PASSWORD:-secret}
+      CACHE_STORE: redis
+      REDIS_CLIENT: phpredis
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      QUEUE_CONNECTION: redis
+      SESSION_DRIVER: redis
+    volumes:
+      - api_storage:/var/www/html/storage
+    depends_on:
+      api:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - discuzq
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+  api_storage:
+    driver: local
+
+networks:
+  discuzq:
+    driver: bridge

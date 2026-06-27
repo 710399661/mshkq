@@ -23,6 +23,11 @@
       "dependsOn": ["^typecheck"],
       "cache": true
     },
+    "test": {
+      "dependsOn": ["^build"],
+      "cache": true,
+      "outputs": []
+    },
     "clean": {
       "cache": false
     },

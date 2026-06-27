@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  mysql:
+    ports:
+      - "${DB_PORT:-3306}:3306"
+
+  redis:
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+
+  api:
+    environment:
+      APP_ENV: local
+      APP_DEBUG: true
+      RUN_SEEDER: ${RUN_SEEDER:-true}
+    volumes:
+      - ./apps/api:/var/www/html
+      - api_storage:/var/www/html/storage
+      - ./docker/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini:ro
+      - ./docker/nginx/api.conf:/etc/nginx/http.d/default.conf:ro
+    command: ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+
+  web:
+    build:
+      target: deps
+    environment:
+      NODE_ENV: development
+      API_BASE_URL: http://api/api/v1
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost/api/v1}
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/apps/web/node_modules
+      - /app/apps/web/.next
+      - /app/packages/sdk/node_modules
+      - /app/packages/ui/node_modules
+      - /app/packages/utils/node_modules
+      - /app/packages/seo/node_modules
+    command: sh -c "cd /app/apps/web && pnpm dev -- -H 0.0.0.0 -p 3000"
+    ports:
+      - "3000:3000"
+
+  admin:
+    build:
+      target: deps
+    environment:
+      NODE_ENV: development
+      API_BASE_URL: http://api/api/v1
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost/api/v1}
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/apps/admin/node_modules
+      - /app/apps/admin/.next
+      - /app/packages/sdk/node_modules
+      - /app/packages/ui/node_modules
+      - /app/packages/utils/node_modules
+      - /app/packages/seo/node_modules
+    command: sh -c "cd /app/apps/admin && pnpm dev -- -H 0.0.0.0 -p 3001"
+    ports:
+      - "3001:3001"
+
+  queue:
+    environment:
+      APP_ENV: local
+      APP_DEBUG: true
+    volumes:
+      - ./apps/api:/var/www/html
+      - api_storage:/var/www/html/storage
+    command: php artisan queue:listen --tries=1
