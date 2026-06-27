@@ -65,6 +65,14 @@ export class DiscuzApi {
   };
 
   users = {
+    list: (
+      params?: PaginationParams & {
+        keyword?: string;
+        sort?: string;
+      },
+    ): Promise<PaginatedResponse<User>> =>
+      this.client.get<PaginatedResponse<User>>('/users', params),
+
     getById: (id: number | string): Promise<User> =>
       this.client.get<User>(`/users/${id}`),
 
@@ -85,6 +93,9 @@ export class DiscuzApi {
 
     follow: (id: number | string): Promise<{ is_following: boolean }> =>
       this.client.post(`/users/${id}/follow`),
+
+    collections: (id: number | string, params?: PaginationParams): Promise<PaginatedResponse<Thread>> =>
+      this.client.get<PaginatedResponse<Thread>>(`/users/${id}/collections`, params),
   };
 
   threads = {
@@ -147,7 +158,14 @@ export class DiscuzApi {
     getById: (id: number | string): Promise<Category> =>
       this.client.get<Category>(`/categories/${id}`),
 
-    threads: (id: number | string, params?: PaginationParams): Promise<PaginatedResponse<Thread>> =>
+    threads: (
+      id: number | string,
+      params?: PaginationParams & {
+        sort?: string;
+        is_essence?: boolean;
+        is_sticky?: boolean;
+      },
+    ): Promise<PaginatedResponse<Thread>> =>
       this.client.get<PaginatedResponse<Thread>>(`/categories/${id}/threads`, params),
   };
 
@@ -161,8 +179,35 @@ export class DiscuzApi {
     getById: (id: number | string): Promise<Tag> =>
       this.client.get<Tag>(`/tags/${id}`),
 
-    threads: (id: number | string, params?: PaginationParams): Promise<PaginatedResponse<Thread>> =>
+    threads: (
+      id: number | string,
+      params?: PaginationParams & {
+        sort?: string;
+        is_essence?: boolean;
+        is_sticky?: boolean;
+      },
+    ): Promise<PaginatedResponse<Thread>> =>
       this.client.get<PaginatedResponse<Thread>>(`/tags/${id}/threads`, params),
+  };
+
+  search = {
+    posts: (
+      keyword: string,
+      params?: PaginationParams & { sort?: string },
+    ): Promise<PaginatedResponse<Thread>> =>
+      this.client.get<PaginatedResponse<Thread>>('/threads', { ...params, search: keyword }),
+
+    users: (
+      keyword: string,
+      params?: PaginationParams & { sort?: string },
+    ): Promise<PaginatedResponse<User>> =>
+      this.client.get<PaginatedResponse<User>>('/users', { ...params, keyword }),
+
+    tags: (
+      keyword: string,
+      params?: PaginationParams & { sort?: string },
+    ): Promise<PaginatedResponse<Tag>> =>
+      this.client.get<PaginatedResponse<Tag>>('/tags', { ...params, keyword }),
   };
 
   notifications = {

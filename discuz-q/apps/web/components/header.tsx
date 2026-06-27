@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Search, Bell, MessageCircle, User, LogOut, Settings, FileText, UserCircle, PenSquare } from 'lucide-react';
+import { Bell, MessageCircle, User, LogOut, Settings, FileText, UserCircle, PenSquare } from 'lucide-react';
 import { Button } from '@discuzq/ui/button';
-import { Input } from '@discuzq/ui/input';
 import { Avatar, AvatarImage, AvatarFallback } from '@discuzq/ui/avatar';
+import { SearchBar } from '@/components/search-bar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -68,15 +68,8 @@ export function Header() {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="hidden w-64 md:block">
-              <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="搜索帖子..."
-                  className="w-full pl-8 h-9 text-sm"
-                />
-              </div>
+            <div className="hidden w-72 md:block">
+              <SearchBar placeholder="搜索帖子、用户、话题..." />
             </div>
 
             {isLoggedIn ? (
