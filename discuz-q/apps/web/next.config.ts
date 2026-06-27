@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  allowedDevOrigins: [
+    'localhost:3000',
+    '127.0.0.1:3000',
+    '*.agent-sandbox-bj-d3-gw.trae.cn',
+    '*.trae.cn',
+  ],
   async rewrites() {
     return [
       {
