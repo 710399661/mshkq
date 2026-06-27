@@ -1,4 +1,4 @@
-import type { ApiError, PaginatedResponse } from './types';
+import type { ApiError, ApiResponse, PaginatedResponse } from './types';
 
 export interface ApiClientOptions {
   baseUrl: string;
@@ -16,7 +16,7 @@ export class ApiClient {
   private onUnauthorized?: () => void;
 
   constructor(options: ApiClientOptions) {
-    this.baseUrl = options.baseUrl;
+    this.baseUrl = options.baseUrl.endsWith('/') ? options.baseUrl : `${options.baseUrl}/`;
     this.token = options.token;
     this.timeout = options.timeout || 30000;
     this.onError = options.onError;
@@ -49,7 +49,8 @@ export class ApiClient {
       cache?: RequestCache;
     },
   ): Promise<T> {
-    const url = new URL(path, this.baseUrl);
+    const normalizedPath = path.startsWith('/') ? path.slice(1) : path;
+    const url = new URL(normalizedPath, this.baseUrl);
 
     if (options?.query) {
       Object.entries(options.query).forEach(([key, value]) => {
@@ -74,13 +75,13 @@ export class ApiClient {
 
       clearTimeout(timeoutId);
 
-      const data = await response.json().catch(() => null);
+      const data = (await response.json().catch(() => null)) as ApiResponse<T> | null;
 
       if (!response.ok) {
         const error: ApiError = {
-          code: data?.code || response.status,
+          code: data?.code ?? response.status,
           message: data?.message || response.statusText,
-          details: data?.details,
+          details: (data as unknown as Record<string, unknown>)?.details as unknown,
         };
 
         if (response.status === 401) {
@@ -91,11 +92,23 @@ export class ApiClient {
         throw error;
       }
 
+      if (data && typeof data === 'object' && 'code' in data) {
+        if (data.code !== 0) {
+          const error: ApiError = {
+            code: data.code,
+            message: data.message || '请求失败',
+          };
+          this.onError?.(error);
+          throw error;
+        }
+        return data.data as T;
+      }
+
       return data as T;
     } catch (error) {
       clearTimeout(timeoutId);
       if ((error as Error).name === 'AbortError') {
-        const timeoutError: ApiError = { code: 0, message: '请求超时' };
+        const timeoutError: ApiError = { code: -1, message: '请求超时' };
         this.onError?.(timeoutError);
         throw timeoutError;
       }

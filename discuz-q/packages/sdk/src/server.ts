@@ -13,6 +13,7 @@ import type {
   CreateThreadParams,
   UpdateThreadParams,
   CreatePostParams,
+  Notification,
 } from './types';
 
 export class DiscuzApi {
@@ -37,134 +38,122 @@ export class DiscuzApi {
 
     logout: (): Promise<void> => this.client.post('/auth/logout'),
 
-    refreshToken: (refreshToken: string): Promise<LoginResponse> =>
-      this.client.post<LoginResponse>('/auth/refresh', { refreshToken }),
-
     me: (): Promise<User> => this.client.get<User>('/auth/me'),
   };
 
   users = {
-    getById: (id: string): Promise<User> => this.client.get<User>(`/users/${id}`),
+    getById: (id: number | string): Promise<User> =>
+      this.client.get<User>(`/users/${id}`),
 
-    getByUsername: (username: string): Promise<User> =>
-      this.client.get<User>(`/users/username/${username}`),
+    threads: (id: number | string, params?: PaginationParams): Promise<PaginatedResponse<Thread>> =>
+      this.client.get<PaginatedResponse<Thread>>(`/users/${id}/threads`, params),
 
-    list: (params?: PaginationParams & { keyword?: string }): Promise<PaginatedResponse<User>> =>
-      this.client.get<PaginatedResponse<User>>('/users', params),
+    posts: (id: number | string, params?: PaginationParams): Promise<PaginatedResponse<Post>> =>
+      this.client.get<PaginatedResponse<Post>>(`/users/${id}/posts`, params),
 
-    update: (id: string, data: Partial<User>): Promise<User> =>
-      this.client.patch<User>(`/users/${id}`, data),
-
-    follow: (id: string): Promise<void> => this.client.post(`/users/${id}/follow`),
-
-    unfollow: (id: string): Promise<void> => this.client.delete(`/users/${id}/follow`),
-
-    followers: (id: string, params?: PaginationParams): Promise<PaginatedResponse<User>> =>
+    followers: (id: number | string, params?: PaginationParams): Promise<PaginatedResponse<User>> =>
       this.client.get<PaginatedResponse<User>>(`/users/${id}/followers`, params),
 
-    following: (id: string, params?: PaginationParams): Promise<PaginatedResponse<User>> =>
+    following: (id: number | string, params?: PaginationParams): Promise<PaginatedResponse<User>> =>
       this.client.get<PaginatedResponse<User>>(`/users/${id}/following`, params),
 
-    threads: (id: string, params?: PaginationParams): Promise<PaginatedResponse<Thread>> =>
-      this.client.get<PaginatedResponse<Thread>>(`/users/${id}/threads`, params),
+    updateProfile: (data: Partial<User>): Promise<User> =>
+      this.client.put<User>('/user/profile', data),
+
+    follow: (id: number | string): Promise<{ is_following: boolean }> =>
+      this.client.post(`/users/${id}/follow`),
   };
 
   threads = {
     list: (
       params?: PaginationParams & {
-        categoryId?: string;
-        tagId?: string;
-        userId?: string;
-        sort?: 'latest' | 'hot' | 'essence';
-        keyword?: string;
+        category_id?: number | string;
+        tag_id?: number | string;
+        user_id?: number | string;
+        type?: number;
+        is_essence?: boolean;
+        is_sticky?: boolean;
+        sort?: string;
+        search?: string;
       },
     ): Promise<PaginatedResponse<Thread>> =>
       this.client.get<PaginatedResponse<Thread>>('/threads', params),
 
-    getById: (id: string): Promise<Thread> => this.client.get<Thread>(`/threads/${id}`),
+    getById: (id: number | string): Promise<Thread> =>
+      this.client.get<Thread>(`/threads/${id}`),
 
     create: (params: CreateThreadParams): Promise<Thread> =>
       this.client.post<Thread>('/threads', params),
 
-    update: (id: string, params: UpdateThreadParams): Promise<Thread> =>
-      this.client.patch<Thread>(`/threads/${id}`, params),
+    update: (id: number | string, params: UpdateThreadParams): Promise<Thread> =>
+      this.client.put<Thread>(`/threads/${id}`, params),
 
-    delete: (id: string): Promise<void> => this.client.delete(`/threads/${id}`),
+    delete: (id: number | string): Promise<void> =>
+      this.client.delete(`/threads/${id}`),
 
-    like: (id: string): Promise<{ likes: number; isLiked: boolean }> =>
+    like: (id: number | string): Promise<{ liked: boolean }> =>
       this.client.post(`/threads/${id}/like`),
 
-    unlike: (id: string): Promise<{ likes: number; isLiked: boolean }> =>
-      this.client.delete(`/threads/${id}/like`),
-
-    favorite: (id: string): Promise<void> => this.client.post(`/threads/${id}/favorite`),
-
-    unfavorite: (id: string): Promise<void> => this.client.delete(`/threads/${id}/favorite`),
-
-    view: (id: string): Promise<void> => this.client.post(`/threads/${id}/view`),
+    collect: (id: number | string): Promise<{ collected: boolean }> =>
+      this.client.post(`/threads/${id}/collect`),
   };
 
   posts = {
     list: (
-      threadId: string,
-      params?: PaginationParams & { sort?: 'asc' | 'desc' },
+      threadId: number | string,
+      params?: PaginationParams & { sort?: string },
     ): Promise<PaginatedResponse<Post>> =>
       this.client.get<PaginatedResponse<Post>>(`/threads/${threadId}/posts`, params),
 
-    create: (params: CreatePostParams): Promise<Post> => this.client.post<Post>('/posts', params),
+    create: (params: CreatePostParams): Promise<Post> =>
+      this.client.post<Post>('/posts', params),
 
-    update: (id: string, content: string): Promise<Post> =>
-      this.client.patch<Post>(`/posts/${id}`, { content }),
+    update: (id: number | string, content: string): Promise<Post> =>
+      this.client.put<Post>(`/posts/${id}`, { content }),
 
-    delete: (id: string): Promise<void> => this.client.delete(`/posts/${id}`),
+    delete: (id: number | string): Promise<void> =>
+      this.client.delete(`/posts/${id}`),
 
-    like: (id: string): Promise<{ likes: number; isLiked: boolean }> =>
+    like: (id: number | string): Promise<{ liked: boolean }> =>
       this.client.post(`/posts/${id}/like`),
-
-    unlike: (id: string): Promise<{ likes: number; isLiked: boolean }> =>
-      this.client.delete(`/posts/${id}/like`),
   };
 
   categories = {
     list: (): Promise<Category[]> => this.client.get<Category[]>('/categories'),
 
-    getById: (id: string): Promise<Category> => this.client.get<Category>(`/categories/${id}`),
+    getById: (id: number | string): Promise<Category> =>
+      this.client.get<Category>(`/categories/${id}`),
+
+    threads: (id: number | string, params?: PaginationParams): Promise<PaginatedResponse<Thread>> =>
+      this.client.get<PaginatedResponse<Thread>>(`/categories/${id}/threads`, params),
   };
 
   tags = {
-    list: (params?: PaginationParams & { keyword?: string; hot?: boolean }): Promise<PaginatedResponse<Tag>> =>
+    list: (params?: PaginationParams & { keyword?: string; sort?: string }): Promise<PaginatedResponse<Tag>> =>
       this.client.get<PaginatedResponse<Tag>>('/tags', params),
 
-    getById: (id: string): Promise<Tag> => this.client.get<Tag>(`/tags/${id}`),
+    search: (keyword: string): Promise<Tag[]> =>
+      this.client.get<Tag[]>('/tags/search', { keyword }),
 
-    hot: (limit = 10): Promise<Tag[]> => this.client.get<Tag[]>('/tags/hot', { limit }),
+    getById: (id: number | string): Promise<Tag> =>
+      this.client.get<Tag>(`/tags/${id}`),
+
+    threads: (id: number | string, params?: PaginationParams): Promise<PaginatedResponse<Thread>> =>
+      this.client.get<PaginatedResponse<Thread>>(`/tags/${id}/threads`, params),
   };
 
-  upload = {
-    getToken: (): Promise<{ token: string; url: string; key: string }> =>
-      this.client.get('/upload/token'),
+  notifications = {
+    list: (params?: PaginationParams): Promise<PaginatedResponse<Notification>> =>
+      this.client.get<PaginatedResponse<Notification>>('/notifications', params),
 
-    image: (file: File): Promise<{ url: string; path: string }> => {
-      const formData = new FormData();
-      formData.append('file', file);
-      return this.client.post('/upload/image', formData, {
-        headers: {},
-      });
-    },
-  };
+    unreadCount: (): Promise<{ count: number }> =>
+      this.client.get('/notifications/unread-count'),
 
-  search = {
-    threads: (
-      keyword: string,
-      params?: PaginationParams,
-    ): Promise<PaginatedResponse<Thread>> =>
-      this.client.get<PaginatedResponse<Thread>>('/search/threads', { keyword, ...params }),
+    readAll: (): Promise<void> =>
+      this.client.post('/notifications/read-all'),
 
-    users: (
-      keyword: string,
-      params?: PaginationParams,
-    ): Promise<PaginatedResponse<User>> =>
-      this.client.get<PaginatedResponse<User>>('/search/users', { keyword, ...params }),
+    read: (id: string): Promise<void> =>
+      this.client.post(`/notifications/${id}/read`),
   };
 }
 

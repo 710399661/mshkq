@@ -9,7 +9,7 @@ export const api = new DiscuzApi(apiClient);
 
 export function createServerApi(token?: string): DiscuzApi {
   const client = new ApiClient({
-    baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api',
+    baseUrl: 'http://localhost:8000/api/v1',
     token,
     timeout: 30000,
   });

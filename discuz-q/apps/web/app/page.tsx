@@ -5,6 +5,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@discuzq/ui/tabs';
 import { Tag } from '@discuzq/ui/tag';
 import { UserCard } from '@discuzq/ui/user-card';
 import { buildMetadata } from '@discuzq/seo/metadata';
+import { createServerApi } from '@/lib/api';
+import type { Thread, Tag as TagType, User, Category } from '@discuzq/sdk/server';
 
 export const metadata = buildMetadata({
   title: '首页',
@@ -12,121 +14,93 @@ export const metadata = buildMetadata({
   type: 'website',
 });
 
-const mockThreads = [
-  {
-    id: '1',
-    title: 'Discuz! Q 新版本发布，带来全新的社区体验',
-    excerpt:
-      '经过团队的不懈努力，我们很高兴地宣布 Discuz! Q 新版本正式发布。这次更新带来了全新的 UI 设计、更快的加载速度、以及更多的社区互动功能...',
-    cover:
-      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=280&fit=crop',
-    author: {
-      id: '1',
-      username: 'admin',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=admin',
-    },
-    category: { id: '1', name: '公告' },
-    tags: [
-      { id: '1', name: '新版本' },
-      { id: '2', name: '更新' },
-    ],
-    stats: { views: 12580, replies: 128, likes: 456 },
-    isSticky: true,
-    isEssence: true,
-    createdAt: '2024-01-15',
-  },
-  {
-    id: '2',
-    title: '如何构建高性能的社区系统？架构师分享实战经验',
-    excerpt:
-      '在构建社区系统时，性能是一个永恒的话题。本文将从数据库设计、缓存策略、前端优化等多个角度，分享我们在构建 Discuz! Q 过程中的一些实践经验...',
-    cover:
-      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=280&fit=crop',
-    author: {
-      id: '2',
-      username: '架构师小明',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ming',
-    },
-    category: { id: '2', name: '技术交流' },
-    tags: [
-      { id: '3', name: '架构' },
-      { id: '4', name: '性能优化' },
-    ],
-    stats: { views: 8923, replies: 89, likes: 312 },
-    isEssence: true,
-    createdAt: '2024-01-14',
-  },
-  {
-    id: '3',
-    title: '前端周刊 #25：React 19 新特性解读',
-    excerpt:
-      '本期前端周刊为大家带来 React 19 的新特性解读，包括 Server Components、Actions、use() 等重要更新，以及 Next.js 15 的最新进展...',
-    author: {
-      id: '3',
-      username: '前端小达人',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=frontend',
-    },
-    category: { id: '3', name: '前端开发' },
-    tags: [
-      { id: '5', name: 'React' },
-      { id: '6', name: '前端' },
-    ],
-    stats: { views: 5621, replies: 45, likes: 189 },
-    createdAt: '2024-01-13',
-  },
-  {
-    id: '4',
-    title: '周末闲聊：大家平时都用什么开发工具？',
-    excerpt:
-      '想问问大家平时开发都用什么 IDE？VS Code？WebStorm？还是 Neovim？另外有没有什么好用的插件推荐？一起来聊聊吧～',
-    author: {
-      id: '4',
-      username: '摸鱼工程师',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=fish',
-    },
-    category: { id: '4', name: '灌水闲聊' },
-    tags: [{ id: '7', name: '闲聊' }],
-    stats: { views: 3245, replies: 156, likes: 78 },
-    createdAt: '2024-01-12',
-  },
-];
+async function getThreads(page = 1, perPage = 15, sort = '-created_at') {
+  try {
+    const api = createServerApi();
+    const result = await api.threads.list({ page, per_page: perPage, sort });
+    return result.data || [];
+  } catch (e) {
+    console.error('Failed to fetch threads:', e);
+    return [];
+  }
+}
 
-const hotTags = [
-  { id: '1', name: 'React' },
-  { id: '2', name: 'Next.js' },
-  { id: '3', name: 'TypeScript' },
-  { id: '4', name: 'Laravel' },
-  { id: '5', name: 'PHP' },
-  { id: '6', name: '前端' },
-  { id: '7', name: '后端' },
-  { id: '8', name: '架构' },
-];
+async function getHotThreads(perPage = 10) {
+  try {
+    const api = createServerApi();
+    const result = await api.threads.list({ page: 1, per_page: perPage, sort: '-view_count' });
+    return result.data || [];
+  } catch (e) {
+    return [];
+  }
+}
 
-const hotUsers = [
-  {
-    id: '1',
-    username: 'admin',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=admin',
-    bio: 'Discuz! Q 官方账号',
-    stats: { posts: 156, followers: 12580, following: 23 },
-  },
-  {
-    id: '2',
-    username: '架构师小明',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ming',
-    bio: '10 年后端经验，专注高并发架构',
-    stats: { posts: 89, followers: 8923, following: 156 },
-  },
-  {
-    id: '3',
-    username: '前端小达人',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=frontend',
-    bio: '热爱前端，热爱开源',
-    stats: { posts: 124, followers: 6721, following: 89 },
-  },
-];
+async function getEssenceThreads(perPage = 10) {
+  try {
+    const api = createServerApi();
+    const result = await api.threads.list({ page: 1, per_page: perPage, is_essence: true, sort: '-created_at' });
+    return result.data || [];
+  } catch (e) {
+    return [];
+  }
+}
 
-export default function HomePage() {
+async function getHotTags(limit = 15) {
+  try {
+    const api = createServerApi();
+    const result = await api.tags.list({ page: 1, per_page: limit, sort: '-thread_count' });
+    return result.data || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+async function getCategories() {
+  try {
+    const api = createServerApi();
+    return await api.categories.list();
+  } catch (e) {
+    return [];
+  }
+}
+
+function mapThreadToCard(thread: Thread) {
+  return {
+    id: String(thread.id),
+    title: thread.title,
+    excerpt: thread.summary,
+    cover: thread.cover_image || undefined,
+    author: {
+      id: String(thread.user?.id || thread.user_id),
+      username: thread.user?.username || '匿名用户',
+      avatar: thread.user?.avatar || '',
+    },
+    category: thread.category
+      ? { id: String(thread.category.id), name: thread.category.name }
+      : undefined,
+    tags: (thread.tags || []).map((t) => ({ id: String(t.id), name: t.name })),
+    stats: {
+      views: thread.view_count,
+      replies: thread.post_count,
+      likes: thread.like_count,
+    },
+    isSticky: thread.is_sticky,
+    isEssence: thread.is_essence,
+    createdAt: thread.created_at,
+  };
+}
+
+export default async function HomePage() {
+  const [latestThreads, hotThreads, essenceThreads, hotTags, categories] = await Promise.all([
+    getThreads(1, 15, '-created_at'),
+    getHotThreads(10),
+    getEssenceThreads(10),
+    getHotTags(15),
+    getCategories(),
+  ]);
+
+  const trendingThreads = [...latestThreads].sort((a, b) => b.view_count - a.view_count);
+
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
       <div className="lg:col-span-3">
@@ -151,27 +125,47 @@ export default function HomePage() {
           </TabsList>
 
           <TabsContent value="latest" className="mt-0 space-y-4">
-            {mockThreads.map((thread) => (
-              <PostCard key={thread.id} {...thread} />
+            {latestThreads.map((thread) => (
+              <PostCard key={thread.id} {...mapThreadToCard(thread)} />
             ))}
+            {latestThreads.length === 0 && (
+              <div className="rounded-lg border bg-card p-8 text-center text-muted-foreground">
+                暂无帖子
+              </div>
+            )}
           </TabsContent>
 
           <TabsContent value="hot" className="mt-0 space-y-4">
-            {mockThreads.slice(0, 3).map((thread) => (
-              <PostCard key={thread.id} {...thread} />
+            {hotThreads.map((thread) => (
+              <PostCard key={thread.id} {...mapThreadToCard(thread)} />
             ))}
+            {hotThreads.length === 0 && (
+              <div className="rounded-lg border bg-card p-8 text-center text-muted-foreground">
+                暂无热门帖子
+              </div>
+            )}
           </TabsContent>
 
           <TabsContent value="essence" className="mt-0 space-y-4">
-            {mockThreads.slice(0, 2).map((thread) => (
-              <PostCard key={thread.id} {...thread} />
+            {essenceThreads.map((thread) => (
+              <PostCard key={thread.id} {...mapThreadToCard(thread)} />
             ))}
+            {essenceThreads.length === 0 && (
+              <div className="rounded-lg border bg-card p-8 text-center text-muted-foreground">
+                暂无精华帖子
+              </div>
+            )}
           </TabsContent>
 
           <TabsContent value="trending" className="mt-0 space-y-4">
-            {mockThreads.slice(1).map((thread) => (
-              <PostCard key={thread.id} {...thread} />
+            {trendingThreads.map((thread) => (
+              <PostCard key={thread.id} {...mapThreadToCard(thread)} />
             ))}
+            {trendingThreads.length === 0 && (
+              <div className="rounded-lg border bg-card p-8 text-center text-muted-foreground">
+                暂无数据
+              </div>
+            )}
           </TabsContent>
         </Tabs>
       </div>
@@ -180,7 +174,7 @@ export default function HomePage() {
         <div className="rounded-lg border bg-card p-4">
           <h3 className="mb-3 text-sm font-semibold">热门话题</h3>
           <div className="flex flex-wrap gap-2">
-            {hotTags.map((tag) => (
+            {hotTags.map((tag: TagType) => (
               <Link key={tag.id} href={`/tag/${tag.id}`}>
                 <Tag variant="blue">{tag.name}</Tag>
               </Link>
@@ -189,14 +183,17 @@ export default function HomePage() {
         </div>
 
         <div className="rounded-lg border bg-card p-4">
-          <h3 className="mb-3 text-sm font-semibold">活跃用户</h3>
-          <div className="space-y-3">
-            {hotUsers.map((user) => (
-              <UserCard
-                key={user.id}
-                {...user}
-                showFollowButton={false}
-              />
+          <h3 className="mb-3 text-sm font-semibold">板块分类</h3>
+          <div className="space-y-2">
+            {categories.map((cat: Category) => (
+              <Link
+                key={cat.id}
+                href={`/category/${cat.id}`}
+                className="flex items-center justify-between rounded-md px-2 py-1.5 text-sm hover:bg-accent"
+              >
+                <span>{cat.name}</span>
+                <span className="text-xs text-muted-foreground">{cat.thread_count}</span>
+              </Link>
             ))}
           </div>
         </div>
