@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 import { Bell, MessageCircle, User, LogOut, Settings, FileText, UserCircle, PenSquare } from 'lucide-react';
 import { Button } from '@discuzq/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@discuzq/ui/avatar';
@@ -17,12 +18,20 @@ import {
 import { useAuthStore } from '@/store/auth';
 import { useLogout } from '@/hooks/useAuth';
 import { toast } from '@discuzq/ui/toast';
+import { getUnreadCount } from '@/lib/mock-notifications';
 
 export function Header() {
   const router = useRouter();
   const { userInfo, token } = useAuthStore();
   const logoutMutation = useLogout();
   const isLoggedIn = !!token;
+
+  const { data: unreadData } = useQuery({
+    queryKey: ['notifications', 'unreadCount'],
+    queryFn: getUnreadCount,
+    initialData: { count: 0 },
+    enabled: isLoggedIn,
+  });
 
   const handleLogout = () => {
     logoutMutation.mutate(undefined, {
@@ -74,9 +83,16 @@ export function Header() {
 
             {isLoggedIn ? (
               <>
-                <Button variant="ghost" size="icon" className="text-muted-foreground">
-                  <Bell className="h-5 w-5" />
-                </Button>
+                <Link href="/notifications">
+                  <Button variant="ghost" size="icon" className="relative text-muted-foreground">
+                    <Bell className="h-5 w-5" />
+                    {unreadData.count > 0 && (
+                      <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-primary px-1 text-[10px] font-medium text-primary-foreground">
+                        {unreadData.count > 99 ? '99+' : unreadData.count}
+                      </span>
+                    )}
+                  </Button>
+                </Link>
                 <Button variant="ghost" size="icon" className="text-muted-foreground">
                   <MessageCircle className="h-5 w-5" />
                 </Button>
@@ -102,7 +118,7 @@ export function Header() {
                       </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => router.push(`/user/${userInfo?.id}`)}>
                       <UserCircle className="mr-2 h-4 w-4" />
                       个人主页
                     </DropdownMenuItem>
@@ -110,12 +126,17 @@ export function Header() {
                       <FileText className="mr-2 h-4 w-4" />
                       我的帖子
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => router.push('/notifications')}>
                       <Bell className="mr-2 h-4 w-4" />
                       消息通知
+                      {unreadData.count > 0 && (
+                        <span className="ml-auto rounded-full bg-primary/10 px-2 py-0.5 text-xs text-primary">
+                          {unreadData.count}
+                        </span>
+                      )}
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => router.push('/settings')}>
                       <Settings className="mr-2 h-4 w-4" />
                       设置
                     </DropdownMenuItem>
