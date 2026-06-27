@@ -1,11 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
-  Heart,
-  MessageCircle,
-  Share2,
-  Bookmark,
-  Flag,
   Eye,
   ChevronLeft,
 } from 'lucide-react';
@@ -14,12 +9,13 @@ import { Button } from '@discuzq/ui/button';
 import { Tag } from '@discuzq/ui/tag';
 import { Badge } from '@discuzq/ui/badge';
 import { RichText } from '@discuzq/ui/rich-text';
-import { CommentList } from '@discuzq/ui/comment';
 import { buildThreadMetadata } from '@discuzq/seo/metadata';
 import { articleJsonLd } from '@discuzq/seo/jsonld';
 import { formatSmartDate } from '@discuzq/utils/date';
 import { formatCompactNumber } from '@discuzq/utils/format';
 import { createServerApi } from '@/lib/api';
+import { ThreadDetailActions } from '@/components/thread-detail-actions';
+import { CommentSection } from '@/components/comment-section';
 import type { Thread, Post, User as UserType, Category } from '@discuzq/sdk/server';
 
 interface ThreadPageProps {
@@ -54,37 +50,6 @@ export async function generateMetadata({ params }: ThreadPageProps) {
   });
 }
 
-function mapComments(posts: Post[]) {
-  return posts
-    .filter((p) => !p.is_first)
-    .map((post) => ({
-      id: String(post.id),
-      content: post.content_html || post.content,
-      author: {
-        id: String(post.user?.id || post.user_id),
-        username: post.user?.username || '匿名用户',
-        avatar: post.user?.avatar || '',
-      },
-      createdAt: post.created_at,
-      likes: post.like_count,
-      isLiked: false,
-      replyCount: post.reply_count,
-      replies: (post.replies || []).map((r) => ({
-        id: String(r.id),
-        content: r.content_html || r.content,
-        author: {
-          id: String(r.user?.id || r.user_id),
-          username: r.user?.username || '匿名用户',
-          avatar: r.user?.avatar || '',
-        },
-        replyTo: r.replyUser?.username,
-        createdAt: r.created_at,
-        likes: r.like_count,
-        isLiked: false,
-      })),
-    }));
-}
-
 export default async function ThreadPage({ params }: ThreadPageProps) {
   const { id } = await params;
   const { thread, posts } = await getThreadData(id);
@@ -96,7 +61,6 @@ export default async function ThreadPage({ params }: ThreadPageProps) {
   const author = thread.user;
   const category = thread.category;
   const tags = thread.tags || [];
-  const comments = mapComments(posts);
 
   const jsonLd = articleJsonLd({
     headline: thread.title,
@@ -193,37 +157,20 @@ export default async function ThreadPage({ params }: ThreadPageProps) {
           </div>
 
           <div className="border-t p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-6">
-                <button className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-rose-500">
-                  <Heart className="h-5 w-5" />
-                  <span>{thread.like_count} 点赞</span>
-                </button>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <MessageCircle className="h-5 w-5" />
-                  <span>{thread.post_count} 评论</span>
-                </div>
-                <button className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-amber-500">
-                  <Bookmark className="h-5 w-5" />
-                  <span>收藏</span>
-                </button>
-                <button className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary">
-                  <Share2 className="h-5 w-5" />
-                  <span>分享</span>
-                </button>
-              </div>
-              <button className="text-sm text-muted-foreground transition-colors hover:text-destructive">
-                <Flag className="h-5 w-5" />
-              </button>
-            </div>
+            <ThreadDetailActions
+              threadId={String(thread.id)}
+              likeCount={thread.like_count}
+              commentCount={thread.post_count}
+            />
           </div>
         </article>
 
-        <div className="mt-6 rounded-lg border bg-card p-6">
-          <h2 className="mb-4 text-lg font-semibold">
-            全部评论 <span className="text-sm font-normal text-muted-foreground">({thread.post_count})</span>
-          </h2>
-          <CommentList comments={comments} />
+        <div className="mt-6">
+          <CommentSection
+            threadId={String(thread.id)}
+            initialPosts={posts}
+            totalCount={thread.post_count}
+          />
         </div>
       </div>
 

@@ -14,7 +14,30 @@ import type {
   UpdateThreadParams,
   CreatePostParams,
   Notification,
+  ApiResponse,
+  ApiError,
+  PaginatedData,
 } from './types';
+
+export type {
+  User,
+  Thread,
+  Post,
+  Category,
+  Tag,
+  PaginatedResponse,
+  PaginationParams,
+  LoginParams,
+  LoginResponse,
+  RegisterParams,
+  CreateThreadParams,
+  UpdateThreadParams,
+  CreatePostParams,
+  Notification,
+  ApiResponse,
+  ApiError,
+  PaginatedData,
+};
 
 export class DiscuzApi {
   private client: ApiClient;

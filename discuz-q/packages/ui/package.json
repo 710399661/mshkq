@@ -12,6 +12,7 @@
     "./button": "./src/components/button/index.tsx",
     "./card": "./src/components/card/index.tsx",
     "./input": "./src/components/input/index.tsx",
+    "./textarea": "./src/components/textarea/index.tsx",
     "./avatar": "./src/components/avatar/index.tsx",
     "./badge": "./src/components/badge/index.tsx",
     "./tag": "./src/components/tag/index.tsx",

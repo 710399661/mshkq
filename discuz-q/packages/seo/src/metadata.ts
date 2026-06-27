@@ -38,7 +38,7 @@ export function buildMetadata(params: SeoMetadataParams = {}): Metadata {
     description,
     keywords,
     authors: author ? [{ name: author }] : undefined,
-    metadataBase: url ? new URL(url) : undefined,
+    metadataBase: url && url.startsWith('http') ? new URL(url) : undefined,
     openGraph: {
       type,
       title: fullTitle,
