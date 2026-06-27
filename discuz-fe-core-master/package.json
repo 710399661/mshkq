@@ -1,0 +1,38 @@
+{
+  "name": "@discuzq/core",
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "publish:alpha": "lerna publish --dist-tag alpha",
+    "publish:albeta": "lerna publish --dist-tag beta",
+    "publish:rc": "lerna publish --dist-tag rc",
+    "publish": "lerna publish",
+    "lint": "lerna run lint",
+    "lint:fix": "lerna run lint:fix",
+    "commit": "git add . && cz",
+    "preinstall": "npm i commitizen eslint -g",
+    "build": "lerna run build",
+    "dependencies1": "lerna add @discuzq/discuz-plugin-loader --scope=@discuzq/cli",
+    "dependencies2": "lerna add @discuzq/discuz-babel-plugin-import --scope=@discuzq/cli",
+    "dependencies3": "lerna add @discuzq/sdk --scope=@discuzq/plugin-center"
+  },
+  "husky": {
+    "hooks": {}
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0",
+    "git-cz": "^4.7.6",
+    "husky": "^4.3.8",
+    "lerna": "^3.22.1",
+    "lerna-changelog": "^1.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "@typescript-eslint/parser": "^5.3.1",
+    "@xstate/fsm": "^1.6.0",
+    "classnames": "^2.2.6"
+  }
+}

@@ -1,0 +1,177 @@
+// 公共前缀
+@prefix: t;
+
+// 颜色色板
+
+@primary-color-1: #DFEFFF;
+@primary-color-2: #BFDBF7;
+@primary-color-3: #9BC5F2;
+@primary-color-4: #7BAFED;
+@primary-color-5: #5C99EB;
+@primary-color-6: #3881E8;
+@primary-color-7: #206AE1;
+@primary-color-8: #0052D9;
+@primary-color-9: #003CBE;
+@primary-color-10: #0026A1;
+
+@warning-color-1: #FFEFDB;
+@warning-color-2: #FFD3A3;
+@warning-color-3: #FFB473;
+@warning-color-4: #FF9247;
+@warning-color-5: #ED7B2F;
+@warning-color-6: #D6621C;
+@warning-color-7: #C24C08;
+@warning-color-8: #A23C00;
+@warning-color-9: #872D00;
+@warning-color-10: #691F00;
+
+@error-color-1: #FFE9E9;
+@error-color-2: #FFCCCE;
+@error-color-3: #FFACAF;
+@error-color-4: #FF888C;
+@error-color-5: #FB646D;
+@error-color-6: #E34D59;
+@error-color-7: #C93043;
+@error-color-8: #B01531;
+@error-color-9: #960022;
+@error-color-10: #730021;
+
+@success-color-1: #DFF7ED;
+@success-color-2: #A9E8CD;
+@success-color-3: #69D5AB;
+@success-color-4: #30BF8B;
+@success-color-5: #00A870;
+@success-color-6: #00935D;
+@success-color-7: #007E4A;
+@success-color-8: #006937;
+@success-color-9: #005426;
+@success-color-10: #004114;
+
+// 基础颜色
+@primary-color: #0052D9; // 色彩-品牌-可操作
+@warning-color: @warning-color-5; // 色彩-功能-警告
+@error-color: @error-color-6; // 色彩-功能-失败
+@success-color: @success-color-5; // 色彩-功能-成功
+
+// 基础颜色的扩展 用于 hover / 禁用 / 点击 等状态
+
+// 主题色扩展
+@primary-color-hover: @primary-color-7;
+@primary-color-active: @primary-color-9;
+@primary-color-disabled: @primary-color-2;
+
+// 警告色扩展
+@warning-color-hover: @warning-color-4;
+@warning-color-active: @warning-color-6;
+@warning-color-disabled: @warning-color-2;
+
+// 失败/错误色扩展
+@error-color-hover: @error-color-5;
+@error-color-active: @error-color-7;
+@error-color-disabled: @error-color-2;
+
+// 成功色扩展
+@success-color-hover: @success-color-4;
+@success-color-active: @success-color-6;
+@success-color-disabled: @success-color-2;
+
+// 遮罩
+@mask-active: rgba(0, 0, 0, .6); // 遮罩-弹出
+@mask-disabled: rgba(255, 255, 255, .6); // 遮罩-禁用
+
+// 背景色
+@bg-color: #f0f2f5; // 色彩-背景
+@bg-color-fade: #fbfbfb; // 色彩-中层背景
+@bg-color-hover: #f5f5f5; // 色彩-hover
+@bg-color-disabled: #f5f5f5; // 色彩-disabled
+@bg-color-block: #fff; // 色彩-模块
+
+// 文本颜色
+@text-level-1-color: rgba(0, 0, 0, .9); // 色彩-文字-一级
+@text-level-2-color: rgba(0, 0, 0, .6); // 色彩-文字-二级
+@text-level-3-color: rgba(0, 0, 0, .3); // 色彩-文字-三级
+@text-level-4-color: rgba(0, 0, 0, .16); // 色彩-文字-四级
+@text-anti-primary-color: rgba(255, 255, 255, .9); // 色彩-文字-主色反色
+
+@placeholder-color: @text-level-3-color;
+
+// @text-primary-color:@primary-color;
+// @text-success-color:@success-color;
+// @text-warning-color:@warning-color;
+// @text-error-color:@error-color;
+
+// 边框色
+@border-level-1-color: #eee;
+@border-level-2-color: #ddd;
+
+// Spacer
+@spacer: 8px;
+@spacer-1: @spacer; // 间距-小-x
+@spacer-2: @spacer * 2; // 间距-小
+@spacer-3: @spacer * 3; // 间距-中
+@spacer-4: @spacer * 4; // 间距-大
+@spacer-5: @spacer * 6; // 间距-大-x
+@spacer-6: @spacer * 10; // 间距-大-xx
+
+// Font
+@font-size: 10px;
+@font-size-xs: @font-size; // 字号-一级字号
+@font-size-s: @font-size * 1.2; // 字号-二级字号
+@font-size-base: @font-size * 1.4; // 字号-三级字号
+@font-size-l: @font-size * 1.6; // 字号-四级字号
+@font-size-xl: @font-size * 3.6; // 字号-五级字号
+
+@text-line-height: 1.5; //
+
+@font-family: PingFang SC, Microsoft YaHei, Arial Regular; // 字体-磅数-常规
+@font-family-medium: PingFang SC, Microsoft YaHei, Arial Medium; // 字体-磅数-粗体
+
+// Border Radius
+@border-radius: 2px; // 圆角-全局
+//@border-radius-base: 2px;
+@border-radius-50: 50%; // 圆角-全圆角
+
+// 表单相关
+@form-height: 30px;
+@form-text-color: @text-level-1-color;
+@form-bg-color: @bg-color-block;
+@form-border-color: @border-level-2-color;
+
+// shadow
+
+// 下层投影 hover 使用的组件包括：表格 /
+@shadow-1: 0 2px 4px -1px rgba(0, 0, 0, .12), 0 4px 5px 0 rgba(0, 0, 0, .08),
+  0 1px 10px 0 rgba(0, 0, 0, .05);
+// 中层投影 下拉 使用的组件包括：下拉菜单 / 气泡确认框 / 选择器 /
+@shadow-2: 0 5px 5px -3px rgba(0, 0, 0, .1), 0 8px 10px 1px rgba(0, 0, 0, .06),
+  0 3px 14px 6px rgba(0, 0, 0, .05);
+// 上层投影（警示/弹窗）使用的组件包括：全局提示 / 消息通知
+@shadow-3: 0 2px 4px -1px rgba(0, 0, 0, .12), 0 4px 5px 0 rgba(0, 0, 0, .08),
+  0 1px 10px 0 rgba(0, 0, 0, .05);
+
+// 图标尺寸
+@icon-default: 16px;
+@icon-l: 24px;
+
+// 响应式断点
+@screen-xs: 320px;
+@screen-xs-min: @screen-xs;
+@screen-sm: 768px;
+@screen-sm-min: @screen-sm;
+@screen-md: 992px;
+@screen-md-min: @screen-md;
+@screen-lg: 1200px;
+@screen-lg-min: @screen-lg;
+@screen-xl: 1400px;
+@screen-xl-min: @screen-xl;
+@screen-xxl: 1880px;
+@screen-xxl-min: @screen-xxl;
+@screen-xs-max: (@screen-sm-min - 1px);
+@screen-sm-max: (@screen-md-min - 1px);
+@screen-md-max: (@screen-lg-min - 1px);
+@screen-lg-max: (@screen-xl-min - 1px);
+@screen-xl-max: (@screen-xxl-min - 1px);
+
+
+// 暗色模式
+@dark-bg-color: #272B30; // 色彩-深色背景

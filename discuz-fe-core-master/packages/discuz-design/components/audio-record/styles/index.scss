@@ -1,0 +1,120 @@
+@import './var.scss';
+@import '../../../styles/mixin.scss';
+
+
+
+.progress-circle-width {
+  width: 64px !important;
+  height: 64px !important;
+}
+
+@include b(audio-record) {
+  padding: 10px;
+  border-radius: 5px;
+  background: $plugin-background-color;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  &-duration {
+    font-size: 12px;
+    line-height: 17px;
+    text-align: left;
+    color: $text-color;
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+
+  &-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    &-hz {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 30%;
+
+      $hz-heights: 6PX, 8PX, 12PX, 8PX, 6PX, 8PX, 10PX, 12PX, 8PX, 6PX;
+      $hz-delays: 0s, 0.4s, 0.8s, 1.2s, 1.6s, 1.4s, 1.2s, 0.8s, 0.4s, 0.2s;
+      @for $i from 1 through length($hz-heights) {
+        $hz-height: nth($hz-heights, $i);
+        $hz-delay: nth($hz-delays, $i);
+        &-#{$i} {
+          width: 2PX;
+          height: $hz-height;
+          border-radius: 1PX;
+          background-color: $border-color;
+        }
+
+        &-#{$i}--animation {
+          animation: .8s .3s living linear infinite backwards normal;
+          animation-delay: $hz-delay;
+        }
+      }
+
+      @keyframes living{
+        0%{-webkit-transform:scaleY(1);transform:scaleY(1);}
+        50%{-webkit-transform:scaleY(.3);transform:scaleY(.3);}
+        100%{-webkit-transform:scaleY(1);transform:scaleY(1);}
+      }
+    }
+
+    &-btn {
+      height: 64px;
+      width: 64px;
+      margin: 0 16.72px;
+      border-radius: 50%;
+      background-color: $progress-background-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &-status {
+        height: 52px;
+        width: 52px;
+        border-radius: 50%;
+        background-color: var(--color-primary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--color-white);
+
+        &-icon {
+          height: 16px;
+          width: 16px;
+          border-radius: 50%;
+          background-color: var(--color-white);
+        }
+      }
+    }
+  }
+
+  &-toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 16px;
+
+    &-tips {
+      font-size: 12px;
+      line-height: 17px;
+      text-align: left;
+      color: $text-color;
+      display: inline-block;
+      margin: 4px 40px 0 40px;
+    }
+
+    &-text {
+      font-size: 12px;
+      line-height: 17px;
+      text-align: left;
+      color: $text-color;
+      display: inline-block;
+    }
+  }
+}

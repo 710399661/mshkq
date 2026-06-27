@@ -1,0 +1,17 @@
+@import './video.scss';
+@include b(video) {
+  // 替换默认样式
+  .video-js .vjs-big-play-button {
+    width: 2em;
+    height: 2em;
+    line-height: 1.84em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+  .vjs-paused .vjs-big-play-button,
+  .vjs-paused.vjs-has-started .vjs-big-play-button {
+    display: block;
+  }
+}

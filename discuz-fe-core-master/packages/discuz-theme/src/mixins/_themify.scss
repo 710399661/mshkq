@@ -1,0 +1,13 @@
+@mixin themify($themes: $themes, $style: 'dzq-theme') {
+
+  @each $theme-name, $map in $themes {
+
+    // & 表示父级元素
+    // !global 表示覆盖原来的
+    .#{$style}--#{$theme-name} {
+      @each $key, $value in $map {
+        #{$key}: #{$value};
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+/node_modules
+/site
+/dist
+/distPure
+/components/scroll-view/layouts/mini/virtual-list/
+.eslintrc.js
+./
+/types

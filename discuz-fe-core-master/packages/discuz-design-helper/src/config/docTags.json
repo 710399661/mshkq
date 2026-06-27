@@ -1,0 +1,254 @@
+{
+  "alert": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/alert",
+    "title": "alert",
+    "tag": "Alert"
+  },
+  "animation": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/animation",
+    "title": "animation",
+    "tag": "Animation"
+  },
+  "audio": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/audio",
+    "title": "audio",
+    "tag": "Audio"
+  },
+  "audio-player": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/audio-player",
+    "title": "audio-player",
+    "tag": "AudioPlayer"
+  },
+  "avatar": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/avatar",
+    "title": "avatar",
+    "tag": "Avatar"
+  },
+  "back-to-top": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/back-to-top",
+    "title": "back-to-top",
+    "tag": "BackToTop"
+  },
+  "badge": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/badge",
+    "title": "badge",
+    "tag": "Badge"
+  },
+  "button": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/button",
+    "title": "button",
+    "tag": "Button"
+  },
+  "card": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/card",
+    "title": "card",
+    "tag": "Card"
+  },
+  "check": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/check",
+    "title": "check",
+    "tag": "Check"
+  },
+  "checkbox": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/checkbox",
+    "title": "checkbox",
+    "tag": "Checkbox"
+  },
+  "dialog": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/dialog",
+    "title": "dialog",
+    "tag": "Dialog"
+  },
+  "divider": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/divider",
+    "title": "divider",
+    "tag": "Divider"
+  },
+  "dropdown": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/dropdown",
+    "title": "dropdown",
+    "tag": "Dropdown"
+  },
+  "flex": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/flex",
+    "title": "flex",
+    "tag": "Flex"
+  },
+  "grid": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/grid",
+    "title": "grid",
+    "tag": "Grid"
+  },
+  "icon": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/icon",
+    "title": "icon",
+    "tag": "Icon"
+  },
+  "image-previewer": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/image-previewer",
+    "title": "image-previewer",
+    "tag": "ImagePreviewer"
+  },
+  "input": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/input",
+    "title": "input",
+    "tag": "Input"
+  },
+  "menu": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/menu",
+    "title": "menu",
+    "tag": "Menu"
+  },
+  "popup": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/popup",
+    "title": "popup",
+    "tag": "Popup"
+  },
+  "progress": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/progress",
+    "title": "progress",
+    "tag": "Progress"
+  },
+  "pull-down-refresh": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/pull-down-refresh",
+    "title": "pull-down-refresh",
+    "tag": "PullDownRefresh"
+  },
+  "radio": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/radio",
+    "title": "radio",
+    "tag": "Radio"
+  },
+  "rich-text": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/rich-text",
+    "title": "rich-text",
+    "tag": "RichText"
+  },
+  "scroll-view": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/scroll-view",
+    "title": "scroll-view",
+    "tag": "ScrollView"
+  },
+  "slider": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/slider",
+    "title": "slider",
+    "tag": "Slider"
+  },
+  "spin": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/spin",
+    "title": "spin",
+    "tag": "Spin"
+  },
+  "switch": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/switch",
+    "title": "switch",
+    "tag": "Switch"
+  },
+  "tabs": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/tabs",
+    "title": "tabs",
+    "tag": "Tabs"
+  },
+  "tag": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/tag",
+    "title": "tag",
+    "tag": "Tag"
+  },
+  "textarea": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/textarea",
+    "title": "textarea",
+    "tag": "Textarea"
+  },
+  "toast": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/toast",
+    "title": "toast",
+    "tag": "Toast"
+  },
+  "upload": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/upload",
+    "title": "upload",
+    "tag": "Upload"
+  },
+  "video": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/video",
+    "title": "video",
+    "tag": "Video"
+  },
+  "web-picker": {
+    "category": "Components",
+    "subtitle": "",
+    "type": "/components/web-picker",
+    "title": "web-picker",
+    "tag": "WebPicker"
+  }
+}

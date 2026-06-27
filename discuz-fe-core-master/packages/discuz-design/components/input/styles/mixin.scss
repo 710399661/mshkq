@@ -1,0 +1,6 @@
+// icon的hover兼容移动端
+@mixin hover($hover) {
+  &:#{$hover}{
+    color: $input-icon-color-hover;
+  }
+}

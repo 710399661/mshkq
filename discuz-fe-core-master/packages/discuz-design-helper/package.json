@@ -1,0 +1,99 @@
+{
+  "name": "discuz-design-helper",
+  "displayName": "discuz-design-helper",
+  "description": "Discuz Design Helper for VS Code",
+  "author": "Discuz-FE",
+  "version": "0.0.5",
+  "icon": "logo.png",
+  "engines": {
+    "vscode": "^1.58.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/zoomlion/discuz-design-helper"
+  },
+  "publisher": "burnellliu",
+  "categories": [
+    "Other",
+    "Snippets"
+  ],
+  "activationEvents": [
+    "onCommand:discuz-design-helper.search",
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "discuz-design-helper.search",
+        "title": "discuz-design-helper.search"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "discuz-design-helper.search",
+        "key": "shift+cmd+i",
+        "when": "editorTextFocus"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "javascriptreact",
+        "path": "./snippets/dzq.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/dzq.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/dzq.json"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./snippets/dzq.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Discuz Helper Configuration",
+      "properties": {
+        "dzq-helper.indent-size": {
+          "type": "number",
+          "default": 2,
+          "description": "Indentation size of snippets"
+        },
+        "dzq-helper.quotes": {
+          "type": "string",
+          "default": "double"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "sh build.sh",
+    "compile": "sh build.sh",
+    "watch": "sh build.sh --watch",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^12.11.7",
+    "@types/vscode": "^1.58.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "eslint": "^7.19.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.2.1",
+    "typescript": "^4.1.3",
+    "uppercamelcase": "^3.0.0",
+    "vscode-test": "^1.5.0"
+  },
+  "dependencies": {
+    "pretty": "^2.0.0"
+  }
+}

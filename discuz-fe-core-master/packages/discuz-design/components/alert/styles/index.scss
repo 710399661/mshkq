@@ -1,0 +1,66 @@
+@import "./var.scss";
+@import "../../../styles/mixin.scss";
+
+@include b(alert) {
+  position: relative;
+  display: flex;
+  font-size: 0;
+  padding: $alert-padding;
+  align-items: stretch;
+  box-sizing: border-box;
+  transition: all 300ms ease;
+
+  @include e(text) {
+    color: $alert-info-text-color;
+
+    @include m(info) {
+      background-color: $alert-info-background-color;
+    }
+  }
+
+  @include m(success) {
+    background-color: $alert-success-background-color;
+
+    @include e(text) {
+      color: $alert-success-text-color;
+    }
+  }
+
+  @include m(warning) {
+    background-color: $alert-warning-background-color;
+
+    @include e(text) {
+      color: $alert-warning-text-color;
+    }
+  }
+
+  @include m(error) {
+    background-color: $alert-danger-background-color;
+
+    @include e(text) {
+      color: $alert-danger-text-color;
+    }
+  }
+
+  @include when(close) {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  @include e(icon) {
+    margin-right: 12px;
+    text-align: center;
+    line-height: 21px;
+  }
+
+  @include e(text) {
+    flex: 1;
+    font-size: $alert-text-size;
+    line-height: 1.5;
+  }
+
+  @include e(close) {
+    margin-top: 2px;
+    margin-left: 10px;
+  }
+}

@@ -1,0 +1,110 @@
+@import '../core';
+
+$popup-overlay-color: $mask-bg-color;
+$popup-center-container-border-radius: $border-radius-small;
+
+@include b(popup) {
+  @include e(overlay) {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    visibility: hidden;
+    opacity: 1;
+    background-color: $popup-overlay-color;
+    transition: opacity 1s ease-in;
+    z-index: $zindex-popup;
+    // 处理点击穿透问题
+    pointer-events: auto;
+
+    @include when(shown) {
+      visibility: visible;
+    }
+  }
+
+  @include e(container) {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: $zindex-popup;
+    visibility: hidden;
+    transition: all 300ms ease;
+    overflow: hidden;
+
+    @include e(close-icon) {
+      font-size: 12px;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      cursor: pointer;
+      color: $disabled-color;
+      z-index: 1;
+    }
+
+    @include when(shown) {
+      visibility: visible;
+    }
+
+    &.top {
+      top: 0;
+      transform: translateY(-100%);
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+
+      @include when(expanded) {
+        transform: translateY(0);
+      }
+    }
+
+    &.center {
+      top: 50%;
+      border-radius: $popup-center-container-border-radius;
+      transform: translateY(-50%) scale(0.75);
+      opacity: 0;
+      border-radius: 10px;
+
+      &.is-expanded {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+      }
+    }
+
+    &.bottom {
+      bottom: 0;
+
+      transform: translateY(100%);
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+
+      &.is-expanded {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  @include e(footer) {
+    background: $white;
+    padding: $padding-2n $padding-4n $padding-4n $padding-4n;
+    border-top: $border-solid-1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include e(btn) {
+      width: 50%;
+      height: rem(42);
+      font-size: $font-size-middle;
+
+      &+button{
+        margin-left: $margin-2n;
+      }
+    }
+  }
+}
+
+body.modal-open {
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+}

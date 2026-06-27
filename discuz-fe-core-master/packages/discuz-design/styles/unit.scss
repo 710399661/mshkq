@@ -1,0 +1,232 @@
+/**
+* *n 代表 4的倍数边距
+* 例如：1n = 4 2n = 8 4n = 12
+* 10 和 5 分别代表 10px 的边距和 5px 的边距
+* l r t b 分别代表四个方向
+* margin 是外边距，padding 是内边距
+**/
+.margin-l1n {
+  margin-left: var(--margin-1n);
+}
+
+.margin-l2n {
+  margin-left: var(--margin-2n);
+}
+
+.margin-l4n {
+  margin-left: var(--margin-4n);
+}
+
+.margin-l5n {
+  margin-left: var(--margin-5n);
+}
+
+.margin-l6n {
+  margin-left: var(--margin-6n);
+}
+
+.margin-l5 {
+  margin-left: var(--margin-5);
+}
+
+.margin-l10 {
+  margin-left: var(--margin-10);
+}
+
+.margin-r1n {
+  margin-right: var(--margin-1n);
+}
+
+.margin-r2n {
+  margin-right: var(--margin-2n);
+}
+
+.margin-r4n {
+  margin-right: var(--margin-4n);
+}
+
+.margin-r5n {
+  margin-right: var(--margin-5n);
+}
+
+.margin-r6n {
+  margin-right: var(--margin-6n);
+}
+
+.margin-r5 {
+  margin-right: var(--margin-5);
+}
+
+.margin-r10 {
+  margin-right: var(--margin-10);
+}
+
+
+.margin-t1n {
+  margin-top: var(--margin-1n);
+}
+
+.margin-t2n {
+  margin-top: var(--margin-2n);
+}
+
+.margin-t4n {
+  margin-top: var(--margin-4n);
+}
+
+.margin-t5n {
+  margin-top: var(--margin-5n);
+}
+
+.margin-t6n {
+  margin-top: var(--margin-6n);
+}
+
+.margin-t5 {
+  margin-top: var(--margin-5);
+}
+
+.margin-t10 {
+  margin-top: var(--margin-10);
+}
+
+.margin-b1n {
+  margin-bottom: var(--margin-1n);
+}
+
+.margin-b2n {
+  margin-bottom: var(--margin-2n);
+}
+
+.margin-b4n {
+  margin-bottom: var(--margin-4n);
+}
+
+.margin-b5n {
+  margin-bottom: var(--margin-5n);
+}
+
+.margin-b6n {
+  margin-bottom: var(--margin-6n);
+}
+
+.margin-b5 {
+  margin-bottom: var(--margin-5);
+}
+
+.margin-b10 {
+  margin-bottom: var(--margin-10);
+}
+
+.padding-l1n {
+  padding-left: var(--padding-1n);
+}
+
+.padding-l2n {
+  padding-left: var(--padding-2n);
+}
+
+.padding-l4n {
+  padding-left: var(--padding-4n);
+}
+
+.padding-l5n {
+  padding-left: var(--padding-5n);
+}
+
+.padding-l6n {
+  padding-left: var(--padding-6n);
+}
+
+.padding-l5 {
+  padding-left: var(--padding-5);
+}
+
+.padding-l10 {
+  padding-left: var(--padding-10);
+}
+
+
+.padding-r1n {
+  padding-right: var(--padding-1n);
+}
+
+.padding-r2n {
+  padding-right: var(--padding-2n);
+}
+
+.padding-r4n {
+  padding-right: var(--padding-4n);
+}
+
+.padding-r5n {
+  padding-right: var(--padding-5n);
+}
+
+.padding-r6n {
+  padding-right: var(--padding-6n);
+}
+
+.padding-r5 {
+  padding-right: var(--padding-5);
+}
+
+.padding-r10 {
+  padding-right: var(--padding-10);
+}
+
+.padding-t1n {
+  padding-top: var(--padding-1n);
+}
+
+.padding-t2n {
+  padding-top: var(--padding-2n);
+}
+
+.padding-t4n {
+  padding-top: var(--padding-4n);
+}
+
+.padding-t5n {
+  padding-top: var(--padding-5n);
+}
+
+.padding-t6n {
+  padding-top: var(--padding-6n);
+}
+
+.padding-t5 {
+  padding-top: var(--padding-5);
+}
+
+.padding-t10 {
+  padding-top: var(--padding-10);
+}
+
+.padding-b1n {
+  padding-bottom: var(--padding-1n);
+}
+
+.padding-b2n {
+  padding-bottom: var(--padding-2n);
+}
+
+.padding-b4n {
+  padding-bottom: var(--padding-4n);
+}
+
+.padding-b5n {
+  padding-bottom: var(--padding-5n);
+}
+
+.padding-b6n {
+  padding-bottom: var(--padding-6n);
+}
+
+.padding-b5 {
+  padding-bottom: var(--padding-5);
+}
+
+.padding-b10 {
+  padding-bottom: var(--padding-10);
+}

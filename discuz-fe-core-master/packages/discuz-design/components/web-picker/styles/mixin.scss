@@ -1,0 +1,6 @@
+//居中
+@mixin flex($align:center, $pack:center) {
+    display: flex;
+    justify-content: $pack;
+    align-items: $align;
+}

@@ -1,0 +1,71 @@
+@import '../core';
+
+$dzq-avatar-size-big: 120px;
+$dzq-avatar-size-lg: 72px;
+$dzq-avatar-size-sm: 24px;
+$dzq-avatar-size-md: 38px;
+$dzq-avatar-bg-color: $text-color-secondary;
+$dzq-avatar-color: $white;
+
+$dzq-avatar-font-size-md: $font-size-primary;
+$dzq-avatar-font-size-lg: 36px;
+$dzq-avatar-font-size-big: 48px;
+$dzq-avatar-font-size-sm: $font-size-label;
+
+@include b(avatar) {
+  width: $dzq-avatar-size-md;
+  height: $dzq-avatar-size-md;
+  color: $dzq-avatar-color;
+  font-size: $dzq-avatar-font-size-md;
+  line-height: $dzq-avatar-size-md;
+  text-align: center;
+  background: $dzq-avatar-bg-color;
+  overflow: hidden;
+  cursor: pointer;
+  display: inline-block;
+
+  @include e(img) {
+    @include center;
+    width: 100%;
+    height: 100%;
+    font-size: $dzq-avatar-font-size-lg;
+  }
+
+  @include m(big) {
+    width: $dzq-avatar-size-big;
+    height: $dzq-avatar-size-big;
+    font-size: $dzq-avatar-font-size-big;
+    line-height: $dzq-avatar-size-big;
+  }
+
+  @include m(large) {
+    width: $dzq-avatar-size-lg;
+    height: $dzq-avatar-size-lg;
+    font-size: $dzq-avatar-font-size-lg;
+    line-height: $dzq-avatar-size-lg;
+  }
+
+  @include m(small) {
+    width: $dzq-avatar-size-sm;
+    height: $dzq-avatar-size-sm;
+    font-size: $dzq-avatar-font-size-sm;
+    line-height: $dzq-avatar-size-sm;
+  }
+
+  @include m(circle) {
+    border-radius: 50%;
+    background-clip: border-box;
+    overflow: hidden;
+  }
+}
+
+@include b(avatar-group) {
+  @include flex(inline-flex);
+  cursor: pointer;
+  @include e(img) {
+    &:not(:first-child) {
+      margin-left: -4px;
+    }
+    position: a;
+  }
+}

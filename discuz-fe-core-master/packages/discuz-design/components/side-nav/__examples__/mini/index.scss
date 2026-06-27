@@ -1,0 +1,30 @@
+.container {
+    width: 400px;
+}
+.text {
+    margin: 20px 0;
+}
+.icon {
+    margin-left: 16px;
+}
+.content {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: #0b0b37;
+    padding-left: 8px
+}
+.actived {
+    .dzq-icon {
+        color: #2469f6 !important
+    }
+    .content {
+        color: #2469f6 
+    }
+}
+.horizontal {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap
+}

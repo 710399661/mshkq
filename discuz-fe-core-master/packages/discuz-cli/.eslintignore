@@ -1,0 +1,8 @@
+.idea
+.vscode
+node_modules
+.npmrc
+.eslintignore
+.eslintrc.js
+example
+template/

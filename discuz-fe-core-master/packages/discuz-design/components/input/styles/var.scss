@@ -1,0 +1,25 @@
+$input-height: 36px;
+$input-width: 236px;
+$input-padding: var(--padding-2n);
+$input-font-size: var(--font-size-primary);
+$input-border-radius: var(--border-radius-small);
+$input-background-color: var(--color-white);
+$input-placeholder-font-color: var(--border-color-hover);
+$input-border: var(--border-border);
+
+$input-border-color-hover: var(--color-primary);
+$input-border-color-focus: var(--color-primary);
+$input-font-color: var(--color-text-primary);
+$input-icon-color: var(--color-disabled2);
+$input-icon-color-select: var(--color-primary);
+$input-icon-color-hover: var(--color-primary);
+$input-icon-color-focus: var(--color-text-primary);
+
+$input-background-color-disabled: var(--color-disabled5);
+$input-font-color-disabled: var(--color-disabled);
+$input-border-color-disabled: var(--border-line-color);
+$input-placeholder-color-disabled: var(--border-color-hover);
+
+$input-icon-width: 32px;
+$input-limit-width: 50px;
+$input-limit-font-size: var(--font-size-middle);

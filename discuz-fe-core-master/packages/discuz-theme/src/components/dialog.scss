@@ -1,0 +1,82 @@
+@import '../core';
+
+@include b(modal) {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: $zindex-dialog;
+  visibility: hidden;
+
+  @include e(overlay) {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: $mask-bg-color;
+  }
+
+  @include e(container) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    background: $white;
+    padding: $padding-6n;
+    border-radius: $border-radius-small;
+    box-sizing: border-box;
+    transform: translate(-50%, -50%);
+  }
+
+  @include e(header) {
+    position: relative;
+    padding-bottom: $padding-4n;
+    font-size: $font-size-middle;
+    text-align: center;
+    line-height: 1;
+    font-weight: 600;
+    .dzq-header__closeicon {
+      position: absolute;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+      color: $text-color-secondary;
+    }
+  }
+
+  @include e(body) {
+    padding-top: $padding-4n;
+    padding-bottom: $padding-4n;
+  }
+
+  @include e(footer) {
+    padding-top: $padding-4n;
+    text-align: center;
+    .dzq-button {
+      min-width: 116px;
+      &:nth-child(2) {
+        margin-left: $margin-4n;
+      }
+    }
+    .dzq-modal_cancel {
+      color: $text-color-regular;
+      background-color: $button-info-bg-color;
+      border: none;
+    }
+  }
+
+  @include when(active) {
+    visibility: visible;
+
+    .dzq-modal__overlay,
+    .dzq-modal__container {
+      opacity: 1;
+    }
+
+    .dzq-modal__container {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}

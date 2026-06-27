@@ -1,0 +1,54 @@
+@import "../core";
+
+@include b(popover) {
+  @include e(content) {
+    position: absolute;
+  }
+
+  @include e(inner) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0 0 8px #c5c9d5;
+    border-radius: 5px;
+    min-width: 100px;
+  }
+
+  @include e(arrow) {
+    position: absolute;
+    transform: rotate(45deg);
+    height: 8px;
+    width: 8px;
+  }
+
+  @include m(open) {
+    animation: popover-open 0.15s ease-in;
+  }
+
+  @include m(close) {
+    animation: popover-close 0.15s ease-in;
+  }
+}
+
+@keyframes popover-open {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform-origin: center;
+  }
+}
+
+@keyframes popover-close {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform-origin: center;
+  }
+}

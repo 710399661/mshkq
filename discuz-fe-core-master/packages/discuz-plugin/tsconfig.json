@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+      "jsx": "react",
+      "target": "es5",
+      "outDir": "./es",
+      "declaration": true,
+      "declarationDir": "./types",
+      "moduleResolution": "node",
+      "allowJs": true,
+      "checkJs": true,
+      "importHelpers": true,
+      "allowSyntheticDefaultImports": true,
+      "rootDir": "./lib",
+      "lib": ["es2017", "dom"],
+      "skipLibCheck": true
+    },
+    "exclude": [
+      "node_modules/**",
+      "**/*.spec.ts"
+    ],
+    "include":[
+      "lib/**/*"
+    ]
+}

@@ -1,0 +1,173 @@
+@import '../core';
+
+$line-height-fz-default: 20px; // fz-default 对应的行高
+
+$progress-height: 6px;
+$progress-line-height-fz-default:$line-height-fz-default;
+
+$progress-font-size: $font-size-label;
+$progress-font-size-l: $font-size-primary;
+$progress-border-radius: $border-radius-zero;
+$progress-color-base-text-weight: $text-color-primary;
+$progress-color-base-bg: $body-bg-color; // 用于白底上的灰底模块  即$color-neutral-0 色 50% 透明度
+
+// 默认进度条
+$progress-primary-color-bg: $warn-color;
+$progress-primary-color-text-label: $text-color-primary;
+// success
+$progress-success-color-border: $success-color;
+$progress-success-color-bg: $success-color;
+// error
+$progress-error-color-border: $error-color;
+$progress-error-color-bg: $error-color;
+
+// 圆环的宽高
+$progress-circle-width: 160px;
+$progress-circle-height: 160px;
+
+.#{$namespace}-progress {
+  height: $progress-height;
+  margin-bottom: $progress-height*4;
+  min-width: 100px;
+  background-color: $progress-color-base-bg;
+  position: relative;
+  border: none;
+  border-radius: $progress-border-radius;
+  color: $text-color-primary;
+}
+
+.#{$namespace}-progress__value {
+  height: $progress-height;
+  background: $progress-primary-color-bg;
+  content: "";
+  display: block;
+  border-radius: $progress-border-radius;
+  position: initial;
+}
+
+.#{$namespace}-progress__text {
+  display: block;
+  position: absolute;
+  font-size: $progress-font-size;
+  line-height: $progress-line-height-fz-default;
+  left: 0;
+  top: 8px;
+}
+
+.#{$namespace}-progress.#{$namespace}-progress--succeed {
+  border-color: $progress-success-color-border;
+}
+
+.#{$namespace}-progress.#{$namespace}-progress--succeed .#{$namespace}-progress__value {
+  background: $progress-success-color-bg;
+}
+
+.#{$namespace}-progress.#{$namespace}-progress--error {
+  border-color: $progress-error-color-border;
+}
+
+.#{$namespace}-progress.#{$namespace}-progress--error .#{$namespace}-progress__value {
+  background: $progress-error-color-bg;
+}
+
+
+/* 环形进度条 */
+.#{$namespace}-progress-circle {
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+
+  /* 小程序环形进度条 */
+  &__canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__children {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+}
+
+.#{$namespace}-progress-circle__area {
+  width: $progress-circle-width;
+  height: $progress-circle-height;
+  position: relative;
+  margin: 0 auto;
+}
+
+.#{$namespace}-progress-circle__svg-path {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  -webkit-transform: rotate(270deg);
+  -webkit-transform-origin: center;
+  -moz-transform: rotate(270deg);
+  -moz-transform-origin: center;
+  -ms-transform: rotate(-90deg);
+  -ms-transform-origin: center;
+}
+
+.#{$namespace}-progress-circle__base-ring {
+  stroke: $progress-color-base-bg;
+}
+
+.#{$namespace}-progress-circle__current-ring {
+  stroke-dasharray: 0 434px;
+  stroke: $progress-primary-color-bg;
+  stroke-dashoffset: 0px;
+  /*-webkit-transition: all .5s ease;*/
+}
+
+.#{$namespace}-progress-circle__area svg {
+  width: 100%;
+  height: 100%;
+}
+
+.#{$namespace}-progress-circle__current-text {
+  // font-family: qcloud-num;
+  height: $progress-circle-height*50/160;
+  line-height: $progress-circle-height*50/160;
+  font-size: $progress-circle-height*48/160;
+  color: $progress-color-base-text-weight;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  margin-top: -($progress-circle-height*50/160)/2;
+}
+
+.#{$namespace}-progress-circle__current-text .text--chinese {
+  font-size: $progress-circle-height*24/160;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.#{$namespace}-progress-circle__current-text .text--symbol {
+  font-size: $progress-font-size-l;
+  color: $progress-primary-color-text-label;
+}
+
+.#{$namespace}-progress-circle__tips {
+  line-height: 1.5;
+  font-size: $progress-font-size-l;
+  color: $progress-primary-color-text-label;
+}
+
+.#{$namespace}-progress-circle.is-success .#{$namespace}-progress-circle__current-ring {
+  stroke: $progress-success-color-bg;
+}
+
+.#{$namespace}-progress-circle.is-error .#{$namespace}-progress-circle__current-ring {
+  stroke: $progress-error-color-bg;
+}

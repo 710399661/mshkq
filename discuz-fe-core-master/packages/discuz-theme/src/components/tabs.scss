@@ -1,0 +1,124 @@
+@import '../core';
+
+$tabs-background-color: $white;
+$tabs-tab-inactive-text-color: $text-color-secondary;
+$tabs-tab-active-text-color: $primary-color;
+$tabs-tab-line-height: $font-line-height-primary;
+$tabs-tab-text-size: $font-size-primary;
+$tabs-tab-padding: 0 $padding-3n;
+$tabs-panel-padding: $padding-1n;
+$tabs-line-color: $primary-color;
+$tabs-line-border-bottom: 2px solid $primary-color;
+$tabs-label-margin-top: $margin-4n;
+$tabs-label-padding-bottom: $padding-4n;
+$tabs-label-active-font-weight: $font-weight-regular;
+
+.#{$namespace}-tabs {
+  background-color: $tabs-background-color;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  &__bar {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+
+
+    @include when(card) {
+      box-shadow: $border-shadow-color-8;
+    }
+  }
+
+  &__list {
+    position: relative;
+    display: flex;
+    -webkit-user-select: none;
+    user-select: none;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    transition: transform .2s;
+  }
+
+  &__scroll {
+    display: block;
+    width: 100%;
+    transition: all .2s;
+
+    @include m(external) {
+      overflow: hidden;
+    }
+  }
+
+  &__item {
+    position: relative;
+    box-sizing: border-box;
+    text-align: center;
+    color: $tabs-tab-inactive-text-color;
+    font-size: $tabs-tab-text-size;
+    padding: $tabs-tab-padding;
+    cursor: pointer;
+
+    @include when(active) {
+      color: $tabs-tab-active-text-color;
+      font-weight: $tabs-label-active-font-weight;
+      text-shadow: 0 0 .25px currentColor;
+      &::after {
+        content: '';
+        display: block;
+        height: 2px;
+        border-radius: 1px;
+        background: $tabs-line-color;
+        width: 100%;
+        border-radius: 2px;
+      }
+
+      .#{$namespace}-tabs__label {
+        padding-bottom: 14px;
+      }
+    }
+    &:hover {
+      color: $tabs-tab-active-text-color;
+    }
+  }
+
+  &__item.#{$namespace}-tabs__direction {
+    &--row {
+      flex-direction: row;
+    }
+  }
+
+  &__panel {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  &__content {
+    width: 100%;
+    box-sizing: border-box;
+    padding: $tabs-panel-padding;
+  }
+
+  &__content.is-active {
+    opacity: 1;
+    height: 100%;
+    -webkit-transition: opacity 0.45s;
+    transition: opacity 0.45s;
+  }
+
+  &__content.is-inactive {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+  }
+
+  &__label {
+    line-height: $tabs-tab-line-height;
+    margin-top: $tabs-label-margin-top;
+    padding-bottom: $tabs-label-padding-bottom;
+  }
+}

@@ -1,0 +1,11 @@
+export declare function isWindow(s: any): boolean;
+export declare function isObject(s: any): boolean;
+export declare function isArray(s: any): boolean;
+export declare function isString(s: any): boolean;
+export declare function isFunction(s: any): boolean;
+export declare function isNumber(s: any): boolean;
+export declare function isRegExp(s: any): boolean;
+export declare function isUndefined(s: any): boolean;
+export declare function isNull(s: any): boolean;
+export declare function isDate(s: any): boolean;
+export declare function isDOM(s: any): boolean;

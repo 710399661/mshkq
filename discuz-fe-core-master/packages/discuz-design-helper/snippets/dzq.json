@@ -1,0 +1,79 @@
+{
+  "BaseLayoutPC": {
+    "prefix": "dzq-bls",
+    "body": [
+      "<BaseLayout\r"
+      "  right={$1}\r"
+      "  noMore={currentPage >= totalPage}\r"
+      "  onRefresh={$2}\r"
+      "  showRefresh={false}\r"
+      "  isShowLayoutRefresh={$3}\r"
+      ">\r"
+      "  <SidebarPanel\r"
+      "    title=\"$4\"\r"
+      "    isShowMore={false}\r"
+      "    noData={$5}\r"
+      "    isLoading={$6}\r"
+      "    icon={{ type: 3, name: 'ShoppingCartOutlined' }}\r"
+      "    rightText=\"此处填写文案\"\r"
+      "    mold='plane'\r"
+      "    isError={$7}\r"
+      "    errorText={$8}\r"
+      " >\r"
+      "    {children}\r"
+      "  </SidebarPanel>\r"
+      "</BaseLayout>\r"
+      ""
+    ],
+    "description": "BaseLayout+SidebarPanel 两列布局+卡片"
+  },
+  "ToastInfo": {
+    "prefix": "dzq-ti",
+    "body": [
+      "Toast.info({ content: \"$1\" });"
+    ],
+    "description": "Toast 信息提示框"
+  },
+  "ToastSuccess": {
+    "prefix": "dzq-ts",
+    "body": [
+      "Toast.success({ content: \"$1\" });"
+    ],
+    "description": "Toast 成功信息提示框"
+  },
+  "ToastWarning": {
+    "prefix": "dzq-tw",
+    "body": [
+      "Toast.warning({ content: \"$1\" });"
+    ],
+    "description": "Toast 警告信息提示框"
+  },
+  "ToastError": {
+    "prefix": "dzq-te",
+    "body": [
+      "Toast.error({ content: \"$1\" });"
+    ],
+    "description": "Toast 错误信息提示框"
+  },
+  "ToastLoading": {
+    "prefix": "dzq-tl",
+    "body": [
+      "Toast.loading({ content: \"$1\" });"
+    ],
+    "description": "Toast 加载信息提示框"
+  },
+  "List": {
+    "prefix": "dzq-l",
+    "body": [
+      "<List\r"
+      "  immediateCheck={$1} // 是否初始化时，立即请求一次网络\r"
+      "  className={$2} // 必填，给list一个高度，不然滑动失效\r"
+      "  onRefresh={$3} // 需要上拉加载更多的功能时，必填\r"
+      ">\r"
+      "  {children}\r"
+      "</List>\r"
+      ""
+    ],
+    "description": "List 列表组件"
+  }
+}

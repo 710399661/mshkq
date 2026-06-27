@@ -1,0 +1,47 @@
+@import '../../../styles/mixin.scss';
+@import './vars.scss';
+
+@include b(avatar) {
+  width: $dzq-avatar-size-md;
+  height: $dzq-avatar-size-md;
+  color: $dzq-avatar-color;
+  font-size: $dzq-avatar-font-size-md;
+  line-height: $dzq-avatar-size-md;
+  text-align: center;
+  background: $dzq-avatar-bg-color;
+  overflow: hidden;
+
+  @include e(img) {
+    width: 100%;
+    height: 100%;
+    font-size: $dzq-avatar-font-size-lg;
+    line-height: $dzq-avatar-size-lg;
+  }
+
+  @include m(big) {
+    width: $dzq-avatar-size-big;
+    height: $dzq-avatar-size-big;
+    font-size: $dzq-avatar-font-size-big;
+    line-height: $dzq-avatar-size-big;
+  }
+
+  @include m(large) {
+    width: $dzq-avatar-size-lg;
+    height: $dzq-avatar-size-lg;
+    font-size: $dzq-avatar-font-size-lg;
+    line-height: $dzq-avatar-size-lg;
+  }
+
+  @include m(small) {
+    width: $dzq-avatar-size-sm;
+    height: $dzq-avatar-size-sm;
+    font-size: $dzq-avatar-font-size-sm;
+    line-height: $dzq-avatar-size-sm;
+  }
+
+  @include m(circle) {
+    border-radius: 50%;
+    background-clip: border-box;
+    overflow: hidden;
+  }
+}

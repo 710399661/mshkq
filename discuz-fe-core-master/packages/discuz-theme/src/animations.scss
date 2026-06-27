@@ -1,0 +1,14 @@
+@import 'animations/fade-in.scss';
+@import 'animations/fade-out.scss';
+// @import 'animations/zoom-in.scss';
+// @import 'animations/zoom-out.scss';
+
+.animated {
+  animation-duration: 300ms !important;
+  transition-duration: 300ms !important;
+  animation-iteration-count: 1 !important;
+}
+
+.animated[class*='Out'] {
+  opacity: 0;
+}

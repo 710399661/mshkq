@@ -1,0 +1,107 @@
+@import "./var.scss";
+
+.#{$namespace}-tabs {
+  background-color: $tabs-background-color;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  &__bar {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+
+
+    @include when(card) {
+      box-shadow: var(--box-shadow);
+    }
+  }
+
+  &__list {
+    position: relative;
+    display: flex;
+    -webkit-user-select: none;
+    user-select: none;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    transition: transform .2s;
+  }
+
+  &__scroll {
+    display: block;
+    width: 100%;
+    transition: all .2s;
+
+    @include m(external) {
+      overflow: hidden;
+    }
+  }
+
+  &__item {
+    position: relative;
+    box-sizing: border-box;
+    text-align: center;
+    color: $tabs-tab-inactive-text-color;
+    font-size: $tabs-tab-text-size;
+    padding: $tabs-tab-padding;
+
+    @include when(active) {
+      color: $tabs-tab-active-text-color;
+      font-weight: $tabs-label-active-font-weight;
+
+      &::after {
+        content: '';
+        display: block;
+        height: 2px;
+        border-radius: 1px;
+        background: $tabs-line-color;
+        width: 100%;
+        border-radius: 2px;
+      }
+
+      .#{$namespace}-tabs__label {
+        padding-bottom: 14px;
+      }
+    }
+  }
+
+  &__item.#{$namespace}-tabs__direction {
+    &--row {
+      flex-direction: row;
+    }
+  }
+
+  &__panel {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  &__content {
+    width: 100%;
+    box-sizing: border-box;
+    padding: $tabs-panel-padding;
+  }
+
+  &__content.is-active {
+    opacity: 1;
+    height: 100%;
+    -webkit-transition: opacity 0.45s;
+    transition: opacity 0.45s;
+  }
+
+  &__content.is-inactive {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+  }
+
+  &__label {
+    line-height: $tabs-tab-line-height;
+    margin-top: $tabs-label-margin-top;
+    padding-bottom: $tabs-label-padding-bottom;
+  }
+}

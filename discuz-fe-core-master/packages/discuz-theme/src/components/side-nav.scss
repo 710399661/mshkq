@@ -1,0 +1,75 @@
+@import '../core';
+
+@include b(side-nav) {
+    display: flex;
+    overflow: hidden;
+    > View:last-child {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+    }
+    > div:last-child {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+    }
+    @include m(vertical) {
+        flex-direction: column;
+    }
+    @include m(horizontal) {
+        flex-direction: row;
+    }
+}
+@include b(side-nav-item) {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    @include m(vertical) {
+        flex-direction: row;
+    }
+    @include m(horizontal) {
+        flex-direction: column;
+    }
+    @include e(connect) {
+        @include m(vertical) {
+            height: rem(45);
+            width: rem(2);
+            background: $border-color;
+            margin-left: rem(9);
+            transform: scale(1.1);
+        }
+        @include m(horizontal) {
+            flex-direction: column;
+            height: rem(2);
+            width: rem(45);
+            background: $border-color;
+            margin-top: rem(9);
+            transform: scale(1.1);
+        }
+    }
+    @include e(circleBox) {
+        width: rem($padding-4n);
+        height: rem($padding-4n);
+        background: transparent;
+        border: 2px solid $primary-color;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    @include e(innerRing) {
+        width: rem($margin-1n);
+        height: rem($margin-1n);
+        background: $primary-color;
+        border-radius: 50%;
+    }
+    @include e(circle) {
+        width: rem($padding-4n);
+        height: rem($padding-4n);
+        background: transparent;
+        border: 2px solid $border-color;
+        border-radius: 50%;
+    }
+}

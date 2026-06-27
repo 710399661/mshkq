@@ -1,0 +1,237 @@
+@import "./var.scss";
+@import "./mixin.scss";
+
+@include b(menu) {
+  position: relative;
+  margin: 0;
+  padding-left: 0;
+  background: $menu-background-color;
+  list-style: none;
+
+  &:after {
+    clear: both;
+  }
+
+  // 横向模式
+  @include m(horizontal) {
+    height: $horizontal-menu-height;
+
+    @include b(submenu) {
+      float: left;
+      position: relative;
+
+      .dzq-submenu__title {
+        border-bottom-color: transparent;
+      }
+
+      & > .#{$namespace}-menu {
+        position: absolute;
+        top: $horizontal-menu-height;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: $horizontal-menu-border-radius;
+        border: $horizontal-menu-border;
+        box-shadow: $horizontal-menu-box-shadow;
+        background: $horizontal-menu-background-color;
+        padding: 0 $horizontal-menu-padding-top-bottom;
+        z-index: $horizontal-menu-z-index;
+        width: fit-content;
+        list-style: none;
+
+        // 菜单指向图标
+        &::before {
+          content: "";
+          position: absolute;
+          top: -6px;
+          left: 50%;
+          margin-left: -5px;
+          height: 10px;
+          width: 10px;
+          transform: rotateZ(45deg);
+          border: $horizontal-menu-border;
+          background: $horizontal-menu-background-color;
+          border-right: none;
+          border-bottom: none;
+        }
+
+        .#{$namespace}-menu-item {
+          position: relative;
+          font-size: $horizontal-menu-item-font-size;
+          text-align: center;
+          color: $horizontal-menu-item-color;
+          padding: $horizontal-menu-item-padding-top-bottom 0;
+          list-style: none;
+          cursor: pointer;
+          box-sizing: border-box;
+          white-space: nowrap;
+
+          &:hover {
+            outline: none;
+            color: $horizontal-menu-item-color-hover;
+          }
+
+          &:focus {
+            outline: none;
+            color: $horizontal-menu-item-color-focus;
+          }
+
+          @include when(active) {
+            color: $horizontal-menu-item-color-focus;
+          }
+
+          @include when(divided) {
+            border-bottom: $horizontal-menu-item-border !important;
+
+            &:last-child {
+              border-bottom: none;
+            }
+          }
+
+          @include when(disabled) {
+            color: $horizontal-menu-item-color-disabled;
+            cursor: not-allowed;
+            background: none !important;
+          }
+        }
+
+        @include b(menu-item) {
+          padding: $horizontal-menu-item-padding;
+
+          &:last-child {
+            padding-bottom: $menu-item-padding-bottom;
+          }
+        }
+      }
+    }
+
+    @include b(menu-item-group) {
+      background: $menu-item-group-background-color-horizontal;
+      @include e(title) {
+        padding-left: 0;
+        text-align: center;
+        color: $menu-item-group-title-font-color;
+      }
+    }
+
+    & > .#{$namespace}-menu-item {
+      float: left;
+      position: relative;
+      height: $horizontal-menu-height;
+      line-height: $horizontal-menu-height;
+      margin: 0;
+      cursor: pointer;
+      box-sizing: border-box;
+      padding: $horizontal-menu-item-padding1;
+      text-align: center;
+      border-bottom: none;
+    }
+  }
+}
+
+@include b(submenu) {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  padding: $horizontal-menu-item-padding1;
+
+  @include e(title) {
+    position: relative;
+    // padding: $submenu-title-padding;
+    color: $submenu-title-font-color;
+    line-height: $horizontal-menu-height;
+
+    list-style: none;
+    cursor: pointer;
+    font-size: $submenu-title-font-size;
+    box-sizing: border-box;
+    white-space: nowrap;
+    border-bottom: $submenu-title-border;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      outline: none;
+      color: $submenu-title-font-color-hover;
+    }
+
+    @include when(disabled) {
+      cursor: not-allowed;
+    }
+
+    @include e(icon) {
+      transform: rotateZ(90deg);
+      will-change: transform;
+      transition: $menu-icon-transition;
+      margin-right: $submenu-menu-item-icon-margin-right;
+
+      @include m(horizontal) {
+        right: 0;
+        left: initial;
+        margin-left: $submenu-menu-item-icon-margin-left;
+      }
+    }
+
+    @include when(active) {
+      color: $submenu-title-font-color-active;
+    }
+  }
+
+  & .dzq-menu-item {
+    padding: $submenu-menu-item-padding;
+    font-size: $submenu-menu-item-font-size;
+    color: $submenu-menu-item-font-color;
+    border-bottom: none;
+
+    & + .dzq-menu-item-group {
+      margin-top: 12px;
+    }
+  }
+
+  @include when(open) {
+    @include e(icon) {
+      transform: rotateZ(270deg);
+
+      @include m(horizontal) {
+        right: 0;
+        left: initial;
+      }
+    }
+  }
+}
+
+@include b(menu-item-group) {
+  @include e(title) {
+    padding-left: $menu-item-group-title-padding-left;
+    color: $menu-item-group-title-font-color;
+  }
+}
+
+@include b(menu-item) {
+  position: relative;
+  box-sizing: border-box;
+  white-space: nowrap;
+  padding: $menu-item-padding;
+  font-size: $menu-item-font-size;
+  line-height: $menu-item-line-height;
+  text-align: left;
+  color: $menu-item-font-color;
+  list-style: none;
+  cursor: pointer;
+  border-bottom: $menu-item-border-bottom;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    color: $menu-item-font-color-hover;
+  }
+
+  @include when(disabled) {
+    color: $menu-item-font-color-disabled;
+    cursor: not-allowed;
+    background: none !important;
+  }
+
+  @include when(active) {
+    color: $menu-item-font-color-active;
+  }
+}

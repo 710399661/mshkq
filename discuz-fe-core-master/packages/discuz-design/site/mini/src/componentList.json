@@ -1,0 +1,121 @@
+{
+  "components": {
+    "button": {
+      "url": "button"
+    },
+    "rich-text": {
+      "url": "rich-text"
+    },
+    "icon": {
+      "url": "icon"
+    },
+    "dialog": {
+      "url": "dialog"
+    },
+    "card": {
+      "url": "card"
+    },
+    "scroll-view": {
+      "url": "scroll-view"
+    },
+    "toast": {
+      "url": "toast"
+    },
+    "image-previewer": {
+      "url": "image-previewer"
+    },
+    "flex": {
+      "url": "flex"
+    },
+    "video": {
+      "url": "video"
+    },
+    "grid": {
+      "url": "grid"
+    },
+    "input": {
+      "url": "input"
+    },
+    "textarea": {
+      "url": "textarea"
+    },
+    "audio": {
+      "url": "audio"
+    },
+    "audio-player": {
+      "url": "audio-player"
+    },
+    "audio-record": {
+      "url": "audio-record"
+    },
+    "radio": {
+      "url": "radio"
+    },
+    "check": {
+      "url": "check"
+    },
+    "checkbox": {
+      "url": "checkbox"
+    },
+    "tabs": {
+      "url": "tabs"
+    },
+    "table": {
+      "url": "table"
+    },
+    "tag": {
+      "url": "tag"
+    },
+    "animation": {
+      "url": "animation"
+    },
+    "upload": {
+      "url": "upload"
+    },
+    "spin": {
+      "url": "spin"
+    },
+    "back-to-top": {
+      "url": "back-to-top"
+    },
+    "divider": {
+      "url": "divider"
+    },
+    "alert": {
+      "url": "alert"
+    },
+    "pullDownRefresh": {
+      "url": "pullDownRefresh"
+    },
+    "avatar": {
+      "url": "avatar"
+    },
+    "popup": {
+      "url": "popup"
+    },
+    "switch": {
+      "url": "switch"
+    },
+    "progress": {
+      "url": "progress"
+    },
+    "badge": {
+      "url": "badge"
+    },
+    "slider": {
+      "url": "slider"
+    },
+    "action-sheet": {
+      "url": "action-sheet"
+    },
+    "side-nav": {
+      "url": "side-nav"
+    },
+    "step": {
+      "url": "step"
+    },
+    "popover": {
+      "url": "popover"
+    }
+  }
+}

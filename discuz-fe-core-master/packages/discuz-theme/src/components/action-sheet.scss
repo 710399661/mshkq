@@ -1,0 +1,107 @@
+@import '../core';
+
+@include b(action-sheet) {
+    width: 100%;
+    background-color: $body-bg-color;
+    display: flex;
+    flex-direction: column;
+    font-weight: normal;
+    background: $white;
+    padding-bottom: constant(safe-area-inset-bottom); ///兼容 IOS<11.2/
+    padding-bottom: env(safe-area-inset-bottom); ///兼容 IOS>11.2/
+    @include e(title) {
+        width: 100%;
+        font-size: $font-size-middle;
+        line-height: $font-line-height-small;
+        text-align: center;
+        font-weight: $font-weight-bold;
+        border-bottom: $border-solid-1;
+        padding: $padding-4n 0;
+    }
+    @include e(content) {
+        padding: 0 $padding-4n;
+        border-bottom: $border-solid-1;
+        @include e(row) {
+            width: 100%;
+            background: $border-color;
+            overflow: hidden;
+            padding: 20px 20px $padding-4n 20px !important;
+            border-radius: $border-radius-big $border-radius-big 0 0;
+            box-sizing: border-box;
+        }
+        @include e(grid) {
+            width: 100%;
+            display: grid;
+            grid-row-gap: 16px;
+            justify-content: space-between;
+        }
+        @include e(flex) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @include e(item) {
+          text-align: center;
+          font-size: $font-size-middle;
+          font-weight: normal;
+          line-height: $font-line-height-base;
+          padding: 16px 0;
+          color: $text-color-primary;
+          border-bottom: $border-solid-1;
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+        @include e(moreItem) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            &:last-child {
+            margin-right: 0;
+            }
+            @include e(flex-more-item) {
+                margin-right: rem(32);
+            } 
+        }
+        @include e(icon) {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            background: $white;
+            border-radius: $border-radius-small;
+            color: $text-color-regular;
+            border: none;
+            .#{$namespace}-icon{
+                font-size: 26px !important;
+            }
+        }
+        @include e(button) {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        @include e(text) {
+            margin-top: $padding-2n;
+            text-align: center;
+            color: $text-color-regular;
+            font-size: $font-size-small;
+            line-height: $font-size-small;
+            white-space: nowrap;
+        }
+    }
+    @include when(disabled) {
+        pointer-events: none;
+        color: #c8c9cc;
+    }
+    @include e(bottom) {
+        width: 100%;
+        font-size: $font-size-middle;
+        line-height: $font-line-height-small;
+        text-align: center;
+        color: $text-color-regular;
+        border-top: $border-solid-1;
+        padding: $padding-3n 0;
+    }
+}

@@ -1,0 +1,42 @@
+@include b(step) {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    @include e(vertical) {
+        flex-direction: column;
+    }
+}
+
+@include b(step-item) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    place-self: flex-start;
+    @include e(index) {
+        width: rem(28);
+        height: rem(28);
+        border-radius: $border-radius-circle;
+        text-align: center;
+        line-height: rem(28);
+        background: $disabled-color;
+        color: $white;
+        @include m(active) {
+            color: $white;
+            background: $primary-color;
+        }
+    }
+    @include e(text) {
+        font-size: $font-size-middle;
+        line-height: $font-line-height-small;
+        margin-left: rem(14);
+        color: $disabled-color;
+        @include m(active) {
+            color: $text-color-primary;
+        }
+    }
+    @include e(connect) {
+        height: rem(38);
+        width: 100%;
+    }
+}

@@ -1,0 +1,78 @@
+@import '../core';
+
+// TODO: FIXME 后期需替换成token定义的变量值
+// 开关的背景颜色
+$switch-background-color: #e8e8e8;
+// 开关开启时的颜色
+$switch-active-background-color: var(--color-primary3);
+// 开关的边框颜色
+$switch-border-color: #eaeaea;
+// 开关禁用态时的颜色
+$switch-disabled-background-color: #f2f2f2;
+// 开关禁用选中态时的颜色
+$switch-active-disabled-background-color: rgba(0, 110, 255, 0.3);
+// 开关禁用选中态时边框的颜色
+$switch-disabled-border-color: #d9d9d9;
+// 开关小圆圈边框的颜色
+$switch-item-border-color: #efefef;
+// 开关小圆圈禁用选中态时背景的颜色
+$switch-item-disabled-background-color: #ddd;
+
+$switch-item-background-color: linear-gradient(#ffffff, #f0f0f0, #dbdbdb);
+
+:host {
+  overflow: hidden;
+  display: inline-block;
+  font-size: 0;
+  vertical-align: middle;
+}
+
+.#{$namespace}-switch {
+  position: relative;
+  display: inline-block;
+  background-color: $switch-background-color;
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $switch-border-color;
+  padding: 3px;
+
+  @include transition(background-color);
+
+  .#{$namespace}-switch__toggle {
+    border-radius: 50%;
+    background: $switch-item-background-color;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.16);
+    border-width: 1px;
+    border-style: solid;
+    border-color: $switch-item-border-color;
+    @include transition(all);
+
+    &.is-loading {
+      @include flex($align-items: center, $justify-content: center);
+    }
+
+    &.is-disabled {
+      background-color: $switch-item-disabled-background-color;
+    }
+  }
+
+  &.is-checked {
+    background-color: $switch-active-background-color;
+
+    .#{$namespace}-switch__toggle {
+      transform: translate3d(26px, 0, 0);
+      box-shadow: none;
+    }
+  }
+
+  &.is-disabled {
+    cursor: not-allowed;
+    background-color: $switch-disabled-background-color;
+    border-color: $switch-disabled-border-color;
+
+    &.is-checked {
+      background-color: $switch-active-disabled-background-color;
+    }
+  }
+}

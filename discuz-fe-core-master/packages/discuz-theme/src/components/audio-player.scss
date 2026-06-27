@@ -1,0 +1,175 @@
+// audio-player 组件中的样式迁移到 theme 项目中进行管理
+@import '../core';
+
+@include b(audio-player) {
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    &-icon {
+      flex-shrink: 0;
+      width: 17px;
+      height: 20px;
+    }
+
+    &-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin-left: 8px;
+      width: 100%;
+
+      &-fileName {
+        width: calc(100% - 20px);
+        font-size: 14px;
+        line-height: 18px;
+        color: $text-color-primary;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      &-fileSize {
+        font-size: 12px;
+        line-height: 17px;
+        color: $text-color-regular;
+      }
+    }
+  }
+
+  &__right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    & > div,
+    & > View {
+      cursor: pointer;
+      margin-left: 16px;
+      color: $text-color-regular;
+      font-size: 12px;
+    }
+
+    .dzq-icon {
+      color: $icon-color-light;
+    }
+  }
+}
+
+@include b(audio-player-bg-view) {
+  box-sizing: border-box;
+  min-height: 52px;
+  border-radius: 5px;
+  background: $body-bg-color;
+  padding: 2px 0;
+  display: flex;
+  flex-direction: column;
+
+  &-top {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+
+  &-bottom {
+    padding: 0 16px;
+
+    .dzq-progress {
+      background-color: #eee;
+      height: 2px;
+      margin-bottom: 0;
+      .dzq-progress__value {
+        height: 2px;
+        background-color: #C5C6CB;
+      }
+    }
+
+    .dzq-slider {
+      height: 12px;
+      margin-bottom: 0;
+
+      .dzq-slider__progress {
+        height: 1px;
+        background-color: $border-color;
+
+        .dzq-slider__progress--stick {
+          background-color: #eee;
+        }
+
+        .dzq-slider__progress__button {
+          width: 8px;
+          height: 8px;
+          top: -4px;
+          background-color: #C5C6CA;
+          box-shadow: none;
+        }
+        .dzq-slider__progress--active {
+          background-color: #C5C6CA;
+        }
+      }
+      .dzq-slider__value {
+        display: none;
+      }
+      .dzq-slider__feature {
+        display: none;
+      }
+    }
+  }
+
+  &__left {
+    display: flex;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__hz {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 164px;
+    margin-left: 30px;
+
+    $hz-heights: 6px, 8px, 12px, 8px, 6px, 8px, 10px, 12px, 8px, 6px, 8px, 10px, 12px, 8px, 6px, 8px, 10px, 12px, 8px, 6px;
+    $hz-delays: 0s, 0.4s, 0.8s, 1.2s, 1.6s, 1.4s, 1.2s, 0.8s, 0.4s, 0.2s, 0s, 0.2s, 0.6s, 1.2s, 0.8s, 0.4s, 0.2s, 0s, 0.2s, 0.6s;
+    @for $i from 1 through length($hz-heights) {
+      $hz-height: nth($hz-heights, $i);
+      $hz-delay: nth($hz-delays, $i);
+
+      .dzq-audio-bg-view__hz-#{$i} {
+        width: 2px;
+        height: $hz-height;
+        border-radius: 1px;
+        background-color: $primary-color6;
+      }
+
+      .dzq-audio-bg-view__hz-#{$i}--animation {
+        animation: .8s .3s living linear infinite backwards normal;
+        animation-delay: $hz-delay;
+      }
+    }
+
+    @keyframes living{
+      0%{-webkit-transform:scaleY(1);transform:scaleY(1);}
+      50%{-webkit-transform:scaleY(.3);transform:scaleY(.3);}
+      100%{-webkit-transform:scaleY(1);transform:scaleY(1);}
+    }
+  }
+
+  &__right {
+    flex-shrink: 0;
+    height: 44px;
+    line-height: 44px;
+    display: flex;
+    align-items: center;
+
+    &-text {
+      color: $text-color-secondary;
+      font-size: $font-size-primary;
+      text-align: right;
+    }
+  }
+}

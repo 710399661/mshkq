@@ -1,0 +1,60 @@
+@import '../core';
+
+$divider-text-backgroud-color: $white;
+$divider-vertical-margin: $margin-6n;
+$divider-horizontal-padding: $padding-6n;
+$divider-text-distance: $padding-6n; // 文字距离左/右两边的边距
+$divider-horizontal-margin-vertical: $margin-2n;
+
+$divider-border: $border-solid-1;
+$divider-border-dashed: $border-dotted-1;
+
+@include b(divider) {
+  position: relative;
+
+  @include e(text) {
+    position: absolute;
+    top: 0;
+    background-color: $divider-text-backgroud-color;
+    transform: translateY(-50%);
+    padding: 0 $divider-horizontal-padding;
+
+    @include when(left) {
+      left: $divider-text-distance;
+    }
+
+    @include when(center) {
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    @include when(right) {
+      right: $divider-text-distance;
+    }
+  }
+
+  @include m(horizontal) {
+    display: block;
+    height: 0;
+    border-top: $divider-border;
+    width: 100%;
+    margin: $divider-vertical-margin 0;
+
+    @include when(dashed) {
+      border-top: $divider-border-dashed;
+    }
+  }
+
+  @include m(vertical) {
+    display: inline-block;
+    width: 0;
+    height: 1em;
+    border-left: $divider-border;
+    margin: 0 $divider-horizontal-margin-vertical;
+    vertical-align: middle;
+
+    @include when(dashed) {
+      border-left: $divider-border-dashed;
+    }
+  }
+}

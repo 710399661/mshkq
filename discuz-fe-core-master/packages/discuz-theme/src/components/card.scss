@@ -1,0 +1,46 @@
+@import '../core';
+
+$card-border: $border-solid-1;
+$card-box-shadow: $border-shadow-color-8;
+$card-padding: $padding-4n;
+
+@include b(card) {
+  box-shadow: $card-box-shadow;
+
+  @include e(header) {
+    padding: $card-padding;
+
+    @include m(full) {
+      padding: 0;
+    }
+  }
+
+  @include e(body) {
+    padding: $card-padding;
+
+    @include m(full) {
+      padding: 0;
+    }
+  }
+
+  @include e(footer) {
+    padding: $card-padding;
+
+    @include m(full) {
+      padding: 0;
+    }
+  }
+
+  @include m(border) {
+    border: $card-border;
+    box-shadow: none;
+
+    @include e(header) {
+      border-bottom: $card-border;
+    }
+
+    @include e(footer) {
+      border-top: $card-border;
+    }
+  }
+}

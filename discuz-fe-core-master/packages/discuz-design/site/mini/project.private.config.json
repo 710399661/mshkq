@@ -1,0 +1,36 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/action-sheet/index",
+          "pathName": "pages/action-sheet/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/audio/index",
+          "pathName": "pages/audio/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/audio-player/index",
+          "pathName": "pages/audio-player/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

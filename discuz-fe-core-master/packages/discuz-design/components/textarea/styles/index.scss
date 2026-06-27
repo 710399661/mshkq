@@ -1,0 +1,74 @@
+@import "./var.scss";
+
+@include b(textarea) {
+  position: relative;
+  width: $textarea-width;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: $textarea-background-color;
+  border-radius: $textarea-border-radius;
+  border: $textarea-border;
+  color: $textarea-font-color;
+  overflow: hidden;
+  &:hover {
+    border-color: $textarea-border-color-hover;
+  }
+
+  @include e(inner) {
+    height: $textarea-inner-height;
+    width: 100%;
+    border: none;
+    resize: vertical;
+    padding: $textarea-padding;
+    font-size: $textarea-font-size;
+    box-sizing: border-box;
+    background-image: none;
+    outline: none;
+    border: none;
+
+    &::placeholder {
+      color: $textarea-placeholder-color;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $textarea-border-color-focus;
+    }
+  }
+
+  @include e(limit) {
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: $textarea-limit-padding-bottom;
+    text-align: right;
+    font-size: $textarea-limit-font-size;
+    color: #c5c6cb;
+  }
+
+  @include when(active) {
+    border-color: $textarea-border-color-hover;
+  }
+
+  @include when(disabled) {
+    background-color: $textarea-background-color-disabled;
+    border: $textarea-border;
+    color: $textarea-color-disabled;
+    cursor: not-allowed;
+
+    &:hover {
+      border: $textarea-border;
+    }
+
+    .#{$namespace}-textarea#{$element-separator}inner {
+      background-color: $textarea-background-color-disabled;
+      color: $textarea-color-disabled;
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: $textarea-placeholder-color-disabled;
+      }
+    }
+  }
+}

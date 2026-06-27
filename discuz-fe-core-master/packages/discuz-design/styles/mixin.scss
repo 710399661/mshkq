@@ -1,0 +1,258 @@
+$namespace: 'dzq';
+$element-separator: '__';
+$modifier-separator: '--';
+$state-prefix: 'is-';
+
+/* BEM support Func
+ -------------------------- */
+@function selectorToString($selector) {
+  $selector: inspect($selector);
+  $selector: str-slice($selector, 2, -2);
+  @return $selector;
+}
+
+@function containsModifier($selector) {
+  $selector: selectorToString($selector);
+
+  @if str-index($selector, $modifier-separator) {
+    @return true;
+  } @else {
+    @return false;
+  }
+}
+
+@function containWhenFlag($selector) {
+  $selector: selectorToString($selector);
+
+  @if str-index($selector, '.' + $state-prefix) {
+    @return true
+  } @else {
+    @return false
+  }
+}
+
+@function containPseudoClass($selector) {
+  $selector: selectorToString($selector);
+
+  @if str-index($selector, ':') {
+    @return true
+  } @else {
+    @return false
+  }
+}
+
+@function hitAllSpecialNestRule($selector) {
+
+  @return containsModifier($selector) or containWhenFlag($selector) or containPseudoClass($selector);
+}
+
+
+// BEM
+
+@mixin b($block) {
+  $B: $namespace+'-'+$block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
+
+@mixin e($element) {
+  $E: $element !global;
+  $selector: &;
+  $currentSelector: "";
+  @each $unit in $element {
+    $currentSelector: #{$currentSelector + "." + $B + $element-separator + $unit + ","};
+  }
+
+  @if hitAllSpecialNestRule($selector) {
+    @at-root {
+      #{$selector} {
+        #{$currentSelector} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @at-root {
+      #{$currentSelector} {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin m($modifier) {
+  $selector: &;
+  $currentSelector: "";
+  @each $unit in $modifier {
+    $currentSelector: #{$currentSelector + & + $modifier-separator + $unit + ","};
+  }
+
+  @at-root {
+    #{$currentSelector} {
+      @content;
+    }
+  }
+}
+
+@mixin configurable-m($modifier, $E-flag: false) {
+  $selector: &;
+  $interpolation: '';
+
+  @if $E-flag {
+    $interpolation: $element-separator + $E-flag;
+  }
+
+  @at-root {
+    #{$selector} {
+      .#{$B+$interpolation+$modifier-separator+$modifier} {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin spec-selector($specSelector: '', $element: $E, $modifier: false, $block: $B) {
+  $modifierCombo: '';
+
+  @if $modifier {
+    $modifierCombo: $modifier-separator + $modifier;
+  }
+
+  @at-root {
+    #{&}#{$specSelector}.#{$block+$element-separator+$element+$modifierCombo} {
+      @content
+    }
+  }
+}
+
+@mixin meb($modifier: false, $element: $E, $block: $B) {
+  $selector: &;
+  $modifierCombo: '';
+
+  @if $modifier {
+    $modifierCombo: $modifier-separator + $modifier;
+  }
+
+  @at-root {
+    #{$selector} {
+      .#{$block+$element-separator+$element+$modifierCombo} {
+        @content
+      }
+    }
+  }
+}
+
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}
+
+@mixin hairline-common(){
+    position: absolute;
+    display: block;
+    content: "";
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+@mixin border($size: 1px, $color: #000, $borderRadius: inherit){
+    @include hairline-common();
+    width: 200%;
+    height: 200%;
+    top: 0px;
+    left: 0px;
+    border: $size solid $color;
+    border-radius: $borderRadius;
+    transform-origin: 0 0;
+    transform: scale(0.5);
+}
+
+@mixin single-border($direction: top, $size: 1px, $color: #000, $t-spacing: 0px, $r-spacing: 0px, $b-spacing: 0px, $l-spacing: 0px){
+    @include hairline-common();
+    @if $direction == top {
+        top: 0px;
+        left: $l-spacing;
+        right: $r-spacing;
+        bottom: auto;
+        width: auto;
+        height: $size;
+        border-top: $size solid $color;
+        background-color: $color;
+        transform-origin: 0 0;
+        transform: scaleY(0.5);
+    } @else if $direction == bottom {
+        top: auto;
+        left: $l-spacing;
+        right: $r-spacing;
+        bottom: 0px;
+        width: auto;
+        height: $size;
+        border-bottom: $size solid $color;
+        background-color: $color;
+        transform-origin: 0 100%;
+        transform: scaleY(0.5);
+    } @else if $direction == left {
+        top: $t-spacing;
+        left: $l-spacing;
+        right: auto;
+        bottom: $b-spacing;
+        width: $size;
+        height: auto;
+        border-left: $size solid $color;
+        background-color: $color;
+        transform-origin: 0 0;
+        transform: scaleX(0.5);
+    } @else if $direction == right {
+        top: $t-spacing;
+        left: auto;
+        right: $r-spacing;
+        bottom: $b-spacing;
+        width: $size;
+        height: auto;
+        border-right: $size solid $color;
+        background-color: $color;
+        transform-origin: 100% 0;
+        transform: scaleX(0.5);
+    }
+}
+
+@mixin horizontal-border($size: 1px, $color: #000){
+    @include hairline-common();
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    border: 0 solid $color;
+    border-width: $size 0;
+    transform-origin: center;
+    transform: scale(0.5);
+}
+
+@mixin flex($display: flex, $flex-direction: row, $flex-wrap: nowrap, $align-items: flex-start, $justify-content: flex-start){
+    display: $display;
+    flex-direction: $flex-direction;
+    flex-wrap: $flex-wrap;
+    align-items: $align-items;
+    justify-content: $justify-content;
+}
+
+@mixin flex-no-stretch(){
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+@mixin flex-center(){
+    @include flex($align-items: center, $justify-content: center);
+}
+
+@mixin transition($property, $duration: 0.3s, $timing-function: ease, $delay: 0s){
+    transition-property: $property;
+    transition-duration: $duration;
+    transition-timing-function: $timing-function;
+    transition-delay: $delay;
+}

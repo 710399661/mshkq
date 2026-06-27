@@ -1,0 +1,691 @@
+@import '../../../styles/mixin.scss';
+
+@import './var.scss';
+// @import './qt-highlight.scss';
+@import './atom-one-dark.scss';
+
+@include b(richText) {
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 24px;
+    word-break: break-word;
+
+    .is-last {
+        margin-bottom: 0 !important;
+    }
+
+    .#{$namespace}-h1 {
+        margin: 16px 0;
+        font-size: 26px;
+        line-height: 34px;
+    }
+
+    .#{$namespace}-h2 {
+        margin: 16px 0;
+        font-size: 24px;
+    }
+
+    .#{$namespace}-h3 {
+        margin: 16px 0;
+        font-size: 22px;
+    }
+
+    .#{$namespace}-h4 {
+        margin: 16px 0;
+        font-size: 20px;
+    }
+
+    .#{$namespace}-h5 {
+        margin: 16px 0;
+        font-size: 18px;
+    }
+
+    .#{$namespace}-h6 {
+        margin: 16px 0;
+        font-size: 16px;
+    }
+
+    .#{$namespace}-h1,
+    .#{$namespace}-h2,
+    .#{$namespace}-h3,
+    .#{$namespace}-h4,
+    .#{$namespace}-h5,
+    .#{$namespace}-h6,
+    .#{$namespace}-b,
+    .#{$namespace}-strong {
+        font-weight: bolder;
+
+        &>br {
+            margin-bottom: 0;
+        }
+    }
+
+    .#{$namespace}-div {
+        margin: 0;
+        padding: 0;
+        display: block;
+        word-break: break-word;
+
+        &>br {
+            margin-bottom: 0;
+        }
+    }
+
+    .#{$namespace}-p {
+        // line-height: 24px;
+        // 修改为1.6的行高
+        line-height: 1.6;
+        font-size: 16px;
+        clear: both;
+        margin-bottom: 16px;
+
+        &:last-child {
+            margin-bottom: 0
+        }
+
+    }
+
+    .#{$namespace}-cite,
+    .#{$namespace}-em,
+    .#{$namespace}-var,
+    .#{$namespace}-address {
+        font-style: italic;
+    }
+
+    .spaceshow {
+        white-space: pre;
+    }
+
+    .#{$namespace}-pre,
+    .#{$namespace}-tt,
+    .#{$namespace}-code,
+    .#{$namespace}-kbd,
+    .#{$namespace}-samp {
+        font-family: monospace;
+    }
+
+    .#{$namespace}-pre {
+        margin: 16px 0;
+        overflow: auto;
+        font-size: 24px;
+        white-space: pre;
+        background: #000000;
+        border-radius: 5px;
+
+        text {
+            white-space: pre;
+        }
+    }
+
+    .#{$namespace}-code {
+        color: #3AC15F;
+        display: inline-block;
+        font-size: 16px;
+        white-space: pre;
+        background: #000000;
+        vertical-align: top;
+        border-radius: 5px;
+        padding-left: 4px;
+        padding-right: 4px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        line-height: 1.2;
+        max-width: 100%;
+    }
+
+    .#{$namespace}-pre .#{$namespace}-code {
+        color: #3AC15F;
+        display: block;
+        padding: 9px;
+        margin: 10px 0;
+        overflow: auto;
+        font-size: 16px;
+        white-space: pre;
+        background: #000000;
+        border-radius: 5px;
+        font-family: "SFMono-Regular", "Menlo,Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace" !important;
+
+        span,
+        p,
+        div,
+        code {
+            font-family: "SFMono-Regular", "Menlo,Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace" !important;
+        }
+    }
+
+    .#{$namespace}-img {
+        border-radius: 5px;
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+
+    .qq-emotion {
+        height: 24px;
+        width: 24px;
+        display: inline-block;
+        margin: 0;
+    }
+
+    .#{$namespace}-video {
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+
+    .#{$namespace}-blockquote {
+        padding: {
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        margin: 10px 0;
+        color: #6a737d;
+        border-left: 6px solid #dbdbdb;
+    }
+
+    .#{$namespace}-blockquote .#{$namespace}-p {
+        margin: 0;
+        line-height: 24px;
+    }
+
+    .#{$namespace}-ul {
+        display: block;
+        line-height: 24px;
+        padding-left: 2 * 16px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+        list-style: disc;
+    }
+
+    .#{$namespace}-ol {
+        display: block;
+        line-height: 24px;
+        padding-left: 2 * 16px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+        list-style: decimal;
+    }
+
+    .#{$namespace}-ul>.#{$namespace}-li {
+        display: list-item;
+        align-items: baseline;
+        text-align: match-parent;
+
+        &::marker {
+            color: #707070;
+        }
+    }
+
+    .#{$namespace}-ol .#{$namespace}-ul {
+        list-style-type: circle;
+    }
+
+    .#{$namespace}-li[data-task-state="checked"] {
+        margin-left: -20px;
+        list-style-type: none;
+        text-decoration: line-through rgba(0, 0, 0, .6);
+    }
+
+    .#{$namespace}-li[data-task-state="checked"] input {
+        position: relative
+    }
+
+    .#{$namespace}-li[data-task-state="checked"] input::before {
+        font: normal normal normal 14px/1;
+        content: "✓";
+        font-size: 17px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -53%) scale(.73);
+        color: #006cd1;
+    }
+
+    .#{$namespace}-li[data-task-state="unchecked"] {
+        margin-left: -20px;
+        list-style-type: none;
+    }
+
+    .#{$namespace}-u {
+        text-decoration: underline;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .#{$namespace}-del {
+        display: inline;
+    }
+
+    .figure {
+        overflow: hidden;
+    }
+
+    .#{$namespace}-tablebox {
+        padding: 8px;
+        overflow: auto;
+        font-size: 13px;
+        background: #f5f5f5;
+        background-color: #f5f5f5;
+    }
+
+    .#{$namespace}-table .#{$namespace}-table,
+    .#{$namespace}-table {
+        overflow: auto;
+        border-collapse: collapse;
+        box-sizing: border-box;
+        margin-bottom: 16px;
+        max-width: 100%;
+        table-layout: fixed;
+    }
+
+    .#{$namespace}-table .#{$namespace}-thead,
+    .#{$namespace}-table .#{$namespace}-tfoot,
+    .#{$namespace}-table .#{$namespace}-th {
+        font-weight: bold;
+        background: #ececec;
+        border-collapse: collapse;
+        box-sizing: border-box;
+    }
+
+    .#{$namespace}-table .#{$namespace}-tr {
+        overflow: auto;
+        border-collapse: collapse;
+        box-sizing: border-box;
+    }
+
+    .#{$namespace}-table .#{$namespace}-th,
+    .#{$namespace}-table .#{$namespace}-td {
+        overflow: auto;
+        border: 1px solid #dadada;
+        border-collapse: collapse;
+        box-sizing: border-box;
+        padding: 8px;
+        word-break: break-all;
+        word-wrap: break-word;
+    }
+
+    .#{$namespace}-tbody {
+        border: 1px solid #dadada;
+        border-collapse: collapse;
+        box-sizing: border-box;
+    }
+
+    .#{$namespace}-a {
+        color: $link-color;
+        line-height: 24px;
+
+        text-decoration: none;
+
+        &:hover {
+            color: $link-color-actived;
+        }
+
+        &:active {
+            color: $link-color-actived;
+        }
+    }
+
+    .inline {
+        display: inline;
+        padding: 0;
+        margin: 0;
+    }
+
+
+    @include m(mini) {
+        font-size: 16px;
+        line-height: 24px;
+        word-break: break-word;
+
+        .is-last {
+            margin-bottom: 0 !important;
+        }
+
+        // 注释和 meta 的换行有问题，这里临时这样实现
+        // FIXME: 换用无副作用的解法
+        .hljs-comment {
+            width: 100%
+        }
+
+        .hljs-meta {
+            width: 100%
+        }
+
+        .#{$namespace}-h1 {
+            margin: 16px 0;
+            font-size: 26px;
+            line-height: 34px;
+        }
+
+        .#{$namespace}-h2 {
+            margin: 16px 0;
+            font-size: 24px;
+        }
+
+        .#{$namespace}-h3 {
+            margin: 16px 0;
+            font-size: 22px;
+        }
+
+        .#{$namespace}-h4 {
+            margin: 16px 0;
+            font-size: 20px;
+        }
+
+        .#{$namespace}-h5 {
+            margin: 16px 0;
+            font-size: 18px;
+        }
+
+        .#{$namespace}-h6 {
+            margin: 16px 0;
+            font-size: 16px;
+        }
+
+        .#{$namespace}-h1,
+        .#{$namespace}-h2,
+        .#{$namespace}-h3,
+        .#{$namespace}-h4,
+        .#{$namespace}-h5,
+        .#{$namespace}-h6,
+        .#{$namespace}-b,
+        .#{$namespace}-strong {
+            font-weight: bolder;
+        }
+
+        .#{$namespace}-strong {
+            display: inline-block;
+        }
+
+        .#{$namespace}-div {
+            margin: 0;
+            padding: 0;
+            display: block;
+            word-break: break-word;
+        }
+
+        .#{$namespace}-p {
+            font-size: 16px;
+            clear: both;
+            margin-bottom: 16px;
+
+            &:last-child {
+                margin-bottom: 0
+            }
+        }
+
+        .#{$namespace}-cite,
+        .#{$namespace}-em,
+        .#{$namespace}-var,
+        .#{$namespace}-address {
+            font-style: italic;
+        }
+
+        .#{$namespace}-span {
+            display: inline-block;
+        }
+
+        .spaceshow {
+            white-space: pre;
+        }
+
+        .qq-emotion {
+            height: 24px;
+            width: 24px;
+            margin: 0;
+        }
+
+        .#{$namespace}-pre,
+        .#{$namespace}-tt,
+        .#{$namespace}-code,
+        .#{$namespace}-kbd,
+        .#{$namespace}-samp {
+            font-family: monospace;
+        }
+
+        .#{$namespace}-pre {
+            margin: 16px 0;
+            overflow: auto;
+            font-size: 24px;
+            white-space: pre-wrap;
+            background: #000000;
+            border-radius: 5px;
+        }
+
+        .#{$namespace}-code {
+            color: #3AC15F;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            background: #000000;
+            vertical-align: top;
+            max-width: 100%;
+
+            padding: {
+                top: 0px;
+                bottom: 0px;
+                left: 4px;
+                right: 4px;
+            }
+        }
+
+        .#{$namespace}-pre .#{$namespace}-code {
+            color: #3AC15F;
+            display: block;
+            padding: 9px;
+            margin: 10px 0;
+            overflow: auto;
+            font-size: 16px;
+            white-space: pre-wrap;
+        }
+
+        .#{$namespace}-img {
+            border-radius: 5px;
+            max-width: 100% !important;
+            overflow: hidden !important;
+            display: block;
+        }
+
+        .#{$namespace}-video {
+            max-width: 100% !important;
+            overflow: hidden !important;
+        }
+
+        .#{$namespace}-blockquote {
+            padding: {
+                left: 10px;
+                top: 0;
+                bottom: 0;
+                right: 0;
+            }
+
+            margin: 10px 0;
+            color: #6a737d;
+            border-left: 6px solid #dbdbdb;
+        }
+
+        .#{$namespace}-blockquote .#{$namespace}-p {
+            margin: 0;
+        }
+
+        .#{$namespace}-ul {
+            display: block;
+            padding-left: 20px;
+            margin: 1em 0;
+            list-style: disc;
+        }
+
+        .#{$namespace}-ol {
+            display: block;
+            padding-left: 20px;
+            margin: 1em 0;
+            list-style: decimal;
+        }
+
+        .#{$namespace}-ol>.#{$namespace}-li {
+            display: list-item;
+            align-items: baseline;
+            text-align: match-parent;
+        }
+
+        .#{$namespace}-ul>.#{$namespace}-li {
+            display: list-item;
+            align-items: baseline;
+            text-align: match-parent;
+        }
+
+        .#{$namespace}-ol .#{$namespace}-ul {
+            list-style-type: circle;
+        }
+
+        .#{$namespace}-li[data-task-state="checked"] {
+            margin-left: -20px;
+            list-style-type: none;
+            text-decoration: line-through rgba(0, 0, 0, .6);
+        }
+
+        .#{$namespace}-li[data-task-state="checked"] input {
+            position: relative
+        }
+
+        .#{$namespace}-li[data-task-state="checked"] input::before {
+            font: normal normal normal 14px/1;
+            content: "✓";
+            font-size: 17px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -53%) scale(.73);
+            color: #006cd1;
+        }
+
+        .#{$namespace}-li[data-task-state="unchecked"] {
+            margin-left: -20px;
+            list-style-type: none;
+        }
+
+        .#{$namespace}-u {
+            text-decoration: underline;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .#{$namespace}-del {
+            display: inline;
+        }
+
+        .figure {
+            overflow: hidden;
+        }
+
+        .#{$namespace}-br {
+            height: 24px;
+            width: 100%;
+        }
+
+        .#{$namespace}-tablebox {
+            padding: 8px;
+            overflow: auto;
+            font-size: 13px;
+            background: #f5f5f5;
+            background-color: #f5f5f5;
+        }
+
+        .#{$namespace}-hr {
+            display: block;
+            unicode-bidi: isolate;
+            margin-block-start: 0.5em;
+            margin-block-end: 0.5em;
+            margin-inline-start: auto;
+            margin-inline-end: auto;
+            overflow: hidden;
+            border-style: inset;
+            border-width: 1px;
+        }
+
+
+        .#{$namespace}-table .#{$namespace}-table,
+        .#{$namespace}-table {
+            overflow: auto;
+            border-collapse: collapse;
+            box-sizing: border-box;
+            max-width: 100%;
+            table-layout: fixed;
+        }
+
+        .#{$namespace}-table .#{$namespace}-thead,
+        .#{$namespace}-table .#{$namespace}-tfoot,
+        .#{$namespace}-table .#{$namespace}-th {
+            font-weight: bold;
+            background: #ececec;
+            border-collapse: collapse;
+            box-sizing: border-box;
+            display: table-cell;
+        }
+
+        .#{$namespace}-table .#{$namespace}-thead {
+            display: table-header-group;
+        }
+
+        .#{$namespace}-table .#{$namespace}-tbody {
+            display: table-row-group;
+        }
+
+        .#{$namespace}-table .#{$namespace}-tr {
+            overflow: auto;
+            border-collapse: collapse;
+            box-sizing: border-box;
+            display: table-row;
+        }
+
+        .#{$namespace}-table .#{$namespace}-th,
+        .#{$namespace}-table .#{$namespace}-td {
+            overflow: auto;
+            padding: 8px;
+            border: 1px solid #dadada;
+            border-collapse: collapse;
+            word-break: break-all;
+            box-sizing: border-box;
+            display: table-cell;
+            word-wrap: break-word;
+        }
+
+        .#{$namespace}-tbody {
+            border: 1px solid #dadada;
+            border-collapse: collapse;
+            box-sizing: border-box;
+        }
+
+        .#{$namespace}-a {
+            color: $link-color;
+            line-height: 24px;
+            display: inline-block;
+            text-decoration: none;
+
+            &:hover {
+                color: $link-color-actived;
+            }
+
+            &:active {
+                color: $link-color-actived;
+            }
+        }
+
+        .audio,
+        .uni-audio-default {
+            display: block;
+        }
+
+        .inline {
+            display: inline;
+            padding: 0;
+            margin: 0;
+        }
+    }
+}

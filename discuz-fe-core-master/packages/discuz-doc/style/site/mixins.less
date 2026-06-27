@@ -1,0 +1,32 @@
+.scroll-container() {
+  overflow: hidden;
+
+  &:hover {
+    overflow-y: auto;
+  }
+}
+.text-ellipsis() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.link(@text-color, @active-color) {
+  color: @text-color;
+  text-decoration: none;
+
+  &:hover {
+    color: @active-color;
+  }
+
+  &:active {
+    color: @active-color;
+  }
+
+  &--active {
+    color: @active-color;
+  }
+
+  &:focus {
+    text-decoration: none;
+  }
+}

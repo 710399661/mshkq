@@ -1,0 +1,297 @@
+@import '../core';
+
+// menu
+$menu-background-color: $white;
+$menu-icon-transition: transform 0.3s;
+
+// submenu
+$submenu-title-padding: $padding-4n $padding-5n;
+$submenu-title-font-color: $text-color-regular;
+$submenu-title-font-size: $font-size-middle;
+$submenu-title-font-color-hover: $primary-disabled-color;
+$submenu-title-font-color-active: $primary-color;
+$submenu-title-border: $border-solid-1;
+// submenu下的menu-item
+$submenu-menu-item-padding: $padding-3n 35px 0 35px;
+$submenu-menu-item-font-size: $font-size-primary;
+$submenu-menu-item-font-color: $text-color-secondary;
+$submenu-menu-item-icon-margin-left: 5px;
+$submenu-menu-item-icon-margin-right: 5px;
+
+// menu-item-group
+$menu-item-group-title-padding-left: $padding-6n;
+$menu-item-group-title-font-color: $text-color-regular;
+$menu-item-group-background-color-horizontal: color($white);
+
+//menu-item
+$menu-item-padding: $padding-4n $padding-5n;
+$menu-item-padding-bottom: $padding-3n;
+$menu-item-font-size: $font-size-middle;
+$menu-item-line-height: $font-line-height-middle;
+$menu-item-font-color: $text-color-regular;
+$menu-item-font-color-hover: $primary-disabled-color;
+$menu-item-font-color-active: $primary-color;
+$menu-item-font-color-disabled: $disabled-color;
+$menu-item-background-color-hover: $primary-color9;
+$menu-item-border-bottom: $border-solid-1;
+
+// 横向菜单
+$horizontal-menu-height: 55px;
+$horizontal-menu-background-color: $white;
+$horizontal-menu-border: $border-solid-1;
+$horizontal-menu-box-shadow: $border-shadow-color-8;
+$horizontal-menu-border-radius: $border-radius-small;
+$horizontal-menu-padding-top-bottom: $padding-4n;
+$horizontal-menu-margin-top-bottom: $margin-4n;
+$horizontal-menu-z-index: $zindex-backtotop;
+$horizontal-menu-min-width: 100px;
+
+$horizontal-menu-trigger-color: $text-color-regular;
+$horizontal-menu-trigger-color-active: $primary-color;
+$horizontal-menu-trigger-icon-margin-left: $margin-1n;
+
+$horizontal-menu-item-color: $text-color-secondary;
+$horizontal-menu-item-color-disabled: $disabled-color2;
+$horizontal-menu-item-color-hover: $primary-disabled-color;
+$horizontal-menu-item-color-focus: $primary-color;
+$horizontal-menu-item-font-size: $font-size-primary;
+$horizontal-menu-item-padding-top-bottom: $padding-2n;
+$horizontal-menu-item-border: $border-solid-1;
+$horizontal-menu-item-padding: $padding-3n $padding-5n;
+$horizontal-menu-item-padding1: 0 $padding-5n;
+
+@include b(menu) {
+  position: relative;
+  margin: 0;
+  padding-left: 0;
+  background: $menu-background-color;
+  list-style: none;
+
+  &:after {
+    clear: both;
+  }
+
+  // 横向模式
+  @include m(horizontal) {
+    height: $horizontal-menu-height;
+
+    @include b(submenu) {
+      float: left;
+      position: relative;
+
+      .dzq-submenu__title {
+        border-bottom-color: transparent;
+      }
+
+      &>.#{$namespace}-menu {
+        position: absolute;
+        top: $horizontal-menu-height;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: $horizontal-menu-border-radius;
+        border: $horizontal-menu-border;
+        box-shadow: $horizontal-menu-box-shadow;
+        background: $horizontal-menu-background-color;
+        padding: 0 $horizontal-menu-padding-top-bottom;
+        z-index: $horizontal-menu-z-index;
+        width: fit-content;
+        list-style: none;
+
+        // 菜单指向图标
+        &::before {
+          content: "";
+          position: absolute;
+          top: -6px;
+          left: 50%;
+          margin-left: -5px;
+          height: 10px;
+          width: 10px;
+          transform: rotateZ(45deg);
+          border: $horizontal-menu-border;
+          background: $horizontal-menu-background-color;
+          border-right: none;
+          border-bottom: none;
+        }
+
+        .#{$namespace}-menu-item {
+          position: relative;
+          font-size: $horizontal-menu-item-font-size;
+          text-align: center;
+          color: $horizontal-menu-item-color;
+          padding: $horizontal-menu-item-padding-top-bottom 0;
+          list-style: none;
+          cursor: pointer;
+          box-sizing: border-box;
+          white-space: nowrap;
+
+          &:hover {
+            outline: none;
+            color: $horizontal-menu-item-color-hover;
+          }
+
+          &:focus {
+            outline: none;
+            color: $horizontal-menu-item-color-focus;
+          }
+
+          @include when(active) {
+            color: $horizontal-menu-item-color-focus;
+          }
+
+          @include when(divided) {
+            border-bottom: $horizontal-menu-item-border !important;
+
+            &:last-child {
+              border-bottom: none;
+            }
+          }
+
+          @include when(disabled) {
+            color: $horizontal-menu-item-color-disabled;
+            cursor: not-allowed;
+            background: none !important;
+          }
+        }
+
+        @include b(menu-item) {
+          padding: $horizontal-menu-item-padding;
+
+          &:last-child {
+            padding-bottom: $menu-item-padding-bottom;
+          }
+        }
+      }
+    }
+
+    @include b(menu-item-group) {
+      background: $menu-item-group-background-color-horizontal;
+
+      @include e(title) {
+        padding-left: 0;
+        text-align: center;
+        color: $menu-item-group-title-font-color;
+      }
+    }
+
+    &>.#{$namespace}-menu-item {
+      float: left;
+      position: relative;
+      height: $horizontal-menu-height;
+      line-height: $horizontal-menu-height;
+      margin: 0;
+      cursor: pointer;
+      box-sizing: border-box;
+      padding: $horizontal-menu-item-padding1;
+      text-align: center;
+      border-bottom: none;
+    }
+  }
+}
+
+@include b(submenu) {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  padding: $horizontal-menu-item-padding1;
+
+  @include e(title) {
+    position: relative;
+    // padding: $submenu-title-padding;
+    color: $submenu-title-font-color;
+    line-height: $horizontal-menu-height;
+
+    list-style: none;
+    cursor: pointer;
+    font-size: $submenu-title-font-size;
+    box-sizing: border-box;
+    white-space: nowrap;
+    border-bottom: $submenu-title-border;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      outline: none;
+      color: $submenu-title-font-color-hover;
+    }
+
+    @include when(disabled) {
+      cursor: not-allowed;
+    }
+
+    @include e(icon) {
+      transform: rotateZ(90deg);
+      will-change: transform;
+      transition: $menu-icon-transition;
+      margin-right: $submenu-menu-item-icon-margin-right;
+
+      @include m(horizontal) {
+        right: 0;
+        left: initial;
+        margin-left: $submenu-menu-item-icon-margin-left;
+      }
+    }
+
+    @include when(active) {
+      color: $submenu-title-font-color-active;
+    }
+  }
+
+  & .dzq-menu-item {
+    padding: $submenu-menu-item-padding;
+    font-size: $submenu-menu-item-font-size;
+    color: $submenu-menu-item-font-color;
+    border-bottom: none;
+
+    &+.dzq-menu-item-group {
+      margin-top: 12px;
+    }
+  }
+
+  @include when(open) {
+    @include e(icon) {
+      transform: rotateZ(270deg);
+
+      @include m(horizontal) {
+        right: 0;
+        left: initial;
+      }
+    }
+  }
+}
+
+@include b(menu-item-group) {
+  @include e(title) {
+    padding-left: $menu-item-group-title-padding-left;
+    color: $menu-item-group-title-font-color;
+  }
+}
+
+@include b(menu-item) {
+  position: relative;
+  box-sizing: border-box;
+  white-space: nowrap;
+  padding: $menu-item-padding;
+  font-size: $menu-item-font-size;
+  line-height: $menu-item-line-height;
+  text-align: left;
+  color: $menu-item-font-color;
+  list-style: none;
+  cursor: pointer;
+  border-bottom: $menu-item-border-bottom;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    color: $menu-item-font-color-hover;
+  }
+
+  @include when(disabled) {
+    color: $menu-item-font-color-disabled;
+    cursor: not-allowed;
+    background: none !important;
+  }
+
+  @include when(active) {
+    color: $menu-item-font-color-active;
+  }
+}

@@ -1,0 +1,223 @@
+@import '../core';
+
+@include b(img-previewer) {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .6);
+  -webkit-user-drag: none;
+  z-index: $zindex-previewer;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity .2s, transform .2s ease-in-out;
+
+  @include when(active) {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @include when(mobile) {
+    background: $black;
+    color: $white;
+  }
+
+  @include e(viewer-wrapper) {
+    width: 100%;
+    height: calc(100% - 132px);
+
+    @include e(viewer-instance) {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: transform .2s ease-in-out, opacity .2s ease-in-out, visibility .2s ease-in-out;
+      -webkit-user-drag: none;
+      drag: none;
+
+      @include when(movable) {
+        cursor: grab;
+      }
+    }
+
+    @include e(viewer-loading) {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: $white;
+
+      @include when(error) {
+        width: 240px;
+        height: 240px;
+        border-radius: 10px;
+        background: $disabled-color;
+        color: $white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+  @include e(controller-wrapper) {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, .8);
+    -webkit-user-drag: none;
+
+    @include when(mobile) {
+      height: 89px;
+    }
+  }
+
+  @include e(mobile-cursor) {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    top: 80px;
+    z-index: 1;
+  }
+
+  @include e(controller-container) {
+    display: flex;
+    margin: 0 auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  @include e(pc-controller-wrapper) {
+    opacity: 0;
+    transform: all .5s;
+    z-index: -1;
+
+    @include when(active) {
+      opacity: 1;
+    }
+
+    @include e(pc-controller-close) {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, .5);
+      position: fixed;
+      top: 51px;
+      right: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      cursor: pointer;
+    }
+
+    @include e(pc-controller-swiper) {
+      @include e(pc-controller-left-swiper) {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, .5);
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%) rotateY(180deg);
+        left: 62px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        cursor: pointer;
+        color: $white;
+
+        @include when(disabled) {
+          color: $disabled-color2;
+          cursor: not-allowed;
+        }
+      }
+
+      @include e(pc-controller-right-swiper) {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, .5);
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 62px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        cursor: pointer;
+        color: $white;
+
+        @include when(disabled) {
+          color: $disabled-color2;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  @include e(controller-item) {
+    height: 60px;
+    width: 60px;
+    margin-right: 16px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    -webkit-user-drag: none;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    @include when(active) {
+      border: 4px solid $primary-color !important;
+    }
+
+    @include when(error) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $disabled-color;
+    }
+
+    @include when(loading) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, .5);
+    }
+
+    @include when(mobile) {
+      height: 40px;
+      width: 40px;
+
+      @include when(active) {
+        border: 1px solid $primary-color !important;
+      }
+
+      @include when(loading) {
+        border: 1px solid rgba(255, 255, 255, .5);
+      }
+
+      @include when(error) {
+        background: $disabled-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+body.modal-open {
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+}

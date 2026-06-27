@@ -1,0 +1,34 @@
+{
+  "name": "@discuzq/plugin",
+  "version": "1.2.18",
+  "description": "> TODO: description",
+  "author": "LLLLLamHo <linhao.4zhong@163com>",
+  "homepage": "https://gitee.com/Discuz/discuz-core",
+  "license": "MIT",
+  "main": "es/index.js",
+  "types": "types/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "es",
+    "types"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@gitee.com:Discuz/discuz-core.git"
+  },
+  "scripts": {
+    "build": "rm -rf ./es && rm -rf ./types && ./node_modules/.bin/tsc"
+  },
+  "devDependencies": {
+    "@discuzq/cli": "^1.3.18",
+    "@types/react": "^17.0.11",
+    "miniprogram-api-typings": "^3.3.2",
+    "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "aegis-mp-sdk": "^1.21.9"
+  }
+}

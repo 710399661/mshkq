@@ -1,0 +1,41 @@
+$line-height-fz-default: 20px; // fz-default 对应的行高
+$font-size-default: var(--font-size-label);
+$font-size-l: var(--font-size-primary);
+$border-radius: var(--border-radius-zero);
+$color-text-weight: var(--color-text-primary);
+$color-bg-gray: var(--background-color); // 用于白底上的灰底模块  即$color-neutral-0 色 50% 透明度
+$color-primary: #FEC32D;
+$color-text-label: var(--color-text-primary);
+$color-success: var(--color-success);
+$color-error: var(--color-error);
+$color-text: var(--color-text-primary); // 默认文本颜色
+
+
+$progress-height:6px;
+$progress-line-height-fz-default:$line-height-fz-default;
+
+$progress-font-size:$font-size-default;
+$progress-font-size-l:$font-size-l;
+$progress-border-radius:$border-radius;
+$progress-color-base-text-weight:$color-text-weight;
+$progress-color-base-bg:$color-bg-gray;
+
+// 默认进度条
+$progress-primary-color-bg:$color-primary;
+$progress-primary-color-text-label:$color-text-label;
+// success
+$progress-success-color-border:$color-success;
+$progress-success-color-bg:$color-success;
+// error
+$progress-error-color-border:$color-error;
+$progress-error-color-bg:$color-error;
+
+// 圆环的宽高
+$progress-circle-width: 160px;
+$progress-circle-height: 160px;
+
+
+
+
+
+

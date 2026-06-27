@@ -1,0 +1,315 @@
+@import '../core';
+
+@include b(upload) {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+
+  @include e(input) {
+    display: none;
+  }
+
+  @include when(card) {
+
+    @include e(area) {
+      position: relative;
+      display: inline-flex;
+      width: 104px;
+      height: 104px;
+
+      padding: 0;
+      margin: 0 5px 5px 0;
+      font-size: 0;
+      color: $text-color-secondary;
+      background-color: $body-bg-color;
+      border-color: $body-bg-color;
+      border-radius: 5px;
+      overflow: hidden;
+
+      .dragger {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+  }
+
+  .dzq-button--text {
+    font-size: 14px;
+    color: $text-color-secondary;
+    background-color: $body-bg-color;
+    border: 0;
+  }
+}
+
+@include b(upload-list-card) {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: rem(-5px);
+  // font-size: 0;
+
+  @include e(item) {
+    position: relative;
+    display: inline-flex;
+    width: 104px;
+    height: 104px;
+
+    padding: 0;
+    margin: 0 5px 5px 0;
+    // font-size: 0;
+    color: $text-color-secondary;
+    background-color: $body-bg-color;
+    border-color: $body-bg-color;
+    border-radius: 5px;
+    overflow: hidden;
+
+    @include when(error) {
+      border: 1px solid $error-color2;
+      color: $error-color2;
+    }
+  }
+
+  @include e(info) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    cursor: pointer;
+  }
+
+  @include e(icon) {
+    font-size: 32px !important;
+    margin-bottom: 4px;
+  }
+
+  @include e(name) {
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  @include e(thumbUrl) {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  @include e(operate) {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: $mask-bg-color;
+    cursor: pointer;
+
+    .dzq-icon {
+      color: $white;
+    }
+  }
+}
+
+@include b(upload-list-card-process) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $mask-bg-color;
+  border-radius: $border-radius-small;
+
+  @include e(icon) {
+    color: $white;
+    animation: loading 1s linear infinite;
+  }
+
+  @include e(text) {
+    margin-top: $margin-1n;
+    font-size: $font-size-primary;
+    line-height: $font-line-height-middle;
+    color: $white;
+  }
+
+
+  @keyframes loading {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@include b(upload-list-list-process) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $mask-bg-color;
+  border-radius: $border-radius-small;
+
+  @include e(icon) {
+    color: $white;
+    animation: loading 1s linear infinite;
+  }
+
+  @include e(text) {
+    margin-top: $margin-1n;
+    font-size: $font-size-primary;
+    line-height: $font-line-height-middle;
+    color: $white;
+  }
+
+
+  @keyframes loading {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@include b(upload-list-list) {
+  display: flex;
+  flex-direction: column;
+
+  @include e(item) {
+    position: relative;
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 8px;
+    height: 52px;
+    background: $body-bg-color;
+
+    @include when(error) {
+      color: $error-color2;
+      border: 1px solid $error-color2;
+
+      @include e(info) {
+        border-color: $error-color2;
+      }
+    }
+
+    @include when(success) {
+      @include e(info) {
+        .dzq-icon {
+          color: $success-color;
+        }
+      }
+    }
+  }
+
+  .dzq-button--text {
+    width: 100%;
+    height: 52px;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .dzq-upload__btntext {
+    margin-left: 8px;
+  }
+
+  @include e(info) {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    background: $body-bg-color;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    @include e(icon) {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @include e(thumbUrl) {
+    object-fit: cover;
+    border-radius: 5px;
+    width: 64px;
+    height: 32px;
+    cursor: pointer;
+  }
+
+  @include e(icon) {
+    display: flex;
+    font-size: 20px;
+  }
+
+  @include e(name) {
+    margin-left: 8px;
+    max-width: 300px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 14px;
+    color: v$text-color-primary;
+  }
+
+  @include e(filesize) {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 12px;
+    color: $text-color-regular;
+  }
+
+  @include e(size) {
+    margin-left: auto;
+    color: $text-color-secondary;
+  }
+
+  @include e(operate) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    margin-left: 8px;
+    cursor: pointer;
+    color: $text-color-secondary;
+  }
+
+  @include e(process) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    background: rgba(lightgray, .9);
+    border-radius: 5px;
+  }
+}

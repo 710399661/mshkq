@@ -1,0 +1,20 @@
+$textarea-width: 334px;
+$textarea-inner-height: 48px;
+
+$textarea-padding: var(--padding-2n);
+$textarea-font-size: var(--font-size-primary);
+$textarea-font-color: var(--color-text-primary);
+$textarea-placeholder-color: var(--color-disabled3);
+$textarea-background-color: var(--color-white);
+$textarea-border: var(--border-border);
+$textarea-border-radius: var(--border-radius-small);
+
+$textarea-border-color-hover: var(--color-primary);
+$textarea-border-color-focus: var(--color-primary);
+
+$textarea-background-color-disabled: var(--color-disabled5);
+$textarea-color-disabled: var(--color-disabled);;
+$textarea-placeholder-color-disabled: var(--color-disabled);
+
+$textarea-limit-font-size: var(--font-size-label);
+$textarea-limit-padding-bottom: var(--padding-3n);

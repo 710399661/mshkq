@@ -1,0 +1,43 @@
+$bubbleBg: #2469f6;
+
+.vditor-bubble-toolbar {
+  display: flex;
+  padding: 0 16px;
+  position: absolute;
+  height: 32px;
+  align-items: center;
+  z-index: 1000;
+  background-color: $bubbleBg;
+  border-radius: 5px;
+  .vditor-toolbar__item {
+    margin-left: 10px;
+    .vditor-tooltipped {
+      display: inline-flex;
+      align-items: center;
+      padding: 0;
+      height: 16px;
+    }
+    svg {
+      color: #fff;
+    }
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+  &__bottom {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 8px solid rgba(0, 0, 0, 0);
+    border-right: 8px solid rgba(0, 0, 0, 0);
+    border-top: 8px solid $bubbleBg;
+  }
+  &__top {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 8px solid rgba(0, 0, 0, 0);
+    border-right: 8px solid rgba(0, 0, 0, 0);
+    border-bottom: 8px solid $bubbleBg;
+  }
+}

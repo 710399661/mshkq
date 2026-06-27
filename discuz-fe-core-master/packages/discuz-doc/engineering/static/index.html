@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Discuz! Q 开发者中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://discuz.chat/favicon.ico">
+    <meta name="keywords" content="Discuz!Q, DZQ, 开发者中心, 二次开发, 插件开发"/>
+    <meta name="description" content="Discuz! Q开发者中，丰富你的站点，提供完整的开发文档，包括组件库，插件开发文档，接口文档，Discuz! Q小助手等一些列使用文档，助理开发者打造丰富的Discuz! Q生态" />
+    <link rel="stylesheet" href="assets/prism.css" />
+    <style type="text/css">
+      html {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app-root">
+      <div style="margin: 24px auto; color: #666; font-size: 12px; text-align: center;">
+        Loading...
+      </div>
+    </div>
+    <script src="assets/prism.js"></script>
+    <script src="https://cdn-go.cn/aegis/aegis-sdk/latest/aegis.min.js"></script>
+    <script>  
+      const aegis = new Aegis({
+        id: 'KqnrSUjzJbQFvHrHDN', // 项目ID，即上报id
+        uin: 'xxx', // 用户唯一 ID（可选）
+        reportApiSpeed: true, // 接口测速
+        reportAssetSpeed: true // 静态资源测速
+      })
+    </script>
+  </body>
+</html>

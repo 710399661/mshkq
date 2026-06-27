@@ -1,0 +1,59 @@
+// menu
+$menu-background-color: var(--color-white);
+$menu-icon-transition: transform 0.3s;
+
+// submenu
+$submenu-title-padding: var(--padding-4n) var(--padding-5n);
+$submenu-title-font-color: var(--color-text-regular);
+$submenu-title-font-size: var(--font-size-middle);
+$submenu-title-font-color-hover: var(--color-primary5);
+$submenu-title-font-color-active: var(--color-primary);
+$submenu-title-border: var(--border-border);
+// submenu下的menu-item
+$submenu-menu-item-padding: var(--padding-3n) 35px 0 35px;
+$submenu-menu-item-font-size: var(--font-size-primary);
+$submenu-menu-item-font-color: var(--color-text-secondary);
+$submenu-menu-item-icon-margin-left: 5px;
+$submenu-menu-item-icon-margin-right: 5px;
+
+// menu-item-group
+$menu-item-group-title-padding-left: var(--padding-6n);
+$menu-item-group-title-font-color: var(--color-text-regular);
+$menu-item-group-background-color-horizontal: color(--color-white);
+
+//menu-item
+$menu-item-padding: var(--padding-4n) var(--padding-5n);
+$menu-item-padding-bottom: var(--padding-3n);
+$menu-item-font-size: var(--font-size-middle);
+$menu-item-line-height: var(--font-line-height-middle);
+$menu-item-font-color: var(--color-text-regular);
+$menu-item-font-color-hover: var(--color-primary5);
+$menu-item-font-color-active: var(--color-primary);
+$menu-item-font-color-disabled: var(--color-disabled);
+$menu-item-background-color-hover: var(--color-primary9);
+$menu-item-border-bottom: var(--border-border);
+
+// 横向菜单
+$horizontal-menu-height: 55px;
+$horizontal-menu-background-color: var(--color-white);
+$horizontal-menu-border: var(--border-border);
+$horizontal-menu-box-shadow: var(--box-shadow);
+$horizontal-menu-border-radius: var(--border-radius-small);
+$horizontal-menu-padding-top-bottom: var(--padding-4n);
+$horizontal-menu-margin-top-bottom: var(--margin-4n);
+$horizontal-menu-z-index: 1450;
+$horizontal-menu-min-width: 100px;
+
+$horizontal-menu-trigger-color: var(--color-text-regular);
+$horizontal-menu-trigger-color-active: var(--color-primary);
+$horizontal-menu-trigger-icon-margin-left: var(--margin-1n);
+
+$horizontal-menu-item-color: var(--color-text-secondary);
+$horizontal-menu-item-color-disabled: var(--color-disabled2);
+$horizontal-menu-item-color-hover: var(--color-primary5);
+$horizontal-menu-item-color-focus: var(--color-primary);
+$horizontal-menu-item-font-size: var(--font-size-primary);
+$horizontal-menu-item-padding-top-bottom: var(--padding-2n);
+$horizontal-menu-item-border: var(--border-border);
+$horizontal-menu-item-padding: var(--padding-3n) var(--padding-5n);
+$horizontal-menu-item-padding1: 0 var(--padding-5n);

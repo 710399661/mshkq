@@ -1,0 +1,251 @@
+:host {
+  width: 100%;
+}
+.#{$namespace}-row {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.#{$namespace}-flex-wrap-nowrap {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.#{$namespace}-flex-wrap-nowrap::-webkit-scrollbar {
+  display: none;
+}
+
+.#{$namespace}-flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.#{$namespace}-justify-content-flex-start {
+  justify-content: flex-start;
+}
+.#{$namespace}-justify-content-center {
+  justify-content: center;
+}
+.#{$namespace}-justify-content-flex-end {
+  justify-content: flex-end;
+}
+
+.#{$namespace}-justify-content-space-around {
+  justify-content: space-around;
+}
+.#{$namespace}-justify-content-space-between {
+  justify-content: space-between;
+}
+.#{$namespace}-justify-content-space-evenly {
+  justify-content: space-evenly;
+}
+
+.#{$namespace}-align-items-stretch {
+  align-items: stretch;
+}
+.#{$namespace}-align-items-flex-start {
+  align-items: flex-start;
+}
+.#{$namespace}-align-items-flex-end {
+  align-items: flex-end;
+}
+.#{$namespace}-align-items-center {
+  align-items: center;
+}
+.#{$namespace}-align-items-baseline {
+  align-items: baseline;
+}
+
+.#{$namespace}-col {
+  box-sizing: border-box;
+  flex: 1;
+  display: flex;
+}
+
+.flex-none {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+}
+
+/*
+ * 小程序不支持此选择器
+ * 目的：为插入到slot中的选择器，设置默认样式
+ * 此处为了实现所有列等高，tea-col设置为flex，所以插入的内容必须要声明flex:1属性
+
+::slotted(view) {
+  background: pink;
+  flex: 1;
+} */
+
+:host {
+  box-sizing: border-box;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;
+  max-width: 100%;
+  display: flex;
+}
+
+:host(.start) {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  align-items: center;
+}
+:host(.center) {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+
+  align-items: center;
+}
+:host(.end) {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+
+  align-items: center;
+}
+
+/* cols */
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-10,
+.col-11,
+.col-12 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+}
+
+.col-1 {
+  flex-basis: 8.33333333%;
+  max-width: 8.33333333%;
+}
+
+.col-2 {
+  flex-basis: 16.66666667%;
+  max-width: 16.66666667%;
+}
+
+.col-3 {
+  flex-basis: 25%;
+  max-width: 25%;
+}
+
+.col-4 {
+  flex-basis: 33.33333333%;
+  max-width: 33.33333333%;
+}
+
+.col-5 {
+  flex-basis: 41.66666667%;
+  max-width: 41.66666667%;
+}
+
+.col-6 {
+  flex-basis: 50%;
+  max-width: 50%;
+}
+
+.col-7 {
+  flex-basis: 58.33333333%;
+  max-width: 58.33333333%;
+}
+
+.col-8 {
+  flex-basis: 66.66666667%;
+  max-width: 66.66666667%;
+}
+
+.col-9 {
+  flex-basis: 75%;
+  max-width: 75%;
+}
+
+.col-10 {
+  flex-basis: 83.33333333%;
+  max-width: 83.33333333%;
+}
+
+.col-11 {
+  flex-basis: 91.66666667%;
+  max-width: 91.66666667%;
+}
+
+.col-12 {
+  flex-basis: 100%;
+  max-width: 100%;
+}
+
+/* Offsets */
+.col-offset-1 {
+  margin-left: 8.33333333%;
+}
+
+.col-offset-2 {
+  margin-left: 16.66666667%;
+}
+
+.col-offset-3 {
+  margin-left: 25%;
+}
+
+.col-offset-4 {
+  margin-left: 33.33333333%;
+}
+
+.col-offset-5 {
+  margin-left: 41.66666667%;
+}
+
+.col-offset-6 {
+  margin-left: 50%;
+}
+
+.col-offset-7 {
+  margin-left: 58.33333333%;
+}
+
+.col-offset-8 {
+  margin-left: 66.66666667%;
+}
+
+.col-offset-9 {
+  margin-left: 75%;
+}
+
+.col-offset-10 {
+  margin-left: 83.33333333%;
+}
+
+.col-offset-11 {
+  margin-left: 91.66666667%;
+}
+
+/* align */
+.#{$namespace}-align-self-stretch {
+  align-self: stretch;
+}
+.#{$namespace}-align-self-flex-start {
+  align-self: flex-start;
+}
+.#{$namespace}-align-self-flex-end {
+  align-self: flex-end;
+}
+.#{$namespace}-align-self-center {
+  align-self: center;
+}
+.#{$namespace}-align-self-baseline {
+  align-self: baseline;
+}

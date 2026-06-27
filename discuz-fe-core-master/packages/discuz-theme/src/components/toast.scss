@@ -1,0 +1,121 @@
+@import '../core';
+
+$toast-z-index: $zindex-toast;
+$toast-mask-z-index: $zindex-toast - 1;
+$toast-padding: $padding-5n $padding-6n;
+$toast-background-color: $mask-bg-color;
+$toast-border-radius: $border-radius-small;
+$toast-font-color: $white;
+$toast-icon-margin-bottom: $margin-2n;
+$toast-font-size: $font-size-primary;
+$toast-distance-top: $margin-10;
+$toast-distance-center: 50%;
+$toast-distance-bootom: $margin-10;
+
+@keyframes rotating {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@include b(toast) {
+  position: fixed;
+  display: flex;
+  // display: inline-block;
+  text-align: left;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: $toast-padding;
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  border-radius: $toast-border-radius;
+  background-color: $toast-background-color;
+  z-index: $toast-z-index;
+  // display: none;
+  visibility: hidden;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+
+  @include e(fadeIn) {
+    animation: fadeIn .3s;
+  }
+
+  @include e(fadeOut) {
+    animation: fadeOut .3s;
+    animation-fill-mode: forwards;
+  }
+
+  @include e(icon) {
+    margin-bottom: $toast-icon-margin-bottom;
+    color: $toast-font-color;
+
+    &.#{$namespace}-icon-loading {
+      animation: rotating 2s linear infinite;
+    }
+  }
+
+  @include e(text) {
+    display: inline-block;
+    max-width: 250px;
+    line-height: 26px;
+    font-size: $toast-font-size;
+    color: $toast-font-color;
+    white-space: pre-wrap;
+    text-align: center;
+  }
+
+  @include m(mask) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: $toast-mask-z-index;
+  }
+
+  @include m(top) {
+    top: $toast-distance-top;
+  }
+
+  @include m(center) {
+    top: $toast-distance-center;
+    transform: translate(-50%, -50%);
+  }
+
+  @include m(bottom) {
+    bottom: $toast-distance-bootom;
+  }
+
+  @include when(show) {
+
+    visibility: visible;
+  }
+}

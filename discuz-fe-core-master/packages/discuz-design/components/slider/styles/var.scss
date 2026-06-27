@@ -1,0 +1,15 @@
+$form-background-active: var(--color-primary);
+$form-background-active-disabled: var(--color-primary7);
+$form-background-base: var(--color-white);
+$text-color: var(--color-text-primary);
+
+
+$slider-progress-height: 2px;
+$slider-progress-background-color: var(--background-color);
+$slider-progress-active-background-color: $form-background-active;
+$slider-progress-disabled-background-color: $form-background-active-disabled;
+$slider-progress-button-background-color: $form-background-base;
+$slider-value-text-color: $text-color;
+$slider-block-size: 26px;
+
+$slider-progress-max-background-color: var(--color-disabled)

@@ -1,0 +1,114 @@
+@import "./var.scss";
+
+.#{$namespace}-tag {
+  position: relative;;
+  display: inline-block;
+  font-size: $tag-sm-text-size;
+  line-height: 1;
+  padding: $tag-padding;
+  border: 1px solid;
+  box-sizing: border-box;
+  border-radius: $tag-border-radius;
+  &::after { 
+    content: ""; 
+    position: absolute; 
+    width: 100%; 
+    height: 100%;  
+    opacity: $opacity; 
+    top: 0; 
+    left: 0; 
+    z-index: 0;
+  }
+
+  &.size {
+    &-md {
+      font-size: $tag-md-text-size;
+    }
+    &-lg {
+      font-size: $tag-lg-text-size;
+    }
+  }
+
+  &--default {
+    color: $color-secondary;
+    border-color: $tag-default-border-color;
+    &::after {
+      background: $tag-default-background-color;
+    }
+  }
+  &--primary {
+    color: $color-brand;
+    border-color: $tag-primary-border-color;
+    &::after {
+      background-color: $tag-primary-background-color;
+    }
+  }
+  &--success {
+    color: $color-success;
+    border-color: $tag-success-border-color;
+    &::after {
+      background-color: $tag-success-background-color;
+    }
+  }
+  &--warning {
+    color: $color-warning;
+    border-color: $tag-warning-border-color;
+    &::after {
+      background-color: $tag-warning-background-color;
+    }
+  }
+  &--danger {
+    color: $color-danger;
+    border-color: $tag-danger-border-color;
+    &::after {
+      background-color: $tag-danger-background-color;
+    }
+  }
+
+  &--orange {
+    color: $tag-orange-text-color;
+    border-color: $tag-orange-border-color;
+    &::after {
+      background-color: $tag-orange-background-color;
+    }
+  }
+
+  &--outline {
+    background-color: $tag-outline-background-color;
+
+    &.#{$namespace}-tag--default {
+      color: $tag-default-text-color;
+    }
+    &.#{$namespace}-tag--primary {
+      color: $tag-primary-text-color;
+    }
+    &.#{$namespace}-tag--success {
+      color: $tag-success-text-color;
+    }
+    &.#{$namespace}-tag--warning {
+      color: $tag-warning-text-color;
+    }
+    &.#{$namespace}-tag--danger {
+      color: $tag-danger-text-color;
+    }
+    &.#{$namespace}-tag--orange {
+      color: $tag-orange-text-color;
+    }
+  }
+
+  &--round {
+    border-radius: $tag-round-border-radius;
+  }
+
+  &.is-clickable {
+    opacity: $opacity-active;
+  }
+
+  &-delete {
+    margin-left: $tag-delete-margin-left;
+  }
+  &-text{
+    line-height: normal;
+    display: inline-block;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@discuzq/discuz-babel-plugin-import",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/types": "^7.2.2",
+    "humps": "^2.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  }
+}

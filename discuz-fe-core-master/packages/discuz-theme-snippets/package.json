@@ -1,0 +1,29 @@
+{
+    "name": "discuz-theme-snippets",
+    "displayName": "",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.59.0"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://gitee.com/Discuz/discuz-core"
+    },
+    "categories": [
+        "Snippets"
+    ],
+    "contributes": {
+        "snippets": [
+            {
+                "language": "scss",
+                "path": "./snippets/snippets.code-snippets"
+            },
+            {
+              "language": "css",
+              "path": "./snippets/snippets.code-snippets"
+            }
+        ]
+    },
+    "publisher": "angelzou"
+}

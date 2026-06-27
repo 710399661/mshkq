@@ -1,0 +1,653 @@
+{
+  "Alert": {
+    "attributes": [
+      "children",
+      "type",
+      "hideIcon",
+      "icon",
+      "closeable",
+      "duration",
+      "onClose",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Animation": {
+    "attributes": [
+      "children",
+      "action",
+      "toggleClass",
+      "enterClass",
+      "leaveClass",
+      "name",
+      "delay",
+      "duration",
+      "count",
+      "easing",
+      "reverse",
+      "onEnd",
+      "exist",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Audio": {
+    "attributes": [
+      "src",
+      "loop",
+      "onError",
+      "onPlay",
+      "onPause",
+      "onEnded",
+      "ref",
+      "disabled",
+      "onDelete",
+      "singleton",
+      "className",
+      "style"
+    ],
+    "defaults": ["src"],
+    "description": ""
+  },
+  "AudioPlayer": {
+    "attributes": [
+      "src",
+      "loop",
+      "onError",
+      "beforePlay",
+      "onPlay",
+      "onPause",
+      "onEnded",
+      "ref",
+      "disabled",
+      "onDelete",
+      "singleton",
+      "className",
+      "style"
+    ],
+    "defaults": ["src"],
+    "description": ""
+  },
+  "Avatar": {
+    "attributes": [
+      "size",
+      "circle",
+      "text",
+      "image",
+      "openData",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "BackToTop": {
+    "attributes": [
+      "right",
+      "bottom",
+      "onClick",
+      "visibilityHeight",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Badge": {
+    "attributes": [
+      "children",
+      "info",
+      "dot",
+      "color",
+      "square",
+      "circle",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Button": {
+    "attributes": [
+      "htmlType",
+      "size",
+      "type",
+      "disabled",
+      "circle",
+      "full",
+      "loading",
+      "onClick",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Card": {
+    "attributes": [
+      "children",
+      "header",
+      "footer",
+      "fullHeader",
+      "fullBody",
+      "fullFooter",
+      "bordered",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Check": {
+    "attributes": [
+      "name",
+      "checked",
+      "defaultChecked",
+      "onChange",
+      "radio",
+      "disabled",
+      "type",
+      "block",
+      "color",
+      "children",
+      "onClick",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Checkbox": {
+    "attributes": [
+      "disabled",
+      "type",
+      "children",
+      "defaultValue",
+      "value",
+      "onChange",
+      "block",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Dialog": {
+    "attributes": [
+      "visible",
+      "defaultVisible",
+      "maskClosable",
+      "onClose",
+      "header",
+      "footer",
+      "inContext",
+      "headerStyle",
+      "bodyStyle",
+      "footerStyle",
+      "maskStyle",
+      "headerClassName",
+      "bodyClassName",
+      "footerClassName",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Divider": {
+    "attributes": [
+      "children",
+      "mode",
+      "orientation",
+      "dashed",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Dropdown": {
+    "attributes": [
+      "children",
+      "menu",
+      "trigger",
+      "onChange",
+      "hideOnClick",
+      "placement",
+      "arrow",
+      "onVisibleChange",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Flex": {
+    "attributes": [
+      "flex",
+      "offset",
+      "order",
+      "span",
+      "children",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Grid": {
+    "attributes": [
+      "data",
+      "gutter",
+      "bordered",
+      "columnNum",
+      "square",
+      "iconSize",
+      "onClick",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Icon": {
+    "attributes": ["size", "name", "color", "onClick", "className", "style"],
+    "defaults": [],
+    "description": ""
+  },
+  "ImagePreviewer": {
+    "attributes": [
+      "imgUrls",
+      "visible",
+      "current",
+      "onSuccess",
+      "onFail",
+      "onComplete",
+      "onClose"
+    ],
+    "defaults": [
+      "imgUrls",
+      "visible",
+      "current",
+      "onSuccess",
+      "onFail",
+      "onComplete",
+      "onClose"
+    ],
+    "description": ""
+  },
+  "Input": {
+    "attributes": [
+      "value",
+      "placeholder",
+      "miniType",
+      "placeholderStyle",
+      "placeholderClass",
+      "cursorSpacing",
+      "autoFocus",
+      "confirmType",
+      "confirmHold",
+      "cursor",
+      "selectionStart",
+      "selectionEnd",
+      "adjustPosition",
+      "holdKeyboard",
+      "onConfirm",
+      "onKeyboardHeightChange",
+      "mode",
+      "type",
+      "disabled",
+      "icon",
+      "prefixIcon",
+      "clearable",
+      "maxLength",
+      "showLimit",
+      "focus",
+      "append",
+      "appendWidth",
+      "trim",
+      "onIconClick",
+      "onPrefixIconClick",
+      "onChange",
+      "onFocus",
+      "onBlur",
+      "onClick",
+      "useRef",
+      "className",
+      "style"
+    ],
+    "defaults": ["value", "placeholder"],
+    "description": ""
+  },
+  "Menu": {
+    "attributes": [
+      "children",
+      "mode",
+      "menuTrigger",
+      "uniqueOpened",
+      "multiple",
+      "defaultOpeneds",
+      "defaultActives",
+      "defaultSubmenuActives",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Popup": {
+    "attributes": [
+      "visible",
+      "position",
+      "maskClosable",
+      "onClose",
+      "children",
+      "containerClassName",
+      "customScroll",
+      "className",
+      "style"
+    ],
+    "defaults": ["visible"],
+    "description": ""
+  },
+  "Progress": {
+    "attributes": [
+      "type",
+      "percent",
+      "text",
+      "tips",
+      "theme",
+      "width",
+      "lineWidth",
+      "isShowText",
+      "children",
+      "color",
+      "lineCap",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "PullDownRefresh": {
+    "attributes": [
+      "onRefresh",
+      "isFinished",
+      "children",
+      "height",
+      "damping",
+      "status",
+      "isReachTop",
+      "isScrollView",
+      "className",
+      "style"
+    ],
+    "defaults": ["onRefresh", "isFinished", "height"],
+    "description": ""
+  },
+  "Radio": {
+    "attributes": [
+      "disabled",
+      "type",
+      "children",
+      "defaultValue",
+      "value",
+      "onChange",
+      "block",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "RichText": {
+    "attributes": [
+      "content",
+      "onClick",
+      "onImgsLoaded",
+      "onImgsErrored",
+      "transformer",
+      "iframeWhiteList",
+      "onImgClick",
+      "onLinkClick",
+      "onParse",
+      "className",
+      "style"
+    ],
+    "defaults": [
+      "content",
+      "onClick",
+      "onImgsLoaded",
+      "onImgsErrored",
+      "transformer",
+      "iframeWhiteList"
+    ],
+    "description": ""
+  },
+  "ScrollView": {
+    "attributes": [
+      "height",
+      "width",
+      "rowCount",
+      "rowData",
+      "rowHeight",
+      "rowRenderer",
+      "onPullingUp",
+      "renderBottom",
+      "onScroll",
+      "onScrollBottom",
+      "onScrollTop",
+      "overscanRowCount",
+      "lowerThreshold",
+      "scrollTop",
+      "scrollToIndex",
+      "scrollOffset",
+      "isRowLoaded",
+      "minHeight",
+      "autoheight",
+      "enabled",
+      "isNormal",
+      "unlimitedSize",
+      "className",
+      "style"
+    ],
+    "defaults": [
+      "height",
+      "width",
+      "rowCount",
+      "rowData",
+      "rowHeight",
+      "rowRenderer",
+      "onPullingUp"
+    ],
+    "description": ""
+  },
+  "Slider": {
+    "attributes": [
+      "min",
+      "max",
+      "step",
+      "disabled",
+      "formatter",
+      "defaultValue",
+      "value",
+      "onChange"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Spin": {
+    "attributes": [
+      "type",
+      "color",
+      "size",
+      "children",
+      "vertical",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Switch": {
+    "attributes": [
+      "checked",
+      "defaultChecked",
+      "onChange",
+      "disabled",
+      "loading",
+      "size",
+      "color",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Tabs": {
+    "attributes": ["id", "label", "children", "className", "style"],
+    "defaults": ["id"],
+    "description": ""
+  },
+  "Tag": {
+    "attributes": [
+      "type",
+      "children",
+      "closeable",
+      "onClose",
+      "size",
+      "onClick",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Textarea": {
+    "attributes": [
+      "value",
+      "placeholder",
+      "placeholderStyle",
+      "placeholderClass",
+      "cursorSpacing",
+      "autoFocus",
+      "autoHeight",
+      "fixed",
+      "confirmHold",
+      "cursor",
+      "selectionStart",
+      "selectionEnd",
+      "adjustPosition",
+      "holdKeyboard",
+      "onConfirm",
+      "onKeyboardHeightChange",
+      "onLineChange",
+      "type",
+      "rows",
+      "disabled",
+      "maxLength",
+      "showLimit",
+      "focus",
+      "onChange",
+      "onFocus",
+      "onBlur",
+      "forwardedRef",
+      "className",
+      "style"
+    ],
+    "defaults": ["value", "placeholder"],
+    "description": ""
+  },
+  "Toast": {
+    "attributes": [
+      "content",
+      "icon",
+      "type",
+      "duration",
+      "position",
+      "hasMask",
+      "onClose",
+      "onMaskClick",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Upload": {
+    "attributes": [
+      "children",
+      "action",
+      "method",
+      "accept",
+      "data",
+      "headers",
+      "name",
+      "fileList",
+      "listType",
+      "showFileList",
+      "drag",
+      "disabled",
+      "multiple",
+      "limit",
+      "progressRender",
+      "customRequest",
+      "beforeUpload",
+      "onChange",
+      "onPreview",
+      "onRemove",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  },
+  "Video": {
+    "attributes": [
+      "src",
+      "preload",
+      "poster",
+      "duration",
+      "controls",
+      "autoplay",
+      "loop",
+      "muted",
+      "initialTime",
+      "height",
+      "width",
+      "onReady",
+      "onPlay",
+      "onPause",
+      "onEnded",
+      "onTimeUpdate",
+      "onFullscreenChange",
+      "onProgress",
+      "onLoadedMetaData",
+      "onWaiting",
+      "onError",
+      "singleton",
+      "className",
+      "style"
+    ],
+    "defaults": ["src"],
+    "description": ""
+  },
+  "WebPicker": {
+    "attributes": [
+      "prefixCls",
+      "pickerData",
+      "renderAfter",
+      "onTouchEnd",
+      "onTouchStart",
+      "height",
+      "className",
+      "style"
+    ],
+    "defaults": [],
+    "description": ""
+  }
+}

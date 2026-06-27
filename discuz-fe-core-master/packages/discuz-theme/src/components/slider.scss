@@ -1,0 +1,82 @@
+@import '../core';
+
+
+$slider-progress-height: 2px;
+$slider-progress-background-color: $body-bg-color;
+$slider-progress-active-background-color: $primary-color;
+$slider-progress-disabled-background-color: $primary-color7;
+$slider-progress-button-background-color: $white;
+$slider-value-text-color: $text-color-primary;
+$slider-block-size: 26px;
+
+$slider-progress-max-background-color: $disabled-color;
+
+.#{$namespace}-slider {
+  @include flex($align-items: center);
+  width: 100%;
+
+  &--disabled {
+    cursor: not-allowed;
+
+    .#{$namespace}-slider__progress {
+      .#{$namespace}-slider__progress__button {
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__feature {
+    height: $slider-progress-height;
+    background-color: $slider-progress-background-color;
+    width: $slider-block-size;
+  }
+
+  &__progress {
+    flex-grow: 1;
+    position: relative;
+    height: $slider-block-size;
+    @include flex($align-items: center);
+
+    &--stick {
+      width: 100%;
+    }
+
+    &__button {
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      background-color: $slider-progress-button-background-color;
+      border-radius: 50%;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      height: $slider-block-size;
+      width: $slider-block-size;
+    }
+
+    &--active {
+      position: absolute;
+      left: 0;
+      height: $slider-progress-height;
+      background-color: $slider-progress-active-background-color;
+    }
+
+
+    &--max {
+      position: absolute;
+      right: -$slider-block-size;
+      height: $slider-progress-height;
+      background-color: $slider-progress-max-background-color;
+    }
+
+    &--disabled {
+      background-color: $slider-progress-disabled-background-color;
+      cursor: not-allowed;
+    }
+  }
+
+  &__value {
+    @include flex-no-stretch();
+    margin-left: 10px;
+    font-size: 14px;
+    color: $slider-value-text-color;
+  }
+}

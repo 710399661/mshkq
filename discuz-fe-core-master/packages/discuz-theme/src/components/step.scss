@@ -1,0 +1,65 @@
+@import '../core';
+
+@include b(step) {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    @include m(vertical) {
+        flex-direction: column;
+    }
+    @include m(horizontal) {
+        flex-direction: row;
+    }
+}
+
+@include b(step-item) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    place-self: flex-start;
+    @include m(vertical) {
+        flex-direction: row;
+    }
+    @include m(horizontal) {
+        flex-direction: column;
+    }
+    @include e(index) {
+        width: rem(28);
+        height: rem(28);
+        border-radius: $border-radius-circle;
+        text-align: center;
+        line-height: rem(28);
+        background: $disabled-color;
+        color: $white;
+        @include m(active) {
+            color: $white;
+            background: $primary-color;
+        }
+    }
+    @include e(text) {
+        font-size: $font-size-middle;
+        line-height: $font-line-height-small;
+        color: $disabled-color;
+        @include m(active) {
+            color: $text-color-primary;
+        }
+        @include m(vertical) {
+            margin-left: rem(14);
+        }
+        @include m(horizontal) {
+            
+        }
+    }
+    @include e(connect) {
+        @include m(vertical) {
+            width: 100%;
+            height: rem(18);
+            margin: rem(10) 0 rem(10) rem(28);
+            border-left: 1px solid $border-color;
+        }
+        @include m(horizontal) {
+            width: rem(32);
+            height: 100%;
+        }
+    }
+}

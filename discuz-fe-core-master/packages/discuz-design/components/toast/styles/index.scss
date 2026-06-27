@@ -1,0 +1,76 @@
+@import "../../../styles/mixin.scss";
+@import "./var.scss";
+
+@keyframes rotating {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+@include b(toast) {
+  position: fixed;
+  display: inline-block;
+  text-align: left;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: $toast-padding;
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  border-radius: $toast-border-radius;
+  background-color: $toast-background-color;
+  z-index: $toast-z-index;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+
+  @include e(icon) {
+    margin-bottom: $toast-icon-margin-bottom;
+    color: $toast-font-color;
+
+    &.#{$namespace}-icon-loading {
+      animation: rotating 2s linear infinite;
+    }
+  }
+
+  @include e(text) {
+    display: inline-block;
+    max-width: 250px;
+    font-size: $toast-font-size;
+    color: $toast-font-color;
+    white-space: pre-wrap;
+    text-align: center;
+  }
+
+  @include m(mask) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: $toast-mask-z-index;
+  }
+
+  @include m(top) {
+    top: $toast-distance-top;
+  }
+
+  @include m(center) {
+    top: $toast-distance-center;
+    transform: translate(-50%,-50%);
+  }
+
+  @include m(bottom) {
+    bottom: $toast-distance-bootom;
+  }
+
+  @include when(show) {
+    display: flex;
+  }
+}

@@ -1,0 +1,105 @@
+@import '../core';
+
+$grid-item-title-text-size: $font-size-primary;
+$grid-item-title-text-color: $black;
+$grid-item-description-text-size: $font-size-small;
+$grid-item-description-text-color: $text-color-placeholder;
+$grid-item-background-color: $white;
+$grid-item-hover-background-color: $text-bg-color2;
+$grid-item-divider-color: $text-bg-color2;
+
+.#{$namespace}-grid {
+  position: relative;
+
+  &--bordered {
+
+    &::before,
+    &::after {
+      z-index: 1;
+    }
+
+    &::before {
+      @include single-border($direction: top, $color: $grid-item-divider-color);
+    }
+
+    &::after {
+      @include single-border($direction: left, $color: $grid-item-divider-color);
+    }
+  }
+
+  &-item {
+    position: relative;
+    width: 100%;
+    background-color: $grid-item-background-color;
+
+    &--square {
+      height: 0;
+      padding-top: 100%;
+    }
+
+    &--bordered,
+    &--bordered-surrounded {
+
+      &::before,
+      &::after {
+        z-index: 1;
+      }
+    }
+
+    &--bordered {
+      &::before {
+        @include single-border($direction: right, $color: $grid-item-divider-color);
+      }
+
+      &::after {
+        @include single-border($direction: bottom, $color: $grid-item-divider-color);
+      }
+
+      &-surrounded {
+        &::after {
+          @include border(1px, $grid-item-divider-color);
+        }
+      }
+    }
+
+    &__content {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      padding: 24px 8px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+
+      &--square {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+
+    &__text {
+      width: 100%;
+      line-height: normal;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    &__title {
+      font-size: $grid-item-title-text-size;
+      color: $grid-item-title-text-color;
+    }
+
+    &__description {
+      font-size: $grid-item-description-text-size;
+      color: $grid-item-description-text-color;
+    }
+
+    &.is-clickable:active {
+      .#{$namespace}-grid-item__content {
+        background-color: $grid-item-hover-background-color;
+      }
+    }
+  }
+}

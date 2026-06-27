@@ -1,0 +1,33 @@
+.popup-box {
+  background-color: #fff;
+  height: 256px;
+  box-sizing: border-box;
+}
+
+.popup-section {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 36px;
+  .popup-btn-wrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 36px;
+  }
+  .popup-btn {
+    display: block;
+    min-width: 80px;
+  }
+}
+
+.popup-header {
+  padding: 16px 24px;
+  color: #000000d9;
+  border-bottom: 1px solid #f0f0f0;
+  border-radius: 2px 2px 0 0;
+}
+
+.popup-content {
+  padding: 16px 24px;
+}

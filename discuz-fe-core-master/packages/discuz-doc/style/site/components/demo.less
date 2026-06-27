@@ -1,0 +1,182 @@
+.@{d-prefix}-demo-item {
+  margin: 0;
+}
+
+.@{d-prefix}-demo-wrapper + .@{d-prefix}-demo-wrapper {
+  margin-top: 50px;
+}
+
+.@{d-prefix}-demo {
+
+  &-wrapper {
+
+    h4 {
+      font-size: 20px;
+      line-height: 30px;
+      height: auto;
+
+      a {
+
+        i {
+          vertical-align: middle;
+          color: @text-level-4-color;
+          content: "";
+          display: inline-block;
+          margin-top: -4px;
+          width: 10px;
+          height: 10px;
+          border-top: 2px solid;
+          border-right: 2px solid;
+          border-color: @text-level-4-color;
+          transform: rotate(45deg);
+        }
+
+        &:hover i {
+          border-color: @text-level-3-color;
+        }
+      }
+    }
+
+    > h4 + p {
+      margin-top: 15px;
+    }
+  }
+
+  &-wrapper {
+    margin: 24px 0 64px;
+  }
+
+  &-item__desc {
+    margin-bottom: 24px;
+  }
+
+  &__demo {
+    padding: 10px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+
+  &__code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #f0f0f0;
+    text-align: center;
+    max-width: 800px;
+    overflow: hidden;
+
+    pre {
+      text-align: justify;
+      background: rgb(246, 248, 250);
+    }
+  }
+
+  &__icon-link {
+    width: 16px;
+    height: 13px;
+    background: transparent
+      url("//0729-75822.gzc.vod.tencent-cloud.com/site_doc/show_code.png")
+      no-repeat 0 0;
+  }
+
+  &__code-toggle {
+    position: relative;
+    display: flex;
+    height: 40px;
+    width: 16px;
+    margin: 0 13px;
+    color: rgba(0, 0, 0, .8);
+    user-select: none;
+    cursor: pointer;
+
+    &__icon-code {
+      display: inline-block;
+      width: 16px;
+      height: 13px;
+      background: transparent
+        url("//0729-75822.gzc.vod.tencent-cloud.com/site_doc/show_code.png")
+        no-repeat 0 0;
+    }
+  }
+
+  &__code-text {
+    margin: 0;
+    width: 800px;
+    max-width: 800px;
+    overflow-x: hidden;
+
+    pre {
+      margin: 0;
+      padding: 23px;
+    }
+  }
+}
+
+.demo-tag {
+
+  .t-tag {
+    margin-right: 10px;
+  }
+}
+
+.@{d-prefix}-demo-item__body {
+  background-color: #fff;
+  transition: height 3s;
+  //overflow-x: scroll;
+  max-width: 800px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #f0f0f0;
+  padding: 36px 24px 42px;
+}
+
+.@{d-prefix}-demo-item__innner {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 2px;
+  transition: box-shadow .3s;
+
+  &:hover {
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .1);
+  }
+}
+
+.@{d-prefix}-demo-code-icon {
+  position: absolute;
+  top: 12px;
+  width: 16px;
+  height: 16px;
+  transition: opacity .3s;
+
+  &__active {
+    opacity: 0;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.@{d-prefix}-demo-item__innner {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 2px;
+}
+
+.@{d-prefix}-demo-code-icon {
+  width: 16px;
+  height: 16px;
+}
+.@{d-prefix}-demo-item__innner {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 2px;
+}
+
+.@{d-prefix}-demo-code-icon {
+  width: 16px;
+  height: 16px;
+}
+

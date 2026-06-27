@@ -1,0 +1,27 @@
+@import './theme/default.scss';
+@import './theme/dark.scss';
+
+page,
+[data-dzq-theme='light'] {
+
+    @each $name,
+    $value in $light {
+        #{$name}: #{$value};
+    }
+}
+
+page,
+[data-dzq-theme='dark'] {
+
+    @each $name,
+    $value in $dark {
+        #{$name}: #{$value};
+    }
+}
+
+:root {
+    @each $name,
+    $value in $light {
+        #{$name}: #{$value};
+    }
+}

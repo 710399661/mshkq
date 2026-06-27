@@ -1,0 +1,38 @@
+{
+  "packages": [
+    "packages/discuz-plugin-loader",
+    "packages/discuz-cli",
+    "packages/discuz-theme",
+    "packages/discuz-sdk",
+    "packages/discuz-design",
+    "packages/discuz-vditor",
+    "packages/discuz-design-babel-plugin",
+    "packages/discuz-plugin-center"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "npmClient": "npm",
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "ignored-file",
+        "*.md",
+        "package-lock.json",
+        "*/package-lock.json"
+      ],
+      "registry": "https://registry.npmjs.org/"
+    },
+    "bootstrap": {
+      "npmClientArgs": [
+        "--no-package-lock"
+      ]
+    },
+    "create": {
+      "license": "MIT",
+      "registry": "https://registry.npmjs.org/",
+      "homepage": "https://gitee.com/Discuz/discuz-core"
+    }
+  },
+  "version": "independent"
+}

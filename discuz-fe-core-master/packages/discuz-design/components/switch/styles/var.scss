@@ -1,0 +1,19 @@
+// FIXME 后期需替换成token定义的变量值
+// 开关的背景颜色
+$switch-background-color: #e8e8e8;
+// 开关开启时的颜色
+$switch-active-background-color: var(--color-primary3);
+// 开关的边框颜色
+$switch-border-color: #eaeaea;
+// 开关禁用态时的颜色
+$switch-disabled-background-color: #f2f2f2;
+// 开关禁用选中态时的颜色
+$switch-active-disabled-background-color: rgba(0, 110, 255, 0.3);
+// 开关禁用选中态时边框的颜色
+$switch-disabled-border-color: #d9d9d9;
+// 开关小圆圈边框的颜色
+$switch-item-border-color: #efefef;
+// 开关小圆圈禁用选中态时背景的颜色
+$switch-item-disabled-background-color: #ddd;
+
+$switch-item-background-color: linear-gradient(#ffffff, #f0f0f0, #dbdbdb);

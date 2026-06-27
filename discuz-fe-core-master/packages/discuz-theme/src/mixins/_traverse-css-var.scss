@@ -1,0 +1,5 @@
+@mixin traverse-css-var($theme) {
+  @each $key, $value in $theme {
+    #{$key}: #{$value};
+  }
+}

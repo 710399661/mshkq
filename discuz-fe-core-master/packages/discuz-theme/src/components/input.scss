@@ -1,0 +1,192 @@
+@import '../core';
+
+$input-height: 36px;
+$input-width: 236px;
+$input-padding: $padding-2n;
+$input-font-size: $font-size-primary;
+$input-border-radius: $border-radius-small;
+$input-background-color: $white;
+$input-placeholder-font-color: $disabled-color;
+$input-border: $border-solid-1;
+
+$input-border-color-hover: $primary-color;
+$input-border-color-focus: $primary-color;
+$input-font-color: $text-color-primary;
+$input-icon-color: $disabled-color2;
+$input-icon-color-select: $primary-color;
+$input-icon-color-hover: $primary-color;
+$input-icon-color-focus: $text-color-primary;
+
+$input-background-color-disabled: $disabled-color5;
+$input-font-color-disabled: $disabled-color;
+$input-border-color-disabled: $border-color;
+$input-placeholder-color-disabled: $disabled-color;
+
+$input-icon-width: 32px;
+$input-limit-width: 50px;
+$input-limit-font-size: $font-size-middle;
+
+@mixin input-hover($hover) {
+  &:#{$hover} {
+    color: $input-icon-color-hover;
+  }
+}
+
+@include b(input) {
+  position: relative;
+  width: $input-width;
+  background-color: $input-background-color;
+
+  @include e(inner) {
+    height: $input-height;
+    line-height: $input-height;
+    width: 100%;
+    border: none;
+    padding: $input-padding;
+    font-size: $input-font-size;
+    box-sizing: border-box;
+    background-image: none;
+    outline: none;
+    border-radius: $input-border-radius;
+    border: $input-border;
+    color: $input-font-color;
+    -webkit-appearance: none;
+    outline: none;
+
+    &::placeholder {
+      color: $input-placeholder-font-color;
+    }
+
+    &:hover {
+      border-color: $input-border-color-hover;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $input-border-color-focus;
+    }
+
+    @include m(placeholder) {
+      color: $input-placeholder-font-color;
+    }
+  }
+
+  @include e(icon) {
+    position: absolute;
+    width: $input-icon-width;
+    height: $input-height;
+    line-height: $input-height;
+    right: 0;
+    top: 0;
+    text-align: center;
+    color: $input-icon-color;
+
+    &+.#{$namespace}-input#{$element-separator}inner {
+      padding-right: $input-icon-width;
+    }
+
+    @include when(select) {
+      color: $input-icon-color-select;
+    }
+  }
+
+  @include e(select-icon) {
+    @media (hover: hover) {
+      @include input-hover(hover);
+    }
+
+    @media (hover: none) {
+      @include input-hover(active);
+    }
+  }
+
+
+  @include e(prefix-icon) {
+    position: absolute;
+    width: $input-icon-width;
+    height: $input-height;
+    line-height: $input-height;
+    left: 0;
+    top: 0;
+    text-align: center;
+    color: $input-icon-color;
+
+    &+.#{$namespace}-input#{$element-separator}inner {
+      padding-left: $input-icon-width;
+    }
+
+    // 不能加hover，移动端不正常，需要js模拟鼠标划入
+
+    // &:hover {
+    //   cursor: pointer;
+    //   color: $input-icon-color-hover;
+    // }
+  }
+
+  @include e(limit) {
+    position: absolute;
+    height: $input-height;
+    line-height: $input-height;
+    right: 0;
+    top: 0;
+    text-align: center;
+    width: $input-limit-width;
+    font-size: $input-limit-font-size;
+    color: $input-icon-color;
+
+    &+.#{$namespace}-input#{$element-separator}inner {
+      padding-right: $input-limit-width;
+    }
+  }
+
+  @include e(append) {
+    position: absolute;
+    height: $input-height;
+    line-height: $input-height;
+    right: 0;
+    top: 0;
+    color: $input-icon-color;
+  }
+
+  @include when(disabled) {
+    .#{$namespace}-input#{$element-separator}inner {
+      background-color: $input-background-color-disabled;
+      border-color: $input-border-color-disabled;
+      color: $input-font-color-disabled;
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: $input-placeholder-color-disabled;
+      }
+    }
+
+    .el-input__icon {
+      cursor: not-allowed;
+    }
+  }
+
+  @include when(focus) {
+    @include e(inner) {
+      border-color: $input-border-color-focus;
+    }
+
+    // @include e(icon) {
+    //   color: $input-icon-color-focus;
+    // 不能加hover，移动端不正常，需要js模拟鼠标划入
+    // &:hover {
+    //   cursor: pointer;
+    //   color: $input-icon-color-hover;
+    // }
+    // }
+
+    @include e(prefix-icon) {
+      color: $input-icon-color-focus;
+      // 不能加hover，移动端不正常，需要js模拟鼠标划入
+
+      // &:hover {
+      //   cursor: pointer;
+      //   color: $input-icon-color-hover;
+      // }
+    }
+  }
+}

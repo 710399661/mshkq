@@ -1,0 +1,21 @@
+{
+  "name": "@discuzq/theme",
+  "version": "1.0.32",
+  "description": "Discuz! Q 公共样式库",
+  "main": "dist/index.css",
+  "style": "dist/index.css",
+  "scripts": {
+    "build": "gulp clean && gulp build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "angelzou",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-sass": "^5.0.0",
+    "sass": "^1.37.5"
+  }
+}

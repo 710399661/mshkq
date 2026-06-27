@@ -1,0 +1,41 @@
+// 改一个就去掉一个组件样式只到全部替换。全部替换之后组件的样式应用规则可以考虑改一下。改成从主题项目中进行引入，这样保证组件和fe项目只引入一个相同的样式，不会存在重复的问题
+@import '../../discuz-theme/src/index.scss';
+
+// 源代码中的样式引入
+// @import "./var.scss";
+// @import "../components/button/styles/index.scss";
+// @import "../components/rich-text/styles/index.scss";
+// @import "../components/icon/styles/index.scss";
+// @import "../components/dialog/styles/index.scss";
+// @import "../components/card/styles/index.scss";
+// @import "../components/image-previewer/styles/index.scss";
+// @import "../components/toast/styles/index.scss";
+// @import "../components/flex/styles/index.scss";
+// @import "../components/video/styles/index.scss";
+// @import "../components/grid/styles/index.scss";
+// @import "../components/input/styles/index.scss";
+// @import "../components/textarea/styles/index.scss";
+// @import "../components/audio/styles/index.scss";
+// @import "../components/audio-player/styles/index.scss";
+// @import "../components/audio-record/styles/index.scss";
+// @import "../components/tabs/styles/index.scss";
+// @import "../components/check/styles/index.scss";
+// @import "../components/tag/styles/index.scss";
+// @import "../components/upload/styles/index.scss";
+// @import "../components/divider/styles/index.scss";
+// @import "../components/menu/styles/index.scss";
+// @import "../components/back-to-top/styles/index.scss";
+// @import "../components/pull-down-refresh/styles/index.scss";
+// @import "../components/alert/styles/index.scss";
+// @import "../components/avatar/styles/index.scss";
+// @import "../components/dropdown/styles/index.scss";
+// @import "../components/spin/styles/index.scss";
+// @import "../components/popover/styles/index.scss";
+// @import "../components/popup/styles/index.scss";
+// @import "../components/switch/styles/index.scss";
+// @import "../components/progress/styles/index.scss";
+// @import "../components/badge/styles/index.scss";
+// @import "../components/slider/styles/index.scss";
+// @import "../components/web-picker/styles/index.scss";
+// @import "../components/side-nav/styles/index.scss";
+// @import "../components/step/styles/index.scss";

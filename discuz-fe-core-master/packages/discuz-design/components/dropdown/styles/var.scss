@@ -1,0 +1,22 @@
+$dropdown-menu-background-color: var(--color-white);
+$dropdown-menu-border: var(--border-border);
+$dropdown-menu-box-shadow: var(--box-shadow);
+$dropdown-menu-border-radius: var(--border-radius-small);
+$dropdown-menu-padding-top-bottom: var(--padding-4n);
+$dropdown-menu-margin-top-bottom: var(--margin-4n);
+$dropdown-menu-z-index: 1450;
+$dropdown-menu-min-width: 100px;
+
+$dropdown-menu-trigger-color: var(--color-text-regular);
+$dropdown-menu-trigger-color-active: var(--color-primary);
+$dropdown-menu-trigger-icon-margin-left: var(--margin-1n);
+$dropdown-menu-trigger-icon-transition: transform 0.3s;
+
+
+$dropdown-menu-item-color: var(--color-text-secondary);
+$dropdown-menu-item-color-disabled: var(--color-disabled2);
+$dropdown-menu-item-color-hover: var(--color-primary5);
+$dropdown-menu-item-color-focus: var(--color-primary);
+$dropdown-menu-item-font-size: var(--font-size-primary);
+$dropdown-menu-item-padding-top-bottom: var(--padding-2n);
+$dropdown-menu-item-border: var(--border-border);

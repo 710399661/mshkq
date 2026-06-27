@@ -1,0 +1,53 @@
+$line-height-zh: 1.5;
+$font-size-xs: var(--font-size-label);
+$font-size-default: var(--font-size-primary);
+$line-height-default: $line-height-zh;
+$form-background-base: var(--background-color-text);
+$form-active-color: var(--color-primary8);
+$form-background-active: var(--color-primary8);
+$form-border-color: var(--color-disabled);
+$text-disabled-color: $form-border-color;
+$border-radius: var(--border-radius-small);
+$padding-base: var(--padding-2n);
+
+$checkbox-width: 20px;
+$checkbox-height: 20px;
+$checkbox-background-color: $form-background-base;
+$checkbox-border-color: $form-border-color;
+$checkbox-active-color: $form-active-color;
+$checkbox-active-background-color: $form-background-active;
+
+$checkbox-icon-active-color: var(--color-primary);
+$checkbox-icon-disabled-color: var(--color-disabled5);
+
+$checkbox-disabled-text-color: $text-disabled-color;
+$checkbox-base-disabled-color: $form-border-color;
+$checkbox-disabled-border-color: $form-border-color;
+$checkbox-active-disabled-color: $checkbox-disabled-border-color;
+
+$checkbox-label-text-size: $font-size-default;
+$checkbox-label-margin-left: var(--margin-2n);
+$checkbox-label-line-height: $line-height-default;
+$checkbox-label-text-color: var(--color-text-primary);
+
+$checkbox-label-active-color: var(--color-primary);
+$checkbox-label-disabled-color: var(--color-disabled);
+
+$checkbox-agreement-width: 14px;
+$checkbox-agreement-height: 14px;
+$checkbox-agreement-margin-top: 3px;
+
+$checkbox-agreement-label-text-size: $font-size-xs;
+$checkbox-agreement-margin-left: 4px;
+$checkbox-agreement-line-height: 22px;
+
+$checkbox-group-item-margin: 8px;
+$checkbox-group-outline-item-margin: 4px;
+
+$checkbox-border-radius: $border-radius;
+$checkbox-after-border-radius: 12px;
+
+$checkbox-item-border-radius: $border-radius;
+$checkbox-item-active-background-color: var(--color-primary10);
+$checkbox-item-disabled-background-color: var(--background-color-text2);
+$checkbox-item-margin-base: var(--margin-4n);

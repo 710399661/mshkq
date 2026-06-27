@@ -1,0 +1,52 @@
+@import "./var.scss";
+
+:host {
+  overflow: hidden;
+  display: inline-block;
+  font-size: 0;
+  vertical-align: middle;
+}
+.#{$namespace}-switch {
+  position: relative;
+  display: inline-block;
+  background-color: $switch-background-color;
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $switch-border-color;
+  padding: 3px;
+
+  @include transition(background-color);
+
+  .#{$namespace}-switch__toggle {
+    border-radius: 50%;
+    background: $switch-item-background-color;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.16);
+    border-width: 1px;
+    border-style: solid;
+    border-color: $switch-item-border-color;
+    @include transition(all);
+    &.is-loading {
+      @include flex($align-items: center, $justify-content: center);
+    }
+    &.is-disabled {
+      background-color: $switch-item-disabled-background-color;
+    }
+  }
+
+  &.is-checked {
+    background-color: $switch-active-background-color;
+    .#{$namespace}-switch__toggle {
+      transform: translate3d(26px, 0, 0);
+      box-shadow: none;
+    }
+  }
+  &.is-disabled {
+    cursor:not-allowed;
+    background-color: $switch-disabled-background-color;
+    border-color: $switch-disabled-border-color;
+    &.is-checked {
+      background-color: $switch-active-disabled-background-color;
+    }
+  }
+}

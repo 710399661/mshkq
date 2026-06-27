@@ -1,0 +1,208 @@
+@import '../core';
+
+// 标签组件中的样式迁移到 theme 项目中进行管理
+
+$color-primary-5: $primary-color3;
+$color-success-5: $success-color;
+$color-warning-5: $warn-color;
+$color-danger-5: $error-color;
+$color-disabled-5: $disabled-color;
+
+$padding-base: $padding-2n;
+$border-radius: $border-radius-small;
+$font-size-xxs: $font-size-small;
+$font-size-xs: $font-size-primary;
+$font-size-sm: $font-size-middle;
+
+$opacity-active: 0.6; // 组件点击态透明度
+$opacity: 0.1; // 组件背景透明度
+
+$color-secondary: $color-disabled-5;
+$text-secondary-color: $color-secondary; // 次要文字色
+$background-secondary-color: $color-secondary;
+$border-secondary-color: $color-secondary;
+
+$color-brand: $color-primary-5;
+$text-primary-color: $color-brand; // 主要文字色
+$background-primary-color: $color-brand;
+$border-primary-color: $color-brand;
+
+$color-success: $color-success-5;
+$text-success-color: $color-success; // 成功文字色
+$background-success-color: $color-success;
+$border-success-color: $color-success;
+
+$color-warning: $color-warning-5;
+$text-warning-color: $color-warning; // 警示文字色
+$background-warning-color: $color-warning;
+$border-warning-color: $color-warning;
+
+$color-danger: $color-danger-5;
+$text-danger-color: $color-danger; // 错误文字色
+$background-danger-color: $color-danger;
+$border-danger-color: $color-danger;
+$border-radius-default: $border-radius;
+
+$tag-sm-text-size: $font-size-xxs;
+$tag-md-text-size: $font-size-xs;
+$tag-lg-text-size: $font-size-sm;
+$tag-default-text-color: $text-secondary-color;
+$tag-default-background-color: $background-secondary-color;
+$tag-default-border-color: $border-secondary-color;
+$tag-primary-text-color: $text-primary-color;
+$tag-primary-background-color: $background-primary-color;
+$tag-primary-border-color: $primary-color6;
+$tag-success-text-color: $text-success-color;
+$tag-success-background-color: $background-success-color;
+$tag-success-border-color: $success-color6;
+
+$tag-orange-text-color: $orange-color;
+$tag-orange-background-color: $orange-color;
+$tag-orange-border-color: $orange-color;
+
+$tag-warning-text-color: $text-warning-color;
+$tag-warning-background-color: $background-warning-color;
+$tag-warning-border-color: $warn-color6;
+$tag-danger-text-color: $text-danger-color;
+$tag-danger-background-color: $background-danger-color;
+$tag-danger-border-color: $error-color6;
+$tag-padding: 1px $padding-base;
+$tag-outline-background-color: transparent;
+$tag-border-radius: $border-radius-default;
+$tag-round-border-radius: 10px;
+$tag-delete-margin-left: $margin-2n;
+
+
+.#{$namespace}-tag {
+  position: relative;;
+  display: inline-flex;
+  font-size: $tag-sm-text-size;
+  line-height: 1;
+  padding: $tag-padding;
+  border: 1px solid;
+  box-sizing: border-box;
+  border-radius: $tag-border-radius;
+  justify-content: center;
+  align-items: center;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: $opacity;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  &.size {
+    &-md {
+      font-size: $tag-md-text-size;
+    }
+
+    &-lg {
+      font-size: $tag-lg-text-size;
+    }
+  }
+
+  &--default {
+    color: $color-secondary;
+    border-color: $tag-default-border-color;
+
+    &::after {
+      background: $tag-default-background-color;
+    }
+  }
+
+  &--primary {
+    color: $color-brand;
+    border-color: $tag-primary-border-color;
+
+    &::after {
+      background-color: $tag-primary-background-color;
+    }
+  }
+
+  &--success {
+    color: $color-success;
+    border-color: $tag-success-border-color;
+
+    &::after {
+      background-color: $tag-success-background-color;
+    }
+  }
+
+  &--warning {
+    color: $color-warning;
+    border-color: $tag-warning-border-color;
+
+    &::after {
+      background-color: $tag-warning-background-color;
+    }
+  }
+
+  &--danger {
+    color: $color-danger;
+    border-color: $tag-danger-border-color;
+
+    &::after {
+      background-color: $tag-danger-background-color;
+    }
+  }
+
+  &--orange {
+    color: $tag-orange-text-color;
+    border-color: $tag-orange-border-color;
+
+    &::after {
+      background-color: $tag-orange-background-color;
+    }
+  }
+
+  &--outline {
+    background-color: $tag-outline-background-color;
+
+    &.#{$namespace}-tag--default {
+      color: $tag-default-text-color;
+    }
+
+    &.#{$namespace}-tag--primary {
+      color: $tag-primary-text-color;
+    }
+
+    &.#{$namespace}-tag--success {
+      color: $tag-success-text-color;
+    }
+
+    &.#{$namespace}-tag--warning {
+      color: $tag-warning-text-color;
+    }
+
+    &.#{$namespace}-tag--danger {
+      color: $tag-danger-text-color;
+    }
+
+    &.#{$namespace}-tag--orange {
+      color: $tag-orange-text-color;
+    }
+  }
+
+  &--round {
+    border-radius: $tag-round-border-radius;
+  }
+
+  &.is-clickable {
+    opacity: $opacity-active;
+  }
+
+  &-delete {
+    margin-left: $tag-delete-margin-left;
+    cursor: pointer;
+  }
+
+  &-text {
+    line-height: normal;
+    display: inline-block;
+  }
+}

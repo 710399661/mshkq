@@ -1,0 +1,335 @@
+@import "../../../styles/mixin.scss";
+@import "./var.scss";
+@import "./mixin.scss";
+
+@keyframes rotating {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+@include b(button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  cursor: pointer;
+  color: $button-font-color-default;
+  background: $button-background-color-default;
+  border: $button-border-default;
+  border-color: $button-border-color-default;
+  border-radius: $button-border-radius-default;
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  transition: 0.1s;
+  font-weight: $button-font-weight;
+  @include utils-user-select(none);
+
+  &::after {
+    content: none;
+  }
+
+  @include when(mouseenter) {
+    color: $button-font-color-default-hover;
+    background: $button-background-color-default-hover;
+    border-color: $button-border-color-default-hover;
+  }
+
+  // .button-hover为taro input中自带的点击class
+  &.button-hover {
+    color: $button-font-color-default-hover;
+    background: $button-background-color-default-hover;
+    border-color: $button-border-color-default-hover;
+  }
+
+  @include when(mousedown) {
+    color: $button-font-color-default-focus;
+    background: $button-background-color-default-focus;
+    border-color: $button-border-color-default-focus;
+  }
+
+  @include when(loading) {
+    position: relative;
+    pointer-events: none;
+
+    [class*="dzq-icon-"] {
+      display: inline-block;
+      margin-right: $button-icon-margin-right;
+      animation: rotating 2s linear infinite;
+    }
+  }
+
+  @include when(full) {
+    display: block;
+    border-radius: 0;
+    width: 100%;
+  }
+
+  @include when(disabled) {
+    &,
+    &:hover,
+    &:focus {
+      color: $button-font-color-default-disabled;
+      cursor: not-allowed;
+      background-image: none;
+      background-color: $button-background-color-default-disabled;
+      border-color: $button-border-color-default-disabled;
+    }
+
+    &.el-button--text {
+      background-color: transparent;
+    }
+  }
+
+  @include when(circle) {
+    padding: $button-padding-circle;
+    border-radius: $button-border-radius-circle;
+  }
+
+  @include m(large) {
+    @include button-size(
+      $button-padding-vertical-large,
+      $button-padding-horizontal-large,
+      $button-font-size-large,
+      $button-border-radius-default,
+      $button-height-large
+    );
+  }
+
+  @include m(medium) {
+    @include button-size(
+      $button-padding-vertical-medium,
+      $button-padding-horizontal-medium,
+      $button-font-size-medium,
+      $button-border-radius-default,
+      $button-height-medium
+    );
+  }
+
+  @include m(small) {
+    @include button-size(
+      $button-padding-vertical-small,
+      $button-padding-horizontal-small,
+      $button-font-size-small,
+      $button-border-radius-default,
+      $button-height-small
+    );
+  }
+
+  @include m(mini) {
+    @include button-size(
+      $button-padding-vertical-mini,
+      $button-padding-horizontal-mini,
+      $button-font-size-mini,
+      $button-border-radius-default,
+      $button-height-mini
+    );
+  }
+
+  @include m(primary) {
+    color: $button-font-color-primary;
+    background-color: $button-background-color-primary;
+    border-color: $button-border-color-primary;
+
+    @include when(mouseenter) {
+      color: $button-font-color-primary-hover;
+      background: $button-background-color-primary-hover;
+      border-color: $button-background-color-primary-hover;
+    }
+
+    &.button-hover {
+      color: $button-font-color-primary-hover;
+      background: $button-background-color-primary-hover;
+      border-color: $button-background-color-primary-hover;
+    }
+
+    @include when(mousedown) {
+      color: $button-font-color-primary-focus;
+      background: $button-background-color-primary-focus;
+      border-color: $button-background-color-primary-focus;
+    }
+
+    @include when(disabled) {
+      &,
+      &:hover,
+      &:focus {
+        color: $button-font-color-primary-disabled;
+        cursor: not-allowed;
+        background-image: none;
+        background-color: $button-background-color-primary-disabled;
+        border-color: $button-border-color-primary-disabled;
+      }
+
+      &.el-button--text {
+        background-color: transparent;
+      }
+    }
+  }
+
+  @include m(danger) {
+    color: $button-font-color-danger;
+    background-color: $button-background-color-danger;
+    border-color: $button-border-color-danger;
+
+    @include when(mouseenter) {
+      color: $button-font-color-danger-hover;
+      background: $button-background-color-danger-hover;
+      border-color: $button-background-color-danger-hover;
+    }
+
+    &.button-hover {
+      color: $button-font-color-danger-hover;
+      background: $button-background-color-danger-hover;
+      border-color: $button-background-color-danger-hover;
+    }
+
+    @include when(mousedown) {
+      color: $button-font-color-danger-focus;
+      background: $button-background-color-danger-focus;
+      border-color: $button-background-color-danger-focus;
+    }
+
+    @include when(disabled) {
+      &,
+      &:hover,
+      &:focus {
+        color: $button-font-color-danger-disabled;
+        cursor: not-allowed;
+        background-image: none;
+        background-color: $button-background-color-danger-disabled;
+        border-color: $button-border-color-danger-disabled;
+      }
+
+      &.el-button--text {
+        background-color: transparent;
+      }
+    }
+  }
+
+  @include m(warn) {
+    color: $button-font-color-warn;
+    background-color: $button-background-color-warn;
+    border-color: $button-border-color-warn;
+
+    @include when(mouseenter) {
+      color: $button-font-color-warn-hover;
+      background: $button-background-color-warn-hover;
+      border-color: $button-background-color-warn-hover;
+    }
+
+    &.button-hover {
+      color: $button-font-color-warn-hover;
+      background: $button-background-color-warn-hover;
+      border-color: $button-background-color-warn-hover;
+    }
+
+    @include when(mousedown) {
+      color: $button-font-color-warn-focus;
+      background: $button-background-color-warn-focus;
+      border-color: $button-background-color-warn-focus;
+    }
+
+    @include when(disabled) {
+      &,
+      &:hover,
+      &:focus {
+        color: $button-font-color-warn-disabled;
+        cursor: not-allowed;
+        background-image: none;
+        background-color: $button-background-color-warn-disabled;
+        border-color: $button-border-color-warn-disabled;
+      }
+
+      &.el-button--text {
+        background-color: transparent;
+      }
+    }
+  }
+
+  @include m(dashed) {
+    border: $button-border-dashed;
+
+    @include when(mouseenter) {
+      color: $button-font-color-default-hover;
+      background: $button-background-color-default-hover;
+      border-color: $button-border-color-default-hover;
+    }
+
+    &.button-hover {
+      color: $button-font-color-default-hover;
+      background: $button-background-color-default-hover;
+      border-color: $button-border-color-default-hover;
+    }
+
+    @include when(mousedown) {
+      color: $button-font-color-default-focus;
+      background: $button-background-color-default-focus;
+      border-color: $button-border-color-default-focus;
+    }
+
+    @include when(disabled) {
+      &,
+      &:hover,
+      &:focus {
+        color: $button-font-color-default-disabled;
+        cursor: not-allowed;
+        background-image: none;
+        background-color: $button-background-color-default-disabled;
+        border-color: $button-border-color-default-disabled;
+      }
+    }
+  }
+
+  @include m(text) {
+    color: $button-font-color-text;
+    background-color: $button-background-color-text;
+    border-color: $button-border-color-text;
+
+    @include when(mouseenter) {
+      color: $button-font-color-text-hover;
+      background: $button-background-color-text-hover;
+      border-color: $button-background-color-text-hover;
+    }
+
+    &.button-hover {
+      color: $button-font-color-text-hover;
+      background: $button-background-color-text-hover;
+      border-color: $button-background-color-text-hover;
+      font-weight: $button-font-weight-text-focus;
+    }
+
+    @include when(mousedown) {
+      color: $button-font-color-text-focus;
+      background: $button-background-color-text-focus;
+      border-color: $button-background-color-text-focus;
+      font-weight: $button-font-weight-text-focus;
+    }
+
+    @include when(disabled) {
+      &,
+      &:hover,
+      &:focus {
+        color: $button-font-color-text-disabled;
+        background-color: $button-background-color-text-disabled;
+        border-color: $button-border-color-text-disabled;
+        cursor: not-allowed;
+        background-image: none;
+      }
+
+      &.button-hover {
+        color: $button-font-color-text-disabled;
+        background-color: $button-background-color-text-disabled;
+        border-color: $button-border-color-text-disabled;
+        font-weight: $button-font-weight-text;
+      }
+
+      &.el-button--text {
+        background-color: transparent;
+      }
+    }
+  }
+}

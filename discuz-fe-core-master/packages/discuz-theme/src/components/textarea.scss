@@ -1,0 +1,97 @@
+@import '../core';
+
+$textarea-width: 334px;
+$textarea-inner-height: 48px;
+
+$textarea-padding: $padding-2n;
+$textarea-font-size: $font-size-primary;
+$textarea-font-color: $text-color-primary;
+$textarea-placeholder-color: $disabled-color3;
+$textarea-background-color: $white;
+$textarea-border: $border-solid-1;
+$textarea-border-radius: $border-radius-small;
+
+$textarea-border-color-hover: $primary-color;
+$textarea-border-color-focus: $primary-color;
+
+$textarea-background-color-disabled: $disabled-color5;
+$textarea-color-disabled: $disabled-color;
+;
+$textarea-placeholder-color-disabled: $disabled-color;
+
+$textarea-limit-font-size: $font-size-label;
+$textarea-limit-padding-bottom: $padding-3n;
+
+@include b(textarea) {
+  position: relative;
+  width: $textarea-width;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: $textarea-background-color;
+  border-radius: $textarea-border-radius;
+  border: $textarea-border;
+  color: $textarea-font-color;
+  overflow: hidden;
+
+  &:hover {
+    border-color: $textarea-border-color-hover;
+  }
+
+  @include e(inner) {
+    height: $textarea-inner-height;
+    width: 100%;
+    border: none;
+    resize: vertical;
+    padding: $textarea-padding;
+    font-size: $textarea-font-size;
+    box-sizing: border-box;
+    background-image: none;
+    outline: none;
+    border: none;
+
+    &::placeholder {
+      color: $textarea-placeholder-color;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $textarea-border-color-focus;
+    }
+  }
+
+  @include e(limit) {
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: $textarea-limit-padding-bottom;
+    text-align: right;
+    font-size: $textarea-limit-font-size;
+    color: $text-color-placeholder;
+  }
+
+  @include when(active) {
+    border-color: $textarea-border-color-hover;
+  }
+
+  @include when(disabled) {
+    background-color: $textarea-background-color-disabled;
+    border: $textarea-border;
+    color: $textarea-color-disabled;
+    cursor: not-allowed;
+
+    &:hover {
+      border: $textarea-border;
+    }
+
+    .#{$namespace}-textarea#{$element-separator}inner {
+      background-color: $textarea-background-color-disabled;
+      color: $textarea-color-disabled;
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: $textarea-placeholder-color-disabled;
+      }
+    }
+  }
+}
