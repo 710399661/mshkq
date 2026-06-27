@@ -15,10 +15,10 @@ class CreateThreadRequest extends FormRequest
     {
         return [
             'category_id' => 'required|integer|exists:categories,id',
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'title' => 'required|string|min:5|max:255',
+            'content' => 'required|string|min:5|max:50000',
             'type' => 'nullable|integer',
-            'tags' => 'nullable|array',
+            'tags' => 'nullable|array|max:10',
             'tags.*' => 'integer|exists:tags,id',
         ];
     }

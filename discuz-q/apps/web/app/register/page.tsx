@@ -104,8 +104,8 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-8rem)] flex items-center justify-center py-8">
-      <div className="w-full max-w-5xl grid md:grid-cols-2 gap-8">
+    <div className="min-h-[calc(100vh-8rem)] flex items-center justify-center py-4 md:py-8 px-2 md:px-4">
+      <div className="w-full max-w-5xl grid md:grid-cols-2 gap-6 md:gap-8">
         <div className="hidden md:flex flex-col justify-center p-8 bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl">
           <div className="space-y-6">
             <div className="space-y-2">
@@ -145,11 +145,11 @@ export default function RegisterPage() {
         </div>
 
         <Card className="shadow-lg">
-          <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl">创建账号</CardTitle>
-            <CardDescription>填写以下信息完成注册</CardDescription>
+          <CardHeader className="space-y-1 px-4 md:px-6 pt-4 md:pt-6">
+            <CardTitle className="text-xl md:text-2xl">创建账号</CardTitle>
+            <CardDescription className="text-xs md:text-sm">填写以下信息完成注册</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-4 md:px-6 pb-4 md:pb-6">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <label htmlFor="username" className="text-sm font-medium">
@@ -166,7 +166,7 @@ export default function RegisterPage() {
                       setErrors((prev) => ({ ...prev, username: undefined }));
                     }
                   }}
-                  className={errors.username ? 'border-destructive' : ''}
+                  className={errors.username ? 'border-destructive min-h-[40px]' : 'min-h-[40px]'}
                   disabled={registerMutation.isPending}
                 />
                 {errors.username && (
@@ -189,7 +189,7 @@ export default function RegisterPage() {
                       setErrors((prev) => ({ ...prev, email: undefined }));
                     }
                   }}
-                  className={errors.email ? 'border-destructive' : ''}
+                  className={errors.email ? 'border-destructive min-h-[40px]' : 'min-h-[40px]'}
                   disabled={registerMutation.isPending}
                 />
                 {errors.email && (
@@ -212,7 +212,7 @@ export default function RegisterPage() {
                       setErrors((prev) => ({ ...prev, mobile: undefined }));
                     }
                   }}
-                  className={errors.mobile ? 'border-destructive' : ''}
+                  className={errors.mobile ? 'border-destructive min-h-[40px]' : 'min-h-[40px]'}
                   disabled={registerMutation.isPending}
                 />
                 {errors.mobile && (
@@ -236,14 +236,15 @@ export default function RegisterPage() {
                         setErrors((prev) => ({ ...prev, password: undefined }));
                       }
                     }}
-                    className={errors.password ? 'border-destructive pr-10' : 'pr-10'}
+                    className={errors.password ? 'border-destructive pr-10 min-h-[40px]' : 'pr-10 min-h-[40px]'}
                     disabled={registerMutation.isPending}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground min-h-[32px] min-w-[32px] flex items-center justify-center"
                     tabIndex={-1}
+                    aria-label="切换密码显示"
                   >
                     {showPassword ? (
                       <EyeOff className="h-4 w-4" />
@@ -273,14 +274,15 @@ export default function RegisterPage() {
                         setErrors((prev) => ({ ...prev, confirmPassword: undefined }));
                       }
                     }}
-                    className={errors.confirmPassword ? 'border-destructive pr-10' : 'pr-10'}
+                    className={errors.confirmPassword ? 'border-destructive pr-10 min-h-[40px]' : 'pr-10 min-h-[40px]'}
                     disabled={registerMutation.isPending}
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground min-h-[32px] min-w-[32px] flex items-center justify-center"
                     tabIndex={-1}
+                    aria-label="切换密码显示"
                   >
                     {showConfirmPassword ? (
                       <EyeOff className="h-4 w-4" />
@@ -296,7 +298,7 @@ export default function RegisterPage() {
 
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full min-h-[44px]"
                 disabled={registerMutation.isPending}
               >
                 {registerMutation.isPending ? (
@@ -310,7 +312,7 @@ export default function RegisterPage() {
               </Button>
             </form>
           </CardContent>
-          <CardFooter className="flex justify-center">
+          <CardFooter className="flex justify-center px-4 md:px-6 pb-4 md:pb-6">
             <p className="text-sm text-muted-foreground">
               已有账号？{' '}
               <Link href="/login" className="text-primary hover:underline">

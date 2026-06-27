@@ -11,6 +11,7 @@
     "clean": "rm -rf .next .turbo node_modules"
   },
   "dependencies": {
+    "@discuzq/i18n": "workspace:*",
     "@discuzq/sdk": "workspace:*",
     "@discuzq/ui": "workspace:*",
     "@discuzq/utils": "workspace:*",

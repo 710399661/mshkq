@@ -17,7 +17,9 @@
     "test": "turbo test",
     "clean": "turbo clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\"",
+    "analyze": "turbo run analyze --filter=@discuzq/web",
+    "lighthouse": "turbo run lighthouse --filter=@discuzq/web"
   },
   "devDependencies": {
     "@discuzq/eslint-config": "workspace:*",

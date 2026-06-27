@@ -1,4 +1,7 @@
+'use client';
+
 import * as React from 'react';
+import { sanitizeHtml } from '@discuzq/utils';
 import { cn } from '../../lib/utils';
 
 export interface RichTextProps {
@@ -7,6 +10,10 @@ export interface RichTextProps {
 }
 
 function RichText({ content, className }: RichTextProps) {
+  const safeContent = React.useMemo(() => {
+    return sanitizeHtml(content);
+  }, [content]);
+
   return (
     <div
       className={cn(
@@ -22,7 +29,7 @@ function RichText({ content, className }: RichTextProps) {
         'prose-hr:border-border',
         className,
       )}
-      dangerouslySetInnerHTML={{ __html: content }}
+      dangerouslySetInnerHTML={{ __html: safeContent }}
     />
   );
 }

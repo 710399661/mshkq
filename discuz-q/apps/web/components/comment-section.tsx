@@ -352,16 +352,16 @@ export function CommentSection({ threadId, initialPosts, totalCount }: CommentSe
   };
 
   return (
-    <div className="rounded-lg border bg-card p-6">
-      <h2 className="mb-4 text-lg font-semibold flex items-center gap-2">
-        <MessageSquare className="h-5 w-5" />
+    <div className="rounded-lg border bg-card p-4 md:p-6">
+      <h2 className="mb-3 md:mb-4 text-base md:text-lg font-semibold flex items-center gap-2">
+        <MessageSquare className="h-4 w-4 md:h-5 md:w-5" />
         全部评论 <span className="text-sm font-normal text-muted-foreground">({totalCount})</span>
       </h2>
 
-      <div className="mb-6">
+      <div className="mb-4 md:mb-6">
         {isAuthenticated ? (
-          <div className="flex gap-3">
-            <Avatar className="h-9 w-9 shrink-0">
+          <div className="flex gap-2 md:gap-3">
+            <Avatar className="h-8 w-8 md:h-9 md:w-9 shrink-0">
               <AvatarImage src={user?.avatar || ''} alt={user?.username || ''} />
               <AvatarFallback className="text-xs">
                 {(user?.username || 'U')[0]}
@@ -372,13 +372,14 @@ export function CommentSection({ threadId, initialPosts, totalCount }: CommentSe
                 placeholder="发表你的评论..."
                 value={commentText}
                 onChange={(e) => setCommentText(e.target.value)}
-                className="min-h-[80px] resize-y"
+                className="min-h-[60px] md:min-h-[80px] resize-y text-sm"
               />
               <div className="mt-2 flex justify-end">
                 <Button
                   onClick={handleSubmitComment}
                   disabled={!commentText.trim() || createCommentMutation.isPending}
                   size="sm"
+                  className="min-h-[36px]"
                 >
                   {createCommentMutation.isPending ? (
                     <>
@@ -396,7 +397,7 @@ export function CommentSection({ threadId, initialPosts, totalCount }: CommentSe
             </div>
           </div>
         ) : (
-          <div className="rounded-md border border-dashed p-6 text-center">
+          <div className="rounded-md border border-dashed p-4 md:p-6 text-center">
             <p className="text-sm text-muted-foreground">
               <Link href="/login" className="text-primary hover:underline">
                 登录
@@ -407,17 +408,17 @@ export function CommentSection({ threadId, initialPosts, totalCount }: CommentSe
         )}
       </div>
 
-      <div className="space-y-5">
+      <div className="space-y-4 md:space-y-5">
         {comments.length === 0 && (
-          <div className="py-8 text-center text-sm text-muted-foreground">
+          <div className="py-6 md:py-8 text-center text-sm text-muted-foreground">
             暂无评论，快来抢沙发吧
           </div>
         )}
 
         {comments.map((comment) => (
-          <div key={comment.id} className="flex gap-3">
+          <div key={comment.id} className="flex gap-2 md:gap-3">
             <Link href={`/user/${comment.author.id}`} className="shrink-0">
-              <Avatar className="h-9 w-9">
+              <Avatar className="h-8 w-8 md:h-9 md:w-9">
                 <AvatarImage
                   src={comment.author.avatar}
                   alt={comment.author.username}
@@ -428,7 +429,7 @@ export function CommentSection({ threadId, initialPosts, totalCount }: CommentSe
               </Avatar>
             </Link>
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <Link
                   href={`/user/${comment.author.id}`}
                   className="text-sm font-medium hover:text-primary"
@@ -442,10 +443,10 @@ export function CommentSection({ threadId, initialPosts, totalCount }: CommentSe
               <div className="mt-1 text-sm text-foreground break-words whitespace-pre-wrap">
                 {comment.content}
               </div>
-              <div className="mt-2 flex items-center gap-4 text-muted-foreground">
+              <div className="mt-2 flex items-center gap-3 md:gap-4 text-muted-foreground">
                 <button
                   className={cn(
-                    'flex items-center gap-1 text-xs transition-colors hover:text-primary',
+                    'flex items-center gap-1 text-xs transition-colors hover:text-primary min-h-[32px]',
                   )}
                   onClick={() => handleLike(comment.id)}
                 >
@@ -454,7 +455,7 @@ export function CommentSection({ threadId, initialPosts, totalCount }: CommentSe
                   {comment.likes === 0 && <span>点赞</span>}
                 </button>
                 <button
-                  className="flex items-center gap-1 text-xs transition-colors hover:text-primary"
+                  className="flex items-center gap-1 text-xs transition-colors hover:text-primary min-h-[32px]"
                   onClick={() => handleReply(comment.id, undefined, comment.author.username)}
                 >
                   <Reply className="h-3.5 w-3.5" />
@@ -506,7 +507,7 @@ export function CommentSection({ threadId, initialPosts, totalCount }: CommentSe
                 <div className="mt-3">
                   <button
                     onClick={() => toggleReplies(comment.id)}
-                    className="flex items-center gap-1 text-xs text-primary hover:underline"
+                    className="flex items-center gap-1 text-xs text-primary hover:underline min-h-[28px]"
                   >
                     {expandedReplies.has(comment.id) ? (
                       <ChevronUp className="h-3.5 w-3.5" />
@@ -517,14 +518,14 @@ export function CommentSection({ threadId, initialPosts, totalCount }: CommentSe
                   </button>
 
                   {expandedReplies.has(comment.id) && (
-                    <div className="mt-3 space-y-4 ml-2 border-l-2 border-muted pl-3">
+                    <div className="mt-3 space-y-3 md:space-y-4 ml-2 border-l-2 border-muted pl-3">
                       {comment.replies.map((reply) => (
                         <div key={reply.id} className="flex gap-2">
                           <Link
                             href={`/user/${reply.author.id}`}
                             className="shrink-0"
                           >
-                            <Avatar className="h-7 w-7">
+                            <Avatar className="h-6 w-6 md:h-7 md:w-7">
                               <AvatarImage
                                 src={reply.author.avatar}
                                 alt={reply.author.username}
@@ -535,7 +536,7 @@ export function CommentSection({ threadId, initialPosts, totalCount }: CommentSe
                             </Avatar>
                           </Link>
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2 flex-wrap">
                               <Link
                                 href={`/user/${reply.author.id}`}
                                 className="text-xs font-medium hover:text-primary"
@@ -564,14 +565,14 @@ export function CommentSection({ threadId, initialPosts, totalCount }: CommentSe
                             </div>
                             <div className="mt-1 flex items-center gap-3 text-muted-foreground">
                               <button
-                                className="flex items-center gap-1 text-[11px] transition-colors hover:text-primary"
+                                className="flex items-center gap-1 text-[11px] transition-colors hover:text-primary min-h-[28px]"
                                 onClick={() => handleLike(reply.id)}
                               >
                                 <ThumbsUp className="h-3 w-3" />
                                 {reply.likes > 0 && <span>{reply.likes}</span>}
                               </button>
                               <button
-                                className="flex items-center gap-1 text-[11px] transition-colors hover:text-primary"
+                                className="flex items-center gap-1 text-[11px] transition-colors hover:text-primary min-h-[28px]"
                                 onClick={() =>
                                   handleReply(
                                     comment.id,
@@ -642,11 +643,12 @@ export function CommentSection({ threadId, initialPosts, totalCount }: CommentSe
       </div>
 
       {hasNextPage && (
-        <div className="mt-6 text-center">
+        <div className="mt-4 md:mt-6 text-center">
           <Button
             variant="outline"
             onClick={() => fetchNextPage()}
             disabled={isFetchingNextPage}
+            className="min-h-[40px]"
           >
             {isFetchingNextPage ? (
               <>

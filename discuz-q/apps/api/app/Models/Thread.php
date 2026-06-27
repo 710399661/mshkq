@@ -32,6 +32,8 @@ class Thread extends Model
         'is_sticky',
         'is_essence',
         'is_locked',
+        'is_paid',
+        'free_words',
         'last_posted_at',
         'deleted_user_id',
     ];
@@ -52,6 +54,8 @@ class Thread extends Model
         'is_sticky' => 'boolean',
         'is_essence' => 'boolean',
         'is_locked' => 'boolean',
+        'is_paid' => 'boolean',
+        'free_words' => 'integer',
         'last_posted_at' => 'datetime',
         'deleted_user_id' => 'integer',
         'deleted_at' => 'datetime',
@@ -95,5 +99,10 @@ class Thread extends Model
     public function collects(): HasMany
     {
         return $this->hasMany(ThreadCollect::class);
+    }
+
+    public function purchases(): HasMany
+    {
+        return $this->hasMany(ThreadPurchase::class);
     }
 }

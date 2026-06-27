@@ -286,7 +286,7 @@ export function SearchPageClient() {
         </div>
       ) : (
         <Tabs value={activeTab} onValueChange={handleTabChange}>
-          <TabsList className="mb-6 w-full justify-start bg-transparent p-0 border-b">
+          <TabsList className="mb-4 md:mb-6 w-full justify-start bg-transparent p-0 border-b overflow-x-auto flex-nowrap">
             <TabsTrigger value="all" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none">
               <Search className="mr-1.5 h-4 w-4" />
               全部

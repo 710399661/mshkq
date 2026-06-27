@@ -184,3 +184,93 @@ export interface Notification {
   read_at: string | null;
   created_at: string;
 }
+
+export interface Wallet {
+  id: number;
+  user_id: number;
+  balance: string | number;
+  frozen_balance: string | number;
+  total_income: string | number;
+  total_expense: string | number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface WalletLog {
+  id: number;
+  user_id: number;
+  type: 'income' | 'expense' | 'freeze' | 'unfreeze';
+  amount: string | number;
+  balance_after: string | number;
+  description: string;
+  related_type: string | null;
+  related_id: number | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ThreadPurchase {
+  id: number;
+  user_id: number;
+  thread_id: number;
+  price: string | number;
+  paid_at: string | null;
+  created_at: string;
+  updated_at: string;
+  user?: User;
+  thread?: Thread;
+}
+
+export interface Conversation {
+  id: number;
+  type: 'direct' | 'group';
+  last_message_id: number | null;
+  last_message_at: string | null;
+  created_at: string;
+  updated_at: string;
+  members?: ConversationMember[];
+  lastMessage?: Message;
+}
+
+export interface ConversationMember {
+  id: number;
+  conversation_id: number;
+  user_id: number;
+  is_muted: boolean;
+  is_pinned: boolean;
+  last_read_at: string | null;
+  joined_at: string | null;
+  created_at: string;
+  updated_at: string;
+  user?: User;
+}
+
+export interface Message {
+  id: number;
+  conversation_id: number;
+  user_id: number | null;
+  type: 'text' | 'image' | 'system';
+  content: string;
+  is_read: boolean;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+  user?: User;
+}
+
+export interface RechargeParams {
+  amount: number;
+}
+
+export interface WithdrawParams {
+  amount: number;
+}
+
+export interface CreateConversationParams {
+  user_id: number;
+}
+
+export interface SendMessageParams {
+  content: string;
+  type?: 'text' | 'image' | 'system';
+}

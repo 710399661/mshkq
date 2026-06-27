@@ -128,4 +128,62 @@ class ThreadController extends Controller
         $message = $result['collected'] ? '收藏成功' : '取消收藏成功';
         return $this->success($result, $message);
     }
+
+    public function purchase(int $id, Request $request)
+    {
+        $thread = $this->threadService->getThreadById($id);
+
+        if (!$thread) {
+            return $this->notFound('帖子不存在');
+        }
+
+        try {
+            $purchase = $this->threadService->purchaseThread($id, $request->user()->id);
+            return $this->success($purchase, '购买成功');
+        } catch (\RuntimeException $e) {
+            return $this->error($e->getMessage());
+        }
+    }
+
+    public function purchases(int $id, Request $request)
+    {
+        $thread = $this->threadService->getThreadById($id);
+
+        if (!$thread) {
+            return $this->notFound('帖子不存在');
+        }
+
+        if ($thread->user_id !== $request->user()->id) {
+            return $this->forbidden('只有楼主可以查看购买列表');
+        }
+
+        $perPage = $request->input('per_page', 20);
+        $purchases = $this->threadService->getThreadPurchases($id, $perPage);
+
+        return $this->success([
+            'data' => $purchases->items(),
+            'meta' => [
+                'current_page' => $purchases->currentPage(),
+                'per_page' => $purchases->perPage(),
+                'total' => $purchases->total(),
+                'last_page' => $purchases->lastPage(),
+            ],
+        ]);
+    }
+
+    public function purchased(Request $request)
+    {
+        $perPage = $request->input('per_page', 20);
+        $purchased = $this->threadService->getPurchasedThreads($request->user()->id, $perPage);
+
+        return $this->success([
+            'data' => $purchased->items(),
+            'meta' => [
+                'current_page' => $purchased->currentPage(),
+                'per_page' => $purchased->perPage(),
+                'total' => $purchased->total(),
+                'last_page' => $purchased->lastPage(),
+            ],
+        ]);
+    }
 }

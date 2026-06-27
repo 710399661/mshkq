@@ -15,10 +15,10 @@ class UpdateThreadRequest extends FormRequest
     {
         return [
             'category_id' => 'sometimes|integer|exists:categories,id',
-            'title' => 'sometimes|string|max:255',
-            'content' => 'sometimes|string',
+            'title' => 'sometimes|string|min:5|max:255',
+            'content' => 'sometimes|string|min:5|max:50000',
             'type' => 'nullable|integer',
-            'tags' => 'nullable|array',
+            'tags' => 'nullable|array|max:10',
             'tags.*' => 'integer|exists:tags,id',
         ];
     }

@@ -5,6 +5,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@discuzq/ui/avatar';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@discuzq/ui/tabs';
 import { PostCard } from '@discuzq/ui/post-card';
 import { Badge } from '@discuzq/ui/badge';
+import { RichText } from '@discuzq/ui/rich-text';
 import { buildUserMetadata } from '@discuzq/seo/metadata';
 import { formatSmartDate } from '@discuzq/utils/date';
 import { formatCompactNumber } from '@discuzq/utils/format';
@@ -85,17 +86,17 @@ export default async function UserPage({ params }: UserPageProps) {
   const isAdmin = user.status === 1;
 
   return (
-    <div className="space-y-6">
-      <div className="rounded-lg border bg-card p-6">
-        <div className="flex flex-col gap-6 md:flex-row md:items-start">
-          <Avatar className="h-24 w-24 border-2 border-primary/20">
+    <div className="space-y-4 md:space-y-6">
+      <div className="rounded-lg border bg-card p-4 md:p-6">
+        <div className="flex flex-col gap-4 md:gap-6 md:flex-row md:items-start">
+          <Avatar className="h-16 w-16 md:h-24 md:w-24 border-2 border-primary/20">
             <AvatarImage src={user.avatar} alt={user.username} />
-            <AvatarFallback className="text-2xl">{user.username[0]}</AvatarFallback>
+            <AvatarFallback className="text-lg md:text-2xl">{user.username[0]}</AvatarFallback>
           </Avatar>
 
-          <div className="flex-1">
-            <div className="flex flex-wrap items-center gap-3">
-              <h1 className="text-2xl font-bold">{user.username}</h1>
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-wrap items-center gap-2 md:gap-3">
+              <h1 className="text-xl md:text-2xl font-bold">{user.username}</h1>
               {isAdmin && (
                 <Badge variant="default" className="bg-primary/10 text-primary hover:bg-primary/20">
                   <Shield className="mr-1 h-3 w-3" />
@@ -110,34 +111,34 @@ export default async function UserPage({ params }: UserPageProps) {
               </p>
             )}
 
-            <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+            <div className="mt-3 flex flex-wrap items-center gap-3 md:gap-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-1">
                 <Calendar className="h-4 w-4" />
                 加入于 {formatSmartDate(user.created_at)}
               </span>
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-6">
+            <div className="mt-4 flex flex-wrap gap-4 md:gap-6">
               <div className="text-center">
-                <div className="text-xl font-semibold text-foreground">
+                <div className="text-lg md:text-xl font-semibold text-foreground">
                   {formatCompactNumber(user.thread_count)}
                 </div>
                 <div className="text-xs text-muted-foreground">帖子</div>
               </div>
               <div className="text-center">
-                <div className="text-xl font-semibold text-foreground">
+                <div className="text-lg md:text-xl font-semibold text-foreground">
                   {formatCompactNumber(user.fans_count)}
                 </div>
                 <div className="text-xs text-muted-foreground">粉丝</div>
               </div>
               <div className="text-center">
-                <div className="text-xl font-semibold text-foreground">
+                <div className="text-lg md:text-xl font-semibold text-foreground">
                   {formatCompactNumber(user.follow_count)}
                 </div>
                 <div className="text-xs text-muted-foreground">关注</div>
               </div>
               <div className="text-center">
-                <div className="text-xl font-semibold text-foreground">
+                <div className="text-lg md:text-xl font-semibold text-foreground">
                   {formatCompactNumber(user.like_count)}
                 </div>
                 <div className="text-xs text-muted-foreground">获赞</div>
@@ -145,40 +146,40 @@ export default async function UserPage({ params }: UserPageProps) {
             </div>
           </div>
 
-          <div className="shrink-0">
+          <div className="shrink-0 w-full md:w-auto">
             <UserProfileActions userId={String(user.id)} isOwnProfile={false} />
           </div>
         </div>
       </div>
 
       <Tabs defaultValue="threads">
-        <TabsList className="w-full justify-start bg-transparent p-0">
-          <TabsTrigger value="threads" className="data-[state=active]:bg-card">
+        <TabsList className="w-full justify-start bg-transparent p-0 overflow-x-auto flex-nowrap">
+          <TabsTrigger value="threads" className="data-[state=active]:bg-card shrink-0">
             <FileText className="mr-1.5 h-4 w-4" />
             帖子
           </TabsTrigger>
-          <TabsTrigger value="replies" className="data-[state=active]:bg-card">
+          <TabsTrigger value="replies" className="data-[state=active]:bg-card shrink-0">
             <MessageSquare className="mr-1.5 h-4 w-4" />
             回复
           </TabsTrigger>
-          <TabsTrigger value="collections" className="data-[state=active]:bg-card">
+          <TabsTrigger value="collections" className="data-[state=active]:bg-card shrink-0">
             <Bookmark className="mr-1.5 h-4 w-4" />
             收藏
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="threads" className="mt-4 space-y-4">
+        <TabsContent value="threads" className="mt-4 space-y-3 md:space-y-4">
           {threads.map((thread: Thread) => (
             <PostCard key={thread.id} {...mapThreadToCard(thread)} />
           ))}
           {threads.length === 0 && (
-            <div className="rounded-lg border bg-card p-8 text-center text-muted-foreground">
+            <div className="rounded-lg border bg-card p-6 md:p-8 text-center text-muted-foreground">
               暂无帖子
             </div>
           )}
         </TabsContent>
 
-        <TabsContent value="replies" className="mt-4 space-y-4">
+        <TabsContent value="replies" className="mt-4 space-y-3 md:space-y-4">
           {posts.map((post: Post) => (
             <div key={post.id} className="rounded-lg border bg-card p-4">
               <div className="flex items-center justify-between">
@@ -186,18 +187,14 @@ export default async function UserPage({ params }: UserPageProps) {
                   回复于 {formatSmartDate(post.created_at)}
                 </div>
               </div>
-              <p className="mt-2 line-clamp-3 text-sm">
-                {post.content_html ? (
-                  <span dangerouslySetInnerHTML={{ __html: post.content_html }} />
-                ) : (
-                  post.content
-                )}
-              </p>
+              <div className="mt-2 line-clamp-3 text-sm">
+                <RichText content={post.content_html || post.content} />
+              </div>
               {post.thread_id && (
                 <div className="mt-3">
                   <Link
                     href={`/thread/${post.thread_id}`}
-                    className="text-sm text-primary hover:underline"
+                    className="text-sm text-primary hover:underline min-h-[32px] inline-flex items-center"
                   >
                     查看原帖 →
                   </Link>
@@ -206,18 +203,18 @@ export default async function UserPage({ params }: UserPageProps) {
             </div>
           ))}
           {posts.length === 0 && (
-            <div className="rounded-lg border bg-card p-8 text-center text-muted-foreground">
+            <div className="rounded-lg border bg-card p-6 md:p-8 text-center text-muted-foreground">
               暂无回复
             </div>
           )}
         </TabsContent>
 
-        <TabsContent value="collections" className="mt-4 space-y-4">
+        <TabsContent value="collections" className="mt-4 space-y-3 md:space-y-4">
           {collections.map((thread: Thread) => (
             <PostCard key={thread.id} {...mapThreadToCard(thread)} />
           ))}
           {collections.length === 0 && (
-            <div className="rounded-lg border bg-card p-8 text-center text-muted-foreground">
+            <div className="rounded-lg border bg-card p-6 md:p-8 text-center text-muted-foreground">
               暂无收藏
             </div>
           )}

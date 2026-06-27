@@ -8,6 +8,8 @@ import { buildMetadata } from '@discuzq/seo/metadata';
 import { createServerApi } from '@/lib/api';
 import type { Thread, Tag as TagType, User, Category } from '@discuzq/sdk/server';
 
+export const revalidate = 60;
+
 export const metadata = buildMetadata({
   title: '首页',
   description: 'Discuz! Q 新一代社区系统首页，发现优质内容，交流思想',
@@ -102,67 +104,67 @@ export default async function HomePage() {
   const trendingThreads = [...latestThreads].sort((a, b) => b.view_count - a.view_count);
 
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 lg:gap-6 lg:grid-cols-4">
       <div className="lg:col-span-3">
         <Tabs defaultValue="latest">
-          <TabsList className="mb-4 w-full justify-start bg-transparent p-0">
-            <TabsTrigger value="latest" className="data-[state=active]:bg-card">
+          <TabsList className="mb-3 md:mb-4 w-full justify-start bg-transparent p-0 overflow-x-auto flex-nowrap">
+            <TabsTrigger value="latest" className="data-[state=active]:bg-card shrink-0">
               <Clock className="mr-1.5 h-4 w-4" />
               最新
             </TabsTrigger>
-            <TabsTrigger value="hot" className="data-[state=active]:bg-card">
+            <TabsTrigger value="hot" className="data-[state=active]:bg-card shrink-0">
               <Flame className="mr-1.5 h-4 w-4" />
               热门
             </TabsTrigger>
-            <TabsTrigger value="essence" className="data-[state=active]:bg-card">
+            <TabsTrigger value="essence" className="data-[state=active]:bg-card shrink-0">
               <Award className="mr-1.5 h-4 w-4" />
               精华
             </TabsTrigger>
-            <TabsTrigger value="trending" className="data-[state=active]:bg-card">
+            <TabsTrigger value="trending" className="data-[state=active]:bg-card shrink-0">
               <TrendingUp className="mr-1.5 h-4 w-4" />
               飙升
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="latest" className="mt-0 space-y-4">
+          <TabsContent value="latest" className="mt-0 space-y-3 md:space-y-4">
             {latestThreads.map((thread) => (
               <PostCard key={thread.id} {...mapThreadToCard(thread)} />
             ))}
             {latestThreads.length === 0 && (
-              <div className="rounded-lg border bg-card p-8 text-center text-muted-foreground">
+              <div className="rounded-lg border bg-card p-6 md:p-8 text-center text-muted-foreground">
                 暂无帖子
               </div>
             )}
           </TabsContent>
 
-          <TabsContent value="hot" className="mt-0 space-y-4">
+          <TabsContent value="hot" className="mt-0 space-y-3 md:space-y-4">
             {hotThreads.map((thread) => (
               <PostCard key={thread.id} {...mapThreadToCard(thread)} />
             ))}
             {hotThreads.length === 0 && (
-              <div className="rounded-lg border bg-card p-8 text-center text-muted-foreground">
+              <div className="rounded-lg border bg-card p-6 md:p-8 text-center text-muted-foreground">
                 暂无热门帖子
               </div>
             )}
           </TabsContent>
 
-          <TabsContent value="essence" className="mt-0 space-y-4">
+          <TabsContent value="essence" className="mt-0 space-y-3 md:space-y-4">
             {essenceThreads.map((thread) => (
               <PostCard key={thread.id} {...mapThreadToCard(thread)} />
             ))}
             {essenceThreads.length === 0 && (
-              <div className="rounded-lg border bg-card p-8 text-center text-muted-foreground">
+              <div className="rounded-lg border bg-card p-6 md:p-8 text-center text-muted-foreground">
                 暂无精华帖子
               </div>
             )}
           </TabsContent>
 
-          <TabsContent value="trending" className="mt-0 space-y-4">
+          <TabsContent value="trending" className="mt-0 space-y-3 md:space-y-4">
             {trendingThreads.map((thread) => (
               <PostCard key={thread.id} {...mapThreadToCard(thread)} />
             ))}
             {trendingThreads.length === 0 && (
-              <div className="rounded-lg border bg-card p-8 text-center text-muted-foreground">
+              <div className="rounded-lg border bg-card p-6 md:p-8 text-center text-muted-foreground">
                 暂无数据
               </div>
             )}
@@ -170,7 +172,7 @@ export default async function HomePage() {
         </Tabs>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4 lg:space-y-6">
         <div className="rounded-lg border bg-card p-4">
           <h3 className="mb-3 text-sm font-semibold">热门话题</h3>
           <div className="flex flex-wrap gap-2">
@@ -184,12 +186,12 @@ export default async function HomePage() {
 
         <div className="rounded-lg border bg-card p-4">
           <h3 className="mb-3 text-sm font-semibold">板块分类</h3>
-          <div className="space-y-2">
+          <div className="space-y-1 md:space-y-2">
             {categories.map((cat: Category) => (
               <Link
                 key={cat.id}
                 href={`/category/${cat.id}`}
-                className="flex items-center justify-between rounded-md px-2 py-1.5 text-sm hover:bg-accent"
+                className="flex items-center justify-between rounded-md px-2 py-1.5 text-sm hover:bg-accent min-h-[40px]"
               >
                 <span>{cat.name}</span>
                 <span className="text-xs text-muted-foreground">{cat.thread_count}</span>
@@ -205,12 +207,12 @@ export default async function HomePage() {
           </p>
           <div className="mt-3 flex gap-2">
             <Link href="/register" className="flex-1">
-              <button className="w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+              <button className="w-full min-h-[40px] rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
                 立即注册
               </button>
             </Link>
             <Link href="/login" className="flex-1">
-              <button className="w-full rounded-md border border-input bg-background px-4 py-2 text-sm font-medium hover:bg-accent">
+              <button className="w-full min-h-[40px] rounded-md border border-input bg-background px-4 py-2 text-sm font-medium hover:bg-accent">
                 登录
               </button>
             </Link>

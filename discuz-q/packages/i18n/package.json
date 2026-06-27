@@ -1,0 +1,30 @@
+{
+  "name": "@discuzq/i18n",
+  "version": "0.1.0",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": ["src/*"]
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "clean": "rm -rf dist .turbo node_modules"
+  },
+  "dependencies": {
+    "react": "^18.3.0",
+    "zustand": "^4.5.4"
+  },
+  "devDependencies": {
+    "@discuzq/eslint-config": "workspace:*",
+    "@discuzq/tsconfig": "workspace:*",
+    "@types/react": "^18.3.3",
+    "typescript": "^5.5.0"
+  }
+}

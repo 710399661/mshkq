@@ -150,21 +150,21 @@ export default function NewPostPage() {
     <div className="mx-auto max-w-3xl">
       <Link
         href="/"
-        className="mb-4 inline-flex items-center text-sm text-muted-foreground hover:text-primary"
+        className="mb-3 md:mb-4 inline-flex items-center text-sm text-muted-foreground hover:text-primary min-h-[32px]"
       >
         <ChevronLeft className="mr-1 h-4 w-4" />
         返回首页
       </Link>
 
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold">发布帖子</h1>
+      <div className="mb-4 md:mb-6">
+        <h1 className="text-xl md:text-2xl font-bold">发布帖子</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           分享你的想法和见解
         </p>
       </div>
 
       <Card>
-        <CardContent className="space-y-6 p-6">
+        <CardContent className="space-y-4 md:space-y-6 p-4 md:p-6">
           <div className="space-y-2">
             <label className="text-sm font-medium">
               分类 <span className="text-destructive">*</span>
@@ -177,7 +177,7 @@ export default function NewPostPage() {
                   setErrors((prev) => ({ ...prev, category: undefined }));
                 }
               }}
-              className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="h-10 min-h-[40px] w-full rounded-md border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               <option value="">请选择分类</option>
               {categories.map((cat) => (
@@ -210,6 +210,7 @@ export default function NewPostPage() {
                 }
               }}
               maxLength={100}
+              className="min-h-[40px]"
             />
             {errors.title && (
               <p className="text-xs text-destructive">{errors.title}</p>
@@ -217,7 +218,7 @@ export default function NewPostPage() {
           </div>
 
           <div className="space-y-2">
-            <label className="flex items-center gap-1 text-sm font-medium">
+            <label className="flex items-center gap-1 text-sm font-medium min-h-[24px]">
               <TagIcon className="h-4 w-4" />
               标签
             </label>
@@ -226,7 +227,7 @@ export default function NewPostPage() {
                 <button
                   key={tag.id}
                   onClick={() => toggleTag(tag.id)}
-                  className="cursor-pointer"
+                  className="cursor-pointer min-h-[32px]"
                   type="button"
                 >
                   <Tag
@@ -261,7 +262,7 @@ export default function NewPostPage() {
                   setErrors((prev) => ({ ...prev, content: undefined }));
                 }
               }}
-              className="min-h-[300px] resize-y"
+              className="min-h-[200px] md:min-h-[300px] resize-y"
             />
             {errors.content && (
               <p className="text-xs text-destructive">{errors.content}</p>
@@ -272,7 +273,7 @@ export default function NewPostPage() {
             <div className="space-y-2">
               <label className="text-sm font-medium">预览</label>
               <div className="rounded-md border bg-muted/30 p-4">
-                <h3 className="text-lg font-semibold">{title || '标题预览'}</h3>
+                <h3 className="text-base md:text-lg font-semibold">{title || '标题预览'}</h3>
                 <div className="mt-2 whitespace-pre-wrap text-sm">
                   {content || '内容预览...'}
                 </div>
@@ -281,21 +282,23 @@ export default function NewPostPage() {
           )}
         </CardContent>
 
-        <CardFooter className="flex items-center justify-between border-t p-4">
+        <CardFooter className="flex flex-col md:flex-row items-stretch md:items-center gap-3 md:justify-between border-t p-4">
           <Button
             variant="outline"
             onClick={() => setShowPreview(!showPreview)}
             type="button"
+            className="min-h-[40px] md:w-auto w-full"
           >
             <Eye className="mr-2 h-4 w-4" />
             {showPreview ? '隐藏预览' : '预览'}
           </Button>
-          <div className="flex gap-3">
+          <div className="flex gap-3 w-full md:w-auto">
             <Button
               variant="outline"
               onClick={() => router.back()}
               type="button"
               disabled={createThreadMutation.isPending}
+              className="flex-1 md:flex-none min-h-[40px]"
             >
               取消
             </Button>
@@ -303,6 +306,7 @@ export default function NewPostPage() {
               onClick={handleSubmit}
               disabled={createThreadMutation.isPending}
               type="button"
+              className="flex-1 md:flex-none min-h-[44px]"
             >
               {createThreadMutation.isPending ? (
                 <>

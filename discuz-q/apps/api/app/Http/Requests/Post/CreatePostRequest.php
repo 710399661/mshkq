@@ -15,7 +15,7 @@ class CreatePostRequest extends FormRequest
     {
         return [
             'thread_id' => 'required|integer|exists:threads,id',
-            'content' => 'required|string',
+            'content' => 'required|string|min:1|max:20000',
             'reply_post_id' => 'nullable|integer|exists:posts,id',
             'reply_user_id' => 'nullable|integer|exists:users,id',
             'parent_id' => 'nullable|integer|exists:posts,id',

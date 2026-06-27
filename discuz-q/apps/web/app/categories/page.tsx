@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Folder, FileText } from 'lucide-react';
 import { Card, CardHeader, CardContent } from '@discuzq/ui/card';
 import { Badge } from '@discuzq/ui/badge';
@@ -6,6 +7,8 @@ import { buildMetadata } from '@discuzq/seo/metadata';
 import { formatCompactNumber } from '@discuzq/utils/format';
 import { createServerApi } from '@/lib/api';
 import type { Category } from '@discuzq/sdk/server';
+
+export const revalidate = 3600;
 
 export const metadata = buildMetadata({
   title: '所有分类',
@@ -45,17 +48,19 @@ export default async function CategoriesPage() {
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                      {category.icon ? (
-                        <img
-                          src={category.icon}
-                          alt={category.name}
-                          className="h-6 w-6"
-                        />
-                      ) : (
-                        <Folder className="h-5 w-5" />
-                      )}
-                    </div>
+                    <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    {category.icon ? (
+                      <Image
+                        src={category.icon}
+                        alt={category.name}
+                        fill
+                        sizes="40px"
+                        className="object-contain p-1"
+                      />
+                    ) : (
+                      <Folder className="h-5 w-5" />
+                    )}
+                  </div>
                     <div>
                       <h3 className="font-semibold group-hover:text-primary transition-colors">
                         {category.name}

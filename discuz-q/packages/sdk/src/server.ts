@@ -17,6 +17,16 @@ import type {
   ApiResponse,
   ApiError,
   PaginatedData,
+  Wallet,
+  WalletLog,
+  ThreadPurchase,
+  Conversation,
+  ConversationMember,
+  Message,
+  RechargeParams,
+  WithdrawParams,
+  CreateConversationParams,
+  SendMessageParams,
 } from './types';
 
 export type {
@@ -37,6 +47,16 @@ export type {
   ApiResponse,
   ApiError,
   PaginatedData,
+  Wallet,
+  WalletLog,
+  ThreadPurchase,
+  Conversation,
+  ConversationMember,
+  Message,
+  RechargeParams,
+  WithdrawParams,
+  CreateConversationParams,
+  SendMessageParams,
 };
 
 export class DiscuzApi {
@@ -130,6 +150,12 @@ export class DiscuzApi {
 
     collect: (id: number | string): Promise<{ collected: boolean }> =>
       this.client.post(`/threads/${id}/collect`),
+
+    purchase: (id: number | string): Promise<ThreadPurchase> =>
+      this.client.post<ThreadPurchase>(`/threads/${id}/purchase`),
+
+    purchases: (id: number | string, params?: PaginationParams): Promise<PaginatedResponse<ThreadPurchase>> =>
+      this.client.get<PaginatedResponse<ThreadPurchase>>(`/threads/${id}/purchases`, params),
   };
 
   posts = {
@@ -222,6 +248,45 @@ export class DiscuzApi {
 
     read: (id: string): Promise<void> =>
       this.client.post(`/notifications/${id}/read`),
+  };
+
+  wallet = {
+    get: (): Promise<Wallet> =>
+      this.client.get<Wallet>('/wallet'),
+
+    logs: (params?: PaginationParams): Promise<PaginatedResponse<WalletLog>> =>
+      this.client.get<PaginatedResponse<WalletLog>>('/wallet/logs', params),
+
+    recharge: (params: RechargeParams): Promise<Wallet> =>
+      this.client.post<Wallet>('/wallet/recharge', params),
+
+    withdraw: (params: WithdrawParams): Promise<Wallet> =>
+      this.client.post<Wallet>('/wallet/withdraw', params),
+  };
+
+  user = {
+    purchased: (params?: PaginationParams): Promise<PaginatedResponse<ThreadPurchase>> =>
+      this.client.get<PaginatedResponse<ThreadPurchase>>('/user/purchased', params),
+  };
+
+  conversations = {
+    list: (params?: PaginationParams): Promise<PaginatedResponse<Conversation>> =>
+      this.client.get<PaginatedResponse<Conversation>>('/conversations', params),
+
+    create: (params: CreateConversationParams): Promise<Conversation> =>
+      this.client.post<Conversation>('/conversations', params),
+
+    unreadCount: (): Promise<{ count: number }> =>
+      this.client.get('/conversations/unread-count'),
+
+    messages: (id: number | string, params?: PaginationParams): Promise<PaginatedResponse<Message>> =>
+      this.client.get<PaginatedResponse<Message>>(`/conversations/${id}/messages`, params),
+
+    sendMessage: (id: number | string, params: SendMessageParams): Promise<Message> =>
+      this.client.post<Message>(`/conversations/${id}/messages`, params),
+
+    read: (id: number | string): Promise<{ count: number }> =>
+      this.client.post(`/conversations/${id}/read`),
   };
 }
 

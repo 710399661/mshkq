@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { AdminLayout } from '@/components/admin-layout';
+import { I18nProvider } from '@discuzq/i18n';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
@@ -19,9 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh-CN" className={inter.className}>
+    <html lang="zh-CN" className={inter.className} suppressHydrationWarning>
       <body className="min-h-screen bg-background">
-        <AdminLayout>{children}</AdminLayout>
+        <I18nProvider>
+          <AdminLayout>{children}</AdminLayout>
+        </I18nProvider>
       </body>
     </html>
   );

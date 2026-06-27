@@ -96,4 +96,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(PostLike::class);
     }
+
+    public function wallet()
+    {
+        return $this->hasOne(\App\Models\Wallet::class);
+    }
+
+    public function threadPurchases(): HasMany
+    {
+        return $this->hasMany(\App\Models\ThreadPurchase::class);
+    }
 }

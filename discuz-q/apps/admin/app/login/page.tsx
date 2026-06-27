@@ -1,24 +1,66 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Lock, User } from 'lucide-react';
 import { Button, Input, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@discuzq/ui';
+import { useAdminAuthStore } from '@/store/auth';
+import { getAdminApi, setAdminToken, resetAdminApi } from '@/lib/api';
+import { toast } from '@discuzq/ui/toast';
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get('redirect') || '/';
+  const { login } = useAdminAuthStore();
+
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    if (!username.trim() || !password.trim()) return;
 
-    setTimeout(() => {
+    setLoading(true);
+    try {
+      const api = getAdminApi();
+      const result: any = await api.auth.login(username.trim(), password.trim());
+
+      if (result?.user && result?.token) {
+        const roles = result.user.roles || [];
+        const isAdmin = roles.some((r: any) => r.name === 'super_admin' || r.name === 'admin') 
+          || result.user.status === 1;
+
+        if (!isAdmin) {
+          toast({
+            title: '登录失败',
+            description: '您没有管理员权限',
+            variant: 'destructive',
+          });
+          resetAdminApi();
+          return;
+        }
+
+        login(result.token, result.user);
+        setAdminToken(result.token);
+
+        toast({
+          title: '登录成功',
+          description: '欢迎回来，管理员',
+        });
+
+        router.push(redirect);
+      }
+    } catch (error: any) {
+      toast({
+        title: '登录失败',
+        description: error?.message || '用户名或密码错误',
+        variant: 'destructive',
+      });
+    } finally {
       setLoading(false);
-      router.push('/');
-    }, 1000);
+    }
   };
 
   return (

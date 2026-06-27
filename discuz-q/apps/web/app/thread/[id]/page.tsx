@@ -18,6 +18,8 @@ import { ThreadDetailActions } from '@/components/thread-detail-actions';
 import { CommentSection } from '@/components/comment-section';
 import type { Thread, Post, User as UserType, Category } from '@discuzq/sdk/server';
 
+export const revalidate = 30;
+
 interface ThreadPageProps {
   params: Promise<{ id: string }>;
 }
@@ -77,19 +79,19 @@ export default async function ThreadPage({ params }: ThreadPageProps) {
   });
 
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 lg:gap-6 lg:grid-cols-4">
       <div className="lg:col-span-3">
         <Link
           href="/"
-          className="mb-4 inline-flex items-center text-sm text-muted-foreground hover:text-primary"
+          className="mb-3 md:mb-4 inline-flex items-center text-sm text-muted-foreground hover:text-primary min-h-[32px]"
         >
           <ChevronLeft className="mr-1 h-4 w-4" />
           返回列表
         </Link>
 
         <article className="rounded-lg border bg-card">
-          <div className="border-b p-6">
-            <div className="mb-3 flex items-center gap-2 flex-wrap">
+          <div className="border-b p-4 md:p-6">
+            <div className="mb-2 md:mb-3 flex items-center gap-2 flex-wrap">
               {thread.is_sticky && (
                 <Badge variant="warning" className="text-xs">
                   置顶
@@ -110,17 +112,19 @@ export default async function ThreadPage({ params }: ThreadPageProps) {
               )}
             </div>
 
-            <h1 className="text-2xl font-bold">{thread.title}</h1>
+            <h1 className="text-xl md:text-2xl font-bold">{thread.title}</h1>
 
-            <div className="mt-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
+            <div className="mt-3 md:mt-4 flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2 md:gap-3">
                 <Link href={`/user/${author?.id || 0}`}>
-                  <Avatar className="h-10 w-10 border">
+                  <Avatar className="h-8 w-8 md:h-10 md:w-10 border">
                     <AvatarImage src={author?.avatar || ''} alt={author?.username || ''} />
-                    <AvatarFallback>{(author?.username || 'U')[0]}</AvatarFallback>
+                    <AvatarFallback className="text-xs md:text-sm">
+                      {(author?.username || 'U')[0]}
+                    </AvatarFallback>
                   </Avatar>
                 </Link>
-                <div>
+                <div className="min-w-0">
                   <Link
                     href={`/user/${author?.id || 0}`}
                     className="text-sm font-medium hover:text-primary"
@@ -129,19 +133,19 @@ export default async function ThreadPage({ params }: ThreadPageProps) {
                   </Link>
                   <div className="text-xs text-muted-foreground">
                     发布于 {formatSmartDate(thread.created_at)}
-                    <span className="mx-2">·</span>
-                    <Eye className="inline h-3.5 w-3.5" />
-                    {formatCompactNumber(thread.view_count)} 浏览
+                    <span className="mx-1 md:mx-2">·</span>
+                    <Eye className="inline h-3 w-3 md:h-3.5 md:w-3.5" />
+                    {formatCompactNumber(thread.view_count)}
                   </div>
                 </div>
               </div>
 
-              <Button size="sm">关注</Button>
+              <Button size="sm" className="shrink-0">关注</Button>
             </div>
           </div>
 
           {tags.length > 0 && (
-            <div className="border-b px-6 py-3">
+            <div className="border-b px-4 md:px-6 py-2 md:py-3">
               <div className="flex flex-wrap gap-2">
                 {tags.map((tag) => (
                   <Link key={tag.id} href={`/tag/${tag.id}`}>
@@ -152,11 +156,11 @@ export default async function ThreadPage({ params }: ThreadPageProps) {
             </div>
           )}
 
-          <div className="p-6">
+          <div className="p-4 md:p-6">
             <RichText content={content} />
           </div>
 
-          <div className="border-t p-4">
+          <div className="border-t p-3 md:p-4">
             <ThreadDetailActions
               threadId={String(thread.id)}
               likeCount={thread.like_count}
@@ -165,7 +169,7 @@ export default async function ThreadPage({ params }: ThreadPageProps) {
           </div>
         </article>
 
-        <div className="mt-6">
+        <div className="mt-4 md:mt-6">
           <CommentSection
             threadId={String(thread.id)}
             initialPosts={posts}
@@ -174,25 +178,25 @@ export default async function ThreadPage({ params }: ThreadPageProps) {
         </div>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4 lg:space-y-6">
         <div className="rounded-lg border bg-card p-4">
           <h3 className="mb-3 text-sm font-semibold">作者</h3>
           <Link
             href={`/user/${author?.id || 0}`}
             className="flex items-center gap-3"
           >
-            <Avatar className="h-12 w-12 border">
+            <Avatar className="h-10 w-10 md:h-12 md:w-12 border">
               <AvatarImage src={author?.avatar || ''} alt={author?.username || ''} />
               <AvatarFallback>{(author?.username || 'U')[0]}</AvatarFallback>
             </Avatar>
-            <div>
-              <p className="text-sm font-medium">{author?.username || '匿名用户'}</p>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-medium truncate">{author?.username || '匿名用户'}</p>
               <p className="text-xs text-muted-foreground line-clamp-1">
                 {author?.bio || ''}
               </p>
             </div>
           </Link>
-          <Button size="sm" className="mt-3 w-full">
+          <Button size="sm" className="mt-3 w-full min-h-[36px]">
             + 关注
           </Button>
         </div>
@@ -201,7 +205,7 @@ export default async function ThreadPage({ params }: ThreadPageProps) {
           <h3 className="mb-3 text-sm font-semibold">相关推荐</h3>
           <div className="space-y-3">
             {[1, 2, 3].map((i) => (
-              <Link key={i} href={`/thread/${i}`} className="block group">
+              <Link key={i} href={`/thread/${i}`} className="block group min-h-[40px]">
                 <p className="line-clamp-2 text-sm group-hover:text-primary">
                   相关推荐帖子 {i}：更多社区系统架构设计
                 </p>

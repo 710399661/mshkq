@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\TagRepository;
+use Illuminate\Support\Facades\Cache;
 
 class TagService extends BaseService
 {
@@ -20,7 +21,9 @@ class TagService extends BaseService
 
     public function getHotTags(int $limit = 20)
     {
-        return $this->repository->getHotTags($limit);
+        return Cache::remember("tags:hot:{$limit}", 3600, function () use ($limit) {
+            return $this->repository->getHotTags($limit);
+        });
     }
 
     public function searchTags(string $keyword, int $perPage = 20)
@@ -30,11 +33,20 @@ class TagService extends BaseService
 
     public function getTagById(int $id)
     {
-        return $this->repository->findById($id);
+        return Cache::remember("tags:{$id}", 3600, function () use ($id) {
+            return $this->repository->findById($id);
+        });
     }
 
     public function getTagThreads(int $tagId, int $perPage = 20)
     {
         return $this->repository->getTagThreads($tagId, $perPage);
+    }
+
+    public function clearTagCache(): void
+    {
+        Cache::forget('tags:hot:20');
+        Cache::forget('tags:hot:15');
+        Cache::forget('tags:hot:10');
     }
 }

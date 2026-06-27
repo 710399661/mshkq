@@ -33,6 +33,7 @@ class UserService extends BaseService
         }
         return $user->threads()
             ->where('is_approved', true)
+            ->with(['category', 'tags'])
             ->orderBy('created_at', 'desc')
             ->paginate($perPage);
     }
@@ -45,6 +46,7 @@ class UserService extends BaseService
         }
         return $user->posts()
             ->where('is_approved', true)
+            ->with(['thread'])
             ->orderBy('created_at', 'desc')
             ->paginate($perPage);
     }

@@ -13,52 +13,54 @@ import {
   X,
 } from 'lucide-react';
 import { cn } from '@discuzq/ui';
+import { useI18n } from '@discuzq/i18n';
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const menuItems = [
-  {
-    title: '仪表盘',
-    href: '/',
-    icon: LayoutDashboard,
-  },
-  {
-    title: '用户管理',
-    href: '/users',
-    icon: Users,
-  },
-  {
-    title: '帖子管理',
-    href: '/threads',
-    icon: FileText,
-  },
-  {
-    title: '评论管理',
-    href: '/posts',
-    icon: MessageSquare,
-  },
-  {
-    title: '分类管理',
-    href: '/categories',
-    icon: FolderTree,
-  },
-  {
-    title: '标签管理',
-    href: '/tags',
-    icon: Tags,
-  },
-  {
-    title: '系统设置',
-    href: '/settings',
-    icon: Settings,
-  },
-];
-
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
+  const { t } = useI18n();
+
+  const menuItems = [
+    {
+      titleKey: 'admin.dashboard',
+      href: '/' as const,
+      icon: LayoutDashboard,
+    },
+    {
+      titleKey: 'admin.userManagement',
+      href: '/users' as const,
+      icon: Users,
+    },
+    {
+      titleKey: 'admin.threadManagement',
+      href: '/threads' as const,
+      icon: FileText,
+    },
+    {
+      titleKey: 'admin.commentManagement',
+      href: '/posts' as const,
+      icon: MessageSquare,
+    },
+    {
+      titleKey: 'admin.categoryManagement',
+      href: '/categories' as const,
+      icon: FolderTree,
+    },
+    {
+      titleKey: 'admin.tagManagement',
+      href: '/tags' as const,
+      icon: Tags,
+    },
+    {
+      titleKey: 'admin.systemSettings',
+      href: '/settings' as const,
+      icon: Settings,
+    },
+  ];
 
   return (
     <>
@@ -80,7 +82,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
               <span className="text-sm font-bold text-primary-foreground">DQ</span>
             </div>
-            <span className="text-lg font-semibold">Discuz! Q 管理</span>
+            <span className="text-lg font-semibold">Discuz! Q</span>
           </Link>
           <button
             onClick={onClose}
@@ -108,7 +110,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 )}
               >
                 <Icon className="h-5 w-5" />
-                {item.title}
+                {t(item.titleKey)}
               </Link>
             );
           })}
@@ -116,7 +118,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         <div className="border-t border-slate-800 p-4">
           <div className="text-xs text-slate-500">
-            版本 v0.1.0
+            {t('admin.version')} v0.1.0
           </div>
         </div>
       </aside>

@@ -9,6 +9,8 @@ import { formatCompactNumber } from '@discuzq/utils/format';
 import { createServerApi } from '@/lib/api';
 import type { Category, Thread } from '@discuzq/sdk/server';
 
+export const revalidate = 120;
+
 interface CategoryPageProps {
   params: Promise<{ id: string }>;
 }

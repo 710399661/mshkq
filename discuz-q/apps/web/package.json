@@ -10,9 +10,12 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "analyze": "ANALYZE=true next build",
+    "lighthouse": "lhci autorun",
     "clean": "rm -rf .next .turbo node_modules"
   },
   "dependencies": {
+    "@discuzq/i18n": "workspace:*",
     "@discuzq/seo": "workspace:*",
     "@discuzq/sdk": "workspace:*",
     "@discuzq/ui": "workspace:*",
