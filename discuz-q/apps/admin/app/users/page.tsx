@@ -1,3 +1,5 @@
+'use client';
+
 import { Users, Search, Plus } from 'lucide-react';
 import { DataTable, type Column } from '@/components/data-table';
 import { Button, Input, Badge, Avatar, AvatarFallback, Card, CardContent, CardHeader, CardTitle } from '@discuzq/ui';

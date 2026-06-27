@@ -1,3 +1,5 @@
+'use client';
+
 import { Settings, Save } from 'lucide-react';
 import { Button, Input, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@discuzq/ui';
 
@@ -86,19 +88,19 @@ export default function SettingsPage() {
           <CardContent>
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="smtp-host">SMTP 服务器</Label>
+                <label htmlFor="smtp-host" className="text-sm font-medium">SMTP 服务器</label>
                 <Input id="smtp-host" placeholder="smtp.example.com" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="smtp-port">端口</Label>
+                <label htmlFor="smtp-port" className="text-sm font-medium">端口</label>
                 <Input id="smtp-port" type="number" placeholder="587" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="smtp-user">用户名</Label>
+                <label htmlFor="smtp-user" className="text-sm font-medium">用户名</label>
                 <Input id="smtp-user" placeholder="noreply@example.com" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="smtp-pass">密码</Label>
+                <label htmlFor="smtp-pass" className="text-sm font-medium">密码</label>
                 <Input id="smtp-pass" type="password" placeholder="••••••••" />
               </div>
             </div>

@@ -1,3 +1,5 @@
+'use client';
+
 import { FileText, Search, Plus } from 'lucide-react';
 import { DataTable, type Column } from '@/components/data-table';
 import { Button, Input, Badge, Card, CardContent, CardHeader, CardTitle } from '@discuzq/ui';
