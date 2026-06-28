@@ -8,7 +8,7 @@ const infolog = require('../utils/console/infoLog');
 const getCurrPath = require('../utils/getCurrPath');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const k2c = require('koa2-connect');
-const uuid = require('node-uuid');
+const { v4: uuidv4 } = require('uuid');
 const clsLog = require('../utils/cloud/clsLog');
 
 const { MS_SERVER_LISTEN_HASTNAME, MS_SERVER_LISTEN_PORT, MS_SERVER_RUNTIME_ADDRESS, DEFAULT_STATIC_BUILD_NEXT_DIR_NAME_SYMBLIC_LINK, DEFAULT_STATIC_BUILD_NEXT_DIR_NAME_LAST } = require('../constants');
@@ -54,7 +54,7 @@ module.exports = (ssr, hostname, port, config) => {
           global.clsLog = clsLog;
 
           clsLog.init({
-            LOG_TASKID: uuid.v4(),
+            LOG_TASKID: uuidv4(),
             LOG_METHOD: ctx.request.method,
             LOG_HOST: ctx.request.host,
             LOG_URL: ctx.request.url,

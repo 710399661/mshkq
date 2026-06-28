@@ -1,7 +1,6 @@
 
 const path = require( 'path' );
-const OptimizeCssAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' );
-const safePostCssParser = require( 'postcss-safe-parser' );
+const CssMinimizerPlugin = require( 'css-minimizer-webpack-plugin' );
 const createOuputFileName = require( '../createOuputFileName' );
 const StyleLoaders = require( '../rulesLoaders/style.loader' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
@@ -68,12 +67,16 @@ module.exports = ( config ) => {
     // css单独压缩
     if (  config.mode == 'production' ) {
 
-        // 默认使用cssnano https://cssnano.co/guides/optimisations
+        // 使用 css-minimizer-webpack-plugin 压缩 CSS
         config.plugins.push(
-            new OptimizeCssAssetsPlugin( {
-                cssProcessorOptions: {
-                    map: false,
-                    parser: safePostCssParser
+            new CssMinimizerPlugin( {
+                minimizerOptions: {
+                    preset: [
+                        'default',
+                        {
+                            discardComments: { removeAll: true },
+                        }
+                    ],
                 }
             } )
         )

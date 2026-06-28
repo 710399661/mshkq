@@ -27,11 +27,14 @@ module.exports = (fn) => {
     // 配置node_modules范围
     nextConfig = setModules(nextConfig);
 
-    if (nextConfig.mode === 'production') {
-      nextConfig.resolve.alias['mobx'] = path.resolve(cwd, './node_modules/mobx/lib/mobx.umd.min.js');
-      nextConfig.resolve.alias['mobx-react'] = path.resolve(cwd, './node_modules/mobx-react/dist/mobx-react.umd.js');
-      nextConfig.resolve.alias['mobx-react-lite'] = path.resolve(cwd, './node_modules/mobx-react-lite/dist/index.min.js');
-    }
+    // mobx 别名配置 - webpack 5 兼容模式
+    // 如果项目使用 mobx，保留标准 import 方式，由 webpack 5 自动优化
+    // 如需指定 UMD 版本，请确保路径存在，或使用原生 ESM import
+    // if (nextConfig.mode === 'production') {
+    //   nextConfig.resolve.alias['mobx'] = path.resolve(cwd, './node_modules/mobx/lib/mobx.umd.min.js');
+    //   nextConfig.resolve.alias['mobx-react'] = path.resolve(cwd, './node_modules/mobx-react/dist/mobx-react.umd.js');
+    //   nextConfig.resolve.alias['mobx-react-lite'] = path.resolve(cwd, './node_modules/mobx-react-lite/dist/index.min.js');
+    // }
 
     // https://github.com/vercel/next.js/blob/62a4de9f8c23fe753650b78d4bd892d0081bc6b7/packages/next/build/webpack-config.ts
     if (nextConfig.name === 'client' && nextConfig.mode === 'production') {
