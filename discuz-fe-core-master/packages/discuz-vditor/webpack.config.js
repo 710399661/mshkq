@@ -9,7 +9,7 @@ const path = require('path')
 const fs = require('fs')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const WebpackOnBuildPlugin = require('on-build-webpack')
 const CopyPlugin = require('copy-webpack-plugin')
 const BundleAnalyzerPlugin = require(
@@ -17,7 +17,7 @@ const BundleAnalyzerPlugin = require(
 const pkg = require('./package.json')
 const banner = new webpack.BannerPlugin({
   banner: `Vditor v${pkg.version} - A markdown editor written in TypeScript.
-  
+
 MIT License
 
 Copyright (c) 2018-present B3log 开源, b3log.org
@@ -89,7 +89,11 @@ module.exports = [
     },
     optimization: {
       minimizer: [
-        new OptimizeCSSAssetsPlugin({}),
+        new CssMinimizerPlugin({
+          minimizerOptions: {
+            preset: ['default', { discardComments: { removeAll: true } }],
+          },
+        }),
       ],
     },
     plugins: [
@@ -119,7 +123,7 @@ module.exports = [
       libraryTarget: 'umd',
       library: 'Vditor',
       libraryExport: 'default',
-	  globalObject: 'this',
+      globalObject: 'this',
     },
     entry: {
       'index.min': './src/index.ts',
@@ -133,9 +137,7 @@ module.exports = [
         {
           test: /\.png$/,
           include: [path.resolve(__dirname, './src/assets/images')],
-          use: [
-            'file-loader',
-          ],
+          type: 'asset/resource',
         },
         {
           test: /\.js$/,

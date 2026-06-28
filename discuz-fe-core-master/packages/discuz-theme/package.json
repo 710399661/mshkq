@@ -1,6 +1,6 @@
 {
   "name": "@discuzq/theme",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "description": "Discuz! Q 公共样式库",
   "main": "dist/index.css",
   "style": "dist/index.css",
@@ -12,10 +12,10 @@
   "license": "MIT",
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
-    "gulp-clean": "^0.4.0",
+    "gulp-autoprefixer": "^9.0.0",
+    "gulp-clean": "^1.0.2",
     "gulp-cssmin": "^0.2.0",
-    "gulp-sass": "^5.0.0",
-    "sass": "^1.37.5"
+    "gulp-sass": "^5.1.0",
+    "sass": "^1.70.0"
   }
 }
