@@ -1,7 +1,7 @@
 const cwd = process.cwd();
 const autoprefixer = require(`${cwd}/node_modules/autoprefixer`);
 const browserslist = require('../browserslist');
-const findUp = require('find-up');
+const { findUpSync } = require('find-up');
 const cssvariables = require(`${cwd}/node_modules/postcss-css-variables`);
 const path = require('path');
 const fs = require('fs');
@@ -20,7 +20,7 @@ if (fs.existsSync(DEFAULT_THEME_PATH)) {
 }
 
 module.exports = (config) => {
-  const postcssConfig = findUp.sync(path.resolve('postcss.config.js'), {
+  const postcssConfig = findUpSync('postcss.config.js', {
     cwd: config.context,
   });
 

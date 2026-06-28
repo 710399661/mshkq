@@ -87,7 +87,7 @@
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.57.0",
-    "eslint-config-tencent": "^2.1.1"
+    "eslint-config-tencent": "^1.1.3"
   },
   "gitHead": "96b795dcf4d14a389db6cf1aab41cbd3e9bbe4ba"
 }
