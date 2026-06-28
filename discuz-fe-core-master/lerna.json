@@ -6,8 +6,12 @@
     "packages/discuz-sdk",
     "packages/discuz-design",
     "packages/discuz-vditor",
-    "packages/discuz-design-babel-plugin",
-    "packages/discuz-plugin-center"
+    "packages/discuz-babel-plugin-import",
+    "packages/discuz-plugin-center",
+    "packages/discuz-plugin",
+    "packages/discuz-doc",
+    "packages/discuz-design-helper",
+    "packages/discuz-theme-snippets"
   ],
   "publishConfig": {
     "access": "public"
