@@ -26,25 +26,31 @@ module.exports = (config, { isServer, dev }, loaders = []) => {
     }));
   }
 
+  // webpack 5 + css-loader 6.x: 不再使用 css-loader/locals，统一使用 css-loader
   const cssLoader = {
-    loader: isServer ? 'css-loader/locals' : 'css-loader', // 必须使用1.0.0版本的css-loader
-    options: Object.assign(
-      {},
-      {
-        modules: true,
-        minimize: !dev,
-        sourceMap: dev,
-        importLoaders: loaders.length + 1,
-      },
-    ),
+    loader: 'css-loader',
+    options: {
+      modules: true,
+      minimize: !dev,
+      sourceMap: dev,
+      importLoaders: loaders.length + 1,
+    },
   };
 
+  if (isServer) {
+    // SSR 环境下使用 css-loader (不提取 CSS)
+    return [
+      cssLoader,
+      postcssLoader(config),
+      ...loaders,
+    ];
+  }
+
   return [
-    !isServer && dev && 'extracted-loader',
-    !isServer && MiniCssExtractPlugin.loader,
+    MiniCssExtractPlugin.loader,
     cssLoader,
     postcssLoader(config),
     ...loaders,
-  ].filter(Boolean);
+  ];
 };
 

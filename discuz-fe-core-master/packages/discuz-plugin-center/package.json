@@ -1,7 +1,7 @@
 {
   "name": "@discuzq/plugin-center",
-  "version": "2.0.15",
-  "description": "> TODO: description",
+  "version": "2.0.16",
+  "description": "Discuz Q Plugin Center - Plugin system for Discuz Q",
   "author": "LLLLLamHo <linhao.4zhong@163com>",
   "homepage": "https://gitee.com/Discuz/discuz-core",
   "license": "MIT",
@@ -24,28 +24,28 @@
     "build": "gulp build"
   },
   "devDependencies": {
-    "@babel/core": "7.12.10",
-    "@babel/plugin-proposal-decorators": "7.12.13",
-    "@babel/plugin-proposal-object-rest-spread": "7.12.13",
-    "@babel/plugin-transform-arrow-functions": "7.12.13",
-    "@babel/plugin-transform-runtime": "7.12.10",
-    "@babel/preset-env": "7.12.11",
-    "@babel/preset-react": "7.12.10",
-    "@babel/preset-typescript": "7.12.7",
-    "@typescript-eslint/eslint-plugin": "2.34.0",
-    "@typescript-eslint/parser": "2.34.0",
-    "babel-plugin-module-resolver": "4.1.0",
-    "babel-preset-env": "1.7.0",
-    "babel-register": "6.26.0",
-    "del": "6.0.0",
-    "gulp": "4.0.2",
-    "gulp-babel": "8.0.0",
-    "gulp-clean-css": "4.3.0",
-    "gulp-postcss": "9.0.0",
-    "gulp-rename": "2.0.0",
-    "gulp-sourcemaps": "3.0.0"
+    "@babel/core": "^7.23.0",
+    "@babel/plugin-proposal-decorators": "^7.23.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@babel/plugin-transform-arrow-functions": "^7.23.0",
+    "@babel/plugin-transform-runtime": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "@babel/preset-react": "^7.23.0",
+    "@babel/preset-typescript": "^7.23.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "babel-register": "^6.26.0",
+    "del": "^6.1.1",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-postcss": "^9.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sourcemaps": "^3.0.0"
   },
   "dependencies": {
-    "@discuzq/sdk": "^1.0.54"
-  }
+    "@discuzq/sdk": "^1.0.55"
+  },
+  "gitHead": "96b795dcf4d14a389db6cf1aab41cbd3e9bbe4ba"
 }
