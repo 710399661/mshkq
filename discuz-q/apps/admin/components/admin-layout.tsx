@@ -8,6 +8,7 @@ import { useAdminAuthStore } from '@/store/auth';
 
 export function AdminLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [hasHydrated, setHasHydrated] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const { token } = useAdminAuthStore();
@@ -15,17 +16,26 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
   const isLoginPage = pathname === '/login';
 
   useEffect(() => {
-    if (!isLoginPage && !token) {
+    setHasHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hasHydrated || isLoginPage) return;
+    if (!token) {
       router.push(`/login?redirect=${encodeURIComponent(pathname)}`);
     }
-  }, [token, isLoginPage, pathname, router]);
+  }, [token, isLoginPage, pathname, router, hasHydrated]);
 
   if (isLoginPage) {
     return <>{children}</>;
   }
 
-  if (!token) {
-    return null;
+  if (!hasHydrated || !token) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-900">
+        <div className="text-white">加载中...</div>
+      </div>
+    );
   }
 
   return (

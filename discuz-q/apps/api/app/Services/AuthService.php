@@ -30,6 +30,7 @@ class AuthService extends BaseService
         }
 
         $token = $user->createToken('auth-token')->plainTextToken;
+        $user->load('roles');
 
         return [
             'user' => $user,
