@@ -83,7 +83,7 @@ export default async function UserPage({ params }: UserPageProps) {
 
   if (!user) notFound();
 
-  const isAdmin = user.status === 1;
+  const isAdmin = user.roles?.some((r: any) => r.name === 'super_admin' || r.name === 'admin') || user.status === 1;
 
   return (
     <div className="space-y-4 md:space-y-6">

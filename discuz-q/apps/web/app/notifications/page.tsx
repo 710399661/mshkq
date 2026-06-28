@@ -12,15 +12,35 @@ import { Card } from '@discuzq/ui/card';
 import { Skeleton } from '@discuzq/ui/skeleton';
 import { Empty } from '@discuzq/ui/empty';
 import { toast } from '@discuzq/ui/toast';
+import { useAuthStore } from '@/store/auth';
+import { getClientApi } from '@/lib/api';
 import { formatSmartDate } from '@discuzq/utils/date';
-import {
-  getNotifications,
-  getUnreadCount,
-  markAsRead,
-  markAllAsRead,
-  getNotificationText,
-  type NotificationWithUser,
-} from '@/lib/mock-notifications';
+
+interface NotificationUser {
+  id: number;
+  username: string;
+  avatar: string;
+}
+
+interface Notification {
+  id: number;
+  type: string;
+  data: Record<string, unknown>;
+  read_at: string | null;
+  created_at: string;
+  user?: NotificationUser;
+  thread?: { id: number; title: string };
+}
+
+interface NotificationResponse {
+  data: Notification[];
+  meta: {
+    current_page: number;
+    per_page: number;
+    total: number;
+    last_page: number;
+  };
+}
 
 const notificationTabs = [
   { value: 'all', label: '全部', icon: Bell },
@@ -33,41 +53,74 @@ const notificationTabs = [
 export default function NotificationsPage() {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { token, userInfo } = useAuthStore();
+  const isAuthenticated = !!token;
   const [activeTab, setActiveTab] = useState('all');
+  const [allNotifications, setAllNotifications] = useState<Notification[]>([]);
   const [page, setPage] = useState(1);
-  const [allNotifications, setAllNotifications] = useState<NotificationWithUser[]>([]);
+  const [hasMore, setHasMore] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['notifications', activeTab],
+  const { data, isLoading } = useQuery<NotificationResponse>({
+    queryKey: ['notifications', activeTab, 1],
     queryFn: async () => {
-      const result = await getNotifications({ page: 1, per_page: 10, type: activeTab });
-      return result;
+      const api = getClientApi();
+      const result = await api.notifications.list({ page: 1, pageSize: 20 });
+      return result as NotificationResponse;
     },
     initialData: {
       data: [],
-      meta: { current_page: 1, per_page: 10, total: 0, last_page: 1 },
+      meta: { current_page: 1, per_page: 20, total: 0, last_page: 1 },
     },
+    enabled: isAuthenticated,
   });
 
-  const { data: unreadData } = useQuery({
+  const { data: unreadData } = useQuery<{ count: number }>({
     queryKey: ['notifications', 'unreadCount'],
-    queryFn: getUnreadCount,
+    queryFn: async () => {
+      const api = getClientApi();
+      const result = await api.notifications.unreadCount();
+      return result as { count: number };
+    },
     initialData: { count: 0 },
+    enabled: isAuthenticated,
   });
 
   const markAsReadMutation = useMutation({
-    mutationFn: (id: string) => markAsRead(id),
-    onSuccess: () => {
+    mutationFn: async (id: string) => {
+      const api = getClientApi();
+      return await api.notifications.read(id);
+    },
+    onMutate: (id) => {
+      setAllNotifications((prev) =>
+        prev.map((n) => (String(n.id) === id ? { ...n, read_at: new Date().toISOString() } : n)),
+      );
+      queryClient.setQueryData<{ count: number }>(['notifications', 'unreadCount'], (old) => ({
+        count: Math.max(0, (old?.count || 0) - 1),
+      }));
+    },
+    onError: () => {
       queryClient.invalidateQueries({ queryKey: ['notifications'] });
     },
   });
 
   const markAllAsReadMutation = useMutation({
-    mutationFn: markAllAsRead,
+    mutationFn: async () => {
+      const api = getClientApi();
+      return await api.notifications.readAll();
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['notifications'] });
+      setAllNotifications((prev) => prev.map((n) => ({ ...n, read_at: new Date().toISOString() })));
+      queryClient.setQueryData<{ count: number }>(['notifications', 'unreadCount'], { count: 0 });
       toast({ title: '已全部标记为已读' });
+    },
+    onError: () => {
+      queryClient.invalidateQueries({ queryKey: ['notifications'] });
+      toast({
+        title: '操作失败',
+        description: '请稍后重试',
+        variant: 'destructive',
+      });
     },
   });
 
@@ -75,27 +128,36 @@ export default function NotificationsPage() {
     if (data?.data) {
       setAllNotifications(data.data);
       setPage(1);
+      setHasMore(data.meta.current_page < data.meta.last_page);
     }
-  }, [data?.data, activeTab]);
+  }, [data]);
 
   const handleLoadMore = useCallback(async () => {
-    const nextPage = page + 1;
-    if (nextPage > data.meta.last_page || isLoadingMore) return;
+    if (!hasMore || isLoadingMore || !isAuthenticated) return;
 
+    const nextPage = page + 1;
     setIsLoadingMore(true);
     try {
-      const result = await getNotifications({ page: nextPage, per_page: 10, type: activeTab });
+      const api = getClientApi();
+      const result = (await api.notifications.list({ page: nextPage, pageSize: 20 })) as NotificationResponse;
       setAllNotifications((prev) => [...prev, ...result.data]);
       setPage(nextPage);
+      setHasMore(result.meta.current_page < result.meta.last_page);
+    } catch {
+      toast({
+        title: '加载失败',
+        description: '请稍后重试',
+        variant: 'destructive',
+      });
     } finally {
       setIsLoadingMore(false);
     }
-  }, [page, data.meta.last_page, activeTab, isLoadingMore]);
+  }, [page, hasMore, isLoadingMore, isAuthenticated]);
 
   const handleNotificationClick = useCallback(
-    (notification: NotificationWithUser) => {
+    (notification: Notification) => {
       if (!notification.read_at) {
-        markAsReadMutation.mutate(notification.id);
+        markAsReadMutation.mutate(String(notification.id));
       }
 
       if (notification.type === 'reply' || notification.type === 'like') {
@@ -111,11 +173,50 @@ export default function NotificationsPage() {
     [markAsReadMutation, router],
   );
 
-  const handleMarkAllAsRead = () => {
-    markAllAsReadMutation.mutate();
+  const getNotificationText = (notification: Notification): { action: string; target?: string } => {
+    switch (notification.type) {
+      case 'reply':
+        return {
+          action: '回复了你的帖子',
+          target: notification.thread?.title,
+        };
+      case 'like':
+        return {
+          action: '赞了你的帖子',
+          target: notification.thread?.title,
+        };
+      case 'follow':
+        return {
+          action: '关注了你',
+        };
+      case 'system':
+        return {
+          action: (notification.data.title as string) || '系统通知',
+          target: notification.data.content as string,
+        };
+      default:
+        return { action: '有新通知' };
+    }
   };
 
-  const hasMore = page < data.meta.last_page;
+  if (!isAuthenticated) {
+    return (
+      <div className="space-y-6">
+        <Card className="p-12 text-center">
+          <h2 className="text-xl font-semibold">请先登录</h2>
+          <p className="mt-2 text-sm text-muted-foreground">登录后才能查看通知</p>
+          <div className="mt-6 flex justify-center gap-3">
+            <Link href="/login">
+              <Button>去登录</Button>
+            </Link>
+            <Link href="/register">
+              <Button variant="outline">注册账号</Button>
+            </Link>
+          </div>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -123,14 +224,14 @@ export default function NotificationsPage() {
         <div>
           <h1 className="text-2xl font-bold">通知中心</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            你有 <span className="font-medium text-primary">{unreadData.count}</span> 条未读通知
+            你有 <span className="font-medium text-primary">{unreadData?.count || 0}</span> 条未读通知
           </p>
         </div>
         <Button
           variant="outline"
           size="sm"
-          onClick={handleMarkAllAsRead}
-          disabled={markAllAsReadMutation.isPending || unreadData.count === 0}
+          onClick={() => markAllAsReadMutation.mutate()}
+          disabled={markAllAsReadMutation.isPending || !unreadData?.count}
         >
           <CheckCheck className="mr-2 h-4 w-4" />
           {markAllAsReadMutation.isPending ? '处理中...' : '全部标记已读'}
@@ -173,13 +274,46 @@ export default function NotificationsPage() {
               </div>
             ) : (
               <div className="divide-y">
-                {allNotifications.map((notification) => (
-                  <NotificationItem
-                    key={notification.id}
-                    notification={notification}
-                    onClick={() => handleNotificationClick(notification)}
-                  />
-                ))}
+                {allNotifications.map((notification) => {
+                  const { action, target } = getNotificationText(notification);
+                  const isUnread = !notification.read_at;
+
+                  return (
+                    <button
+                      key={notification.id}
+                      onClick={() => handleNotificationClick(notification)}
+                      className="flex w-full items-start gap-4 px-4 py-3 text-left transition-colors hover:bg-muted/50"
+                    >
+                      <div className="relative">
+                        <Avatar className="h-10 w-10">
+                          <AvatarImage
+                            src={notification.user?.avatar}
+                            alt={notification.user?.username}
+                          />
+                          <AvatarFallback>{notification.user?.username?.[0] || 'U'}</AvatarFallback>
+                        </Avatar>
+                        {isUnread && (
+                          <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full bg-primary ring-2 ring-background" />
+                        )}
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-baseline gap-2">
+                          <span className="font-medium text-foreground">
+                            {notification.user?.username || '系统'}
+                          </span>
+                          <span className="text-sm text-muted-foreground">{action}</span>
+                        </div>
+                        {target && (
+                          <p className="mt-1 line-clamp-1 text-sm text-muted-foreground">{target}</p>
+                        )}
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {formatSmartDate(notification.created_at)}
+                        </p>
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             )}
 
@@ -200,46 +334,5 @@ export default function NotificationsPage() {
         </Tabs>
       </Card>
     </div>
-  );
-}
-
-function NotificationItem({
-  notification,
-  onClick,
-}: {
-  notification: NotificationWithUser;
-  onClick: () => void;
-}) {
-  const { action, target } = getNotificationText(notification);
-  const isUnread = !notification.read_at;
-
-  return (
-    <button
-      onClick={onClick}
-      className="flex w-full items-start gap-4 px-4 py-3 text-left transition-colors hover:bg-muted/50"
-    >
-      <div className="relative">
-        <Avatar className="h-10 w-10">
-          <AvatarImage src={notification.user?.avatar} alt={notification.user?.username} />
-          <AvatarFallback>{notification.user?.username?.[0] || 'U'}</AvatarFallback>
-        </Avatar>
-        {isUnread && (
-          <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full bg-primary ring-2 ring-background" />
-        )}
-      </div>
-
-      <div className="flex-1 min-w-0">
-        <div className="flex items-baseline gap-2">
-          <span className="font-medium text-foreground">{notification.user?.username}</span>
-          <span className="text-sm text-muted-foreground">{action}</span>
-        </div>
-        {target && (
-          <p className="mt-1 line-clamp-1 text-sm text-muted-foreground">{target}</p>
-        )}
-        <p className="mt-1 text-xs text-muted-foreground">
-          {formatSmartDate(notification.created_at)}
-        </p>
-      </div>
-    </button>
   );
 }
