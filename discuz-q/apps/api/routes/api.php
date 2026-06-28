@@ -46,7 +46,11 @@ Route::prefix('v1')->group(function () {
 
         Route::prefix('user')->group(function () {
             Route::put('/profile', [\App\Http\Controllers\Api\V1\UserController::class, 'updateProfile']);
+            Route::post('/avatar', [\App\Http\Controllers\Api\V1\UploadController::class, 'avatar']);
         });
+
+        Route::post('/upload/image', [\App\Http\Controllers\Api\V1\UploadController::class, 'image']);
+        Route::get('/upload/config', [\App\Http\Controllers\Api\V1\UploadController::class, 'config']);
 
         Route::post('/users/{id}/follow', [\App\Http\Controllers\Api\V1\UserController::class, 'follow']);
 
@@ -90,6 +94,30 @@ Route::prefix('v1')->group(function () {
 
         Route::prefix('user')->group(function () {
             Route::get('/purchased', [\App\Http\Controllers\Api\V1\ThreadController::class, 'purchased']);
+        });
+
+        Route::prefix('email')->middleware('auth:sanctum')->group(function () {
+            Route::post('/send-verification', [\App\Http\Controllers\Api\V1\EmailController::class, 'sendVerification']);
+            Route::post('/verify', [\App\Http\Controllers\Api\V1\EmailController::class, 'verify']);
+        });
+
+        Route::post('/password/reset-code', [\App\Http\Controllers\Api\V1\AuthController::class, 'sendPasswordResetCode']);
+        Route::post('/password/reset', [\App\Http\Controllers\Api\V1\AuthController::class, 'resetPassword']);
+
+        Route::prefix('sms')->group(function () {
+            Route::post('/send-code', [\App\Http\Controllers\Api\V1\SmsController::class, 'sendVerificationCode']);
+            Route::post('/verify', [\App\Http\Controllers\Api\V1\SmsController::class, 'verifyCode']);
+        });
+
+        Route::prefix('oauth')->group(function () {
+            Route::get('/redirect', [\App\Http\Controllers\Api\V1\OAuthController::class, 'redirect']);
+            Route::get('/callback', [\App\Http\Controllers\Api\V1\OAuthController::class, 'callback']);
+        });
+
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::post('/oauth/bind', [\App\Http\Controllers\Api\V1\OAuthController::class, 'bind']);
+            Route::post('/oauth/unbind', [\App\Http\Controllers\Api\V1\OAuthController::class, 'unbind']);
+            Route::get('/oauth/status', [\App\Http\Controllers\Api\V1\OAuthController::class, 'status']);
         });
     });
 
