@@ -1,9 +1,7 @@
 import type { NextConfig } from 'next';
-
-const isProd = process.env.NODE_ENV === 'production';
+import path from 'path';
 
 const nextConfig: NextConfig = {
-  output: 'standalone',
   reactStrictMode: true,
   poweredByHeader: false,
   typedRoutes: true,
@@ -29,6 +27,9 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react'],
   },
+  turbopack: {
+    root: path.resolve(__dirname, '../../'),
+  },
   allowedDevOrigins: [
     'localhost:3000',
     '127.0.0.1:3000',
@@ -40,28 +41,6 @@ const nextConfig: NextConfig = {
       {
         source: '/api/:path*',
         destination: `${process.env.API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1'}/:path*`,
-      },
-    ];
-  },
-  async headers() {
-    return [
-      {
-        source: '/_next/static/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/assets/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
       },
     ];
   },
