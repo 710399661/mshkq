@@ -1,16 +1,9 @@
-const withCSS = require('@zeit/next-css');
-const withSass = require('@zeit/next-sass');
-const withImages = require('next-images');
 const webpack = require('webpack');
 const path = require('path');
 
 const withDZQ = (nextConfig = {}) => Object.assign({}, nextConfig, {
-  alias: () => {
-    return {
-      react: path.resolve(__dirname, './node_modules/react'),
-      'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
-    }
-  },
+  reactStrictMode: true,
+  transpilePackages: ['@discuzq/plugin'],
   webpack(config) {
     /**
       * 将 上层组件库目录 加入编译 include
@@ -29,17 +22,22 @@ const withDZQ = (nextConfig = {}) => Object.assign({}, nextConfig, {
      */
     config.module.rules.push({
       test: /\.woff(2)?(\?v=[0-9].[0-9].[0-9])?$/,
-      use: [{ loader: "url-loader?mimetype=application/font-woff" }]
-    })
+      type: 'asset/resource',
+      generator: {
+        filename: 'fonts/[name][ext]',
+      },
+    });
 
     config.module.rules.push({
       test: /\.(ttf|eot|svg)(\?v=[0-9].[0-9].[0-9])?$/,
-      use: [{ loader: "file-loader?name=[name].[ext]" }]
-    })
+      type: 'asset/resource',
+      generator: {
+        filename: 'fonts/[name][ext]',
+      },
+    });
 
     return config;
   },
 });
 
-module.exports = withImages(withSass(withCSS(withDZQ())));
-
+module.exports = withDZQ;

@@ -35,6 +35,7 @@ class Index extends React.Component {
       ],
       funcType: 'readThreadMsgList',
       type: 'threadMsgList',
+      prevSubPage: null,
     }
   }
 
@@ -47,11 +48,21 @@ class Index extends React.Component {
     !subPage && this.setUnReadCount();
   }
 
-  // 处理路由query切换
-  async componentWillReceiveProps(nextProps) {
-    if (this.props.subPage === nextProps.subPage) return;
-    await this.switchTypeByQuery(nextProps.subPage);
-    this.fetchMessageData(1)
+  // 处理路由query切换 - React 18 兼容
+  async componentDidUpdate(prevProps) {
+    const { subPage } = this.props.router.query;
+    const { subPage: prevSubPage } = prevProps.router.query;
+    if (subPage === prevSubPage) return;
+    await this.switchTypeByQuery(subPage);
+    this.fetchMessageData(1);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { subPage } = nextProps.router.query;
+    if (subPage !== prevState.prevSubPage) {
+      return { prevSubPage: subPage };
+    }
+    return null;
   }
 
   // 转换帖子消息渲染类型
