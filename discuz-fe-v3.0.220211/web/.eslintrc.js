@@ -11,16 +11,24 @@ module.exports = {
     'plugin:react/recommended',
   ],
   plugins: ['prettier', 'react', 'react-hooks', 'import'],
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 2018,
     ecmaFeatures: {
       jsx: true,
+    },
+    requireConfigFile: false,
+    babelOptions: {
+      presets: [],
+      plugins: [],
     },
   },
   rules: {
     'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
     'react/prop-types': 0,
+    'import/no-unresolved': 'off',
+    'import/no-duplicates': 'warn',
   },
   globals: {
     DISCUZ_ENV: true,

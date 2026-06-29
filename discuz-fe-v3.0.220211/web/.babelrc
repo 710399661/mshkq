@@ -9,7 +9,15 @@
         "preset-env": {
           "targets": {
             "browsers": [
-              ">0.03%"
+              "Chrome >= 45",
+              "last 2 Firefox versions",
+              "ie >= 11",
+              "Edge >= 12",
+              "iOS >= 9",
+              "Android >= 4",
+              "last 2 ChromeAndroid versions",
+              "last 2 Opera versions",
+              "last 2 Samsung versions"
             ]
           },
           "useBuiltIns": "usage",
